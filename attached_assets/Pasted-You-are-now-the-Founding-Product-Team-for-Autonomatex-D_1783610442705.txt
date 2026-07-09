@@ -1,0 +1,675 @@
+You are now the Founding Product Team for Autonomatex Drive.
+
+You are acting as:
+
+• CEO
+• Chief Product Officer
+• Enterprise UX Architect
+• Principal Product Designer
+• Creative Director
+• Enterprise Software Architect
+• Senior Frontend Engineer
+• Accessibility Expert
+• Brand Strategist
+• Conversion Expert
+• SEO Specialist
+
+Your task is NOT to build a landing page.
+
+Your task is to build the highest-converting enterprise sales funnel for truck owners.
+
+This is the second commercial product of Autonomatex.
+
+It must follow exactly the same Design System, quality and visual language as:
+
+autonomatex.com
+
+dispatch.autonomatex.com
+
+Everything should feel like one ecosystem.
+
+────────────────────────────────────
+
+IMPORTANT
+
+────────────────────────────────────
+
+This website is NOT for dispatch companies.
+
+This website is for:
+
+• Owner Operators
+• Small Fleets
+• Medium Fleets
+• Large Fleets
+
+Supported equipment:
+
+• Dry Van
+• Reefer
+• Flatbed
+• Hotshot
+• Box Truck
+
+One product.
+
+No separate pages.
+
+No separate websites.
+
+During onboarding customers simply select their equipment types.
+
+────────────────────────────────────
+
+WEBSITE GOAL
+
+────────────────────────────────────
+
+When a truck owner finishes reading this website they should think:
+
+"My truck becomes more profitable every month."
+
+NOT
+
+"This is another dispatch software."
+
+NOT
+
+"This is another TMS."
+
+NOT
+
+"This is another AI tool."
+
+Business value first.
+
+Technology second.
+
+────────────────────────────────────
+
+CORE PROMISE
+
+────────────────────────────────────
+
+Autonomatex helps truck owners preserve operational intelligence so every mile, every load and every dispatcher continuously improve the profitability of their truck.
+
+────────────────────────────────────
+
+VERY IMPORTANT
+
+────────────────────────────────────
+
+The customer should experience an extremely simple product.
+
+Simple interface.
+
+Simple text.
+
+Simple voice interaction.
+
+Very few buttons.
+
+Very low cognitive load.
+
+Behind this simple experience the platform operates as a complete enterprise Operational Intelligence System.
+
+Never expose all enterprise capabilities.
+
+Customers buy simplicity.
+
+The intelligence stays behind the scenes.
+
+────────────────────────────────────
+
+HERO
+
+────────────────────────────────────
+
+Headline:
+
+Operational Intelligence for Modern Truck Owners
+
+Subheading:
+
+Built for Owner Operators • Small Fleets • Growing Fleets
+
+Equipment support:
+
+Dry Van • Reefer • Flatbed • Hotshot • Box Truck
+
+Highlighted statement:
+
+"I found 42 loads.
+Rejected 39.
+Here are the 3 worth calling."
+
+Supporting line:
+
+Every mile, every load, every dispatcher and every decision continuously improve the profitability of your truck.
+
+CTA:
+
+Start Paid Pilot
+
+Secondary CTA:
+
+See How It Works
+
+Hero Layout:
+
+Left:
+
+Headline
+
+Subheading
+
+CTA
+
+Right:
+
+Premium enterprise illustration.
+
+No stock photography.
+
+Illustration should show:
+
+Truck
+
+Dispatcher
+
+Driver
+
+Operational dashboard
+
+Load ranking
+
+Human making final decision
+
+Enterprise quality.
+
+────────────────────────────────────
+
+SECTION 2
+
+THE HIDDEN PROBLEM
+
+────────────────────────────────────
+
+Headline:
+
+Your Truck Builds Knowledge.
+Almost None Of It Stays.
+
+Explain:
+
+Every truck creates valuable operational intelligence.
+
+Preferred brokers.
+
+Preferred lanes.
+
+Best-paying freight.
+
+Seasonal patterns.
+
+Negotiation outcomes.
+
+Driver preferences.
+
+Customer preferences.
+
+Rate expectations.
+
+Unfortunately most of this knowledge lives inside people.
+
+When people change...
+
+Your business starts over.
+
+────────────────────────────────────
+
+SECTION 3
+
+THE BIG DIFFERENTIATOR
+
+────────────────────────────────────
+
+Headline:
+
+Changing Dispatchers Should Never Mean Starting From Zero.
+
+This is one of the most important sections.
+
+Explain:
+
+The operational intelligence belongs to your truck and your business.
+
+Not to an individual dispatcher.
+
+If you change:
+
+• Dispatcher
+
+• Dispatch company
+
+• Internal employee
+
+• Operations manager
+
+Your truck keeps learning.
+
+The new dispatcher immediately benefits from:
+
+Preferred lanes
+
+Operational history
+
+Business preferences
+
+Driver notes
+
+Previous successful strategies
+
+Market insights
+
+AI intelligence
+
+Historical outcomes
+
+Customer preferences
+
+Operational patterns
+
+The truck never starts over.
+
+Knowledge compounds.
+
+Do NOT describe this as transferring another company's confidential information.
+
+Describe it as preserving the truck owner's own operational intelligence.
+
+────────────────────────────────────
+
+SECTION 4
+
+YOUR TRUCK LEARNS
+
+────────────────────────────────────
+
+Create a beautiful enterprise timeline.
+
+Truck
+
+↓
+
+Load
+
+↓
+
+Broker
+
+↓
+
+Dispatcher
+
+↓
+
+Decision
+
+↓
+
+Outcome
+
+↓
+
+Knowledge
+
+↓
+
+Profitability
+
+────────────────────────────────────
+
+SECTION 5
+
+OWNER OPERATOR
+
+────────────────────────────────────
+
+Pain points.
+
+Finding good loads.
+
+Changing dispatchers.
+
+Building broker relationships.
+
+Growing income.
+
+Explain how Autonomatex reduces operational stress.
+
+────────────────────────────────────
+
+SECTION 6
+
+SMALL FLEETS
+
+────────────────────────────────────
+
+2–10 trucks.
+
+Knowledge begins fragmenting.
+
+Different dispatchers.
+
+Different drivers.
+
+Different decisions.
+
+Autonomatex keeps operational intelligence together.
+
+────────────────────────────────────
+
+SECTION 7
+
+GROWING FLEETS
+
+────────────────────────────────────
+
+10–100 trucks.
+
+Operations become difficult.
+
+Autonomatex creates one intelligence layer across the fleet.
+
+────────────────────────────────────
+
+SECTION 8
+
+ENTERPRISE FLEETS
+
+────────────────────────────────────
+
+Every truck contributes.
+
+Every dispatcher contributes.
+
+Every driver contributes.
+
+Every decision improves the business.
+
+Fleet intelligence compounds continuously.
+
+────────────────────────────────────
+
+SECTION 9
+
+WHAT MAKES A TRUCK MORE VALUABLE?
+
+────────────────────────────────────
+
+Not only:
+
+Truck.
+
+Trailer.
+
+Equipment.
+
+Engine.
+
+Also:
+
+Operational Intelligence.
+
+The more history your truck builds...
+
+The more valuable it becomes.
+
+────────────────────────────────────
+
+SECTION 10
+
+NO MATTER WHO YOU WORK WITH
+
+────────────────────────────────────
+
+Driver changes.
+
+Dispatcher changes.
+
+Dispatch company changes.
+
+Fleet manager changes.
+
+Nothing important is lost.
+
+Your truck remembers.
+
+────────────────────────────────────
+
+SECTION 11
+
+HOW IT WORKS
+
+────────────────────────────────────
+
+Morning.
+
+↓
+
+Autonomatex analyzes opportunities.
+
+↓
+
+Ranks loads.
+
+↓
+
+Shows:
+
+Three worth calling.
+
+↓
+
+Human decides.
+
+↓
+
+Truck learns.
+
+↓
+
+Repeat.
+
+────────────────────────────────────
+
+SECTION 12
+
+THE PRODUCT
+
+────────────────────────────────────
+
+Show a calm interface.
+
+Simple.
+
+Minimal.
+
+Large typography.
+
+42 Loads
+
+39 Rejected
+
+3 Worth Calling
+
+Call Broker
+
+Nothing else.
+
+────────────────────────────────────
+
+SECTION 13
+
+BEHIND THE SCENES
+
+────────────────────────────────────
+
+Do NOT expose enterprise modules.
+
+Instead explain:
+
+Behind every recommendation the platform continuously learns from:
+
+Driver input
+
+Dispatcher experience
+
+Truck history
+
+Market conditions
+
+Accepted loads
+
+Rejected loads
+
+Rate history
+
+Broker relationships
+
+Operational outcomes
+
+Customer preferences
+
+AI reasoning
+
+Quietly improving every day.
+
+────────────────────────────────────
+
+SECTION 14
+
+PRICING
+
+────────────────────────────────────
+
+Same pricing philosophy as Dispatch.
+
+Paid Pilot.
+
+Simple.
+
+No complexity.
+
+────────────────────────────────────
+
+SECTION 15
+
+FAQ
+
+────────────────────────────────────
+
+Can I change dispatchers?
+
+Yes.
+
+Will my truck lose its knowledge?
+
+No.
+
+Can I use different dispatch companies?
+
+Yes.
+
+Does my truck continue learning?
+
+Yes.
+
+Can multiple trucks build intelligence independently?
+
+Yes.
+
+────────────────────────────────────
+
+CONTACT
+
+────────────────────────────────────
+
+Simple contact form.
+
+Name
+
+Company
+
+Email
+
+Phone
+
+Fleet size
+
+Message
+
+No demos.
+
+No sales pressure.
+
+────────────────────────────────────
+
+DESIGN LANGUAGE
+
+────────────────────────────────────
+
+Exactly the same Design System as:
+
+autonomatex.com
+
+dispatch.autonomatex.com
+
+Large whitespace.
+
+Premium enterprise typography.
+
+SVG illustrations.
+
+Responsive.
+
+Accessibility AA.
+
+SEO.
+
+React.
+
+Vite.
+
+TypeScript.
+
+Reusable components.
+
+Netlify compatible.
+
+────────────────────────────────────
+
+WRITING STYLE
+
+────────────────────────────────────
+
+Never oversell AI.
+
+Translate technology into business outcomes.
+
+Customers buy outcomes.
+
+Not technology.
+
+────────────────────────────────────
+
+FINAL PRINCIPLE
+
+────────────────────────────────────
+
+The visitor should leave believing one thing:
+
+"My truck should become more profitable every month, no matter who dispatches it."
+
+That is the entire purpose of this website.
