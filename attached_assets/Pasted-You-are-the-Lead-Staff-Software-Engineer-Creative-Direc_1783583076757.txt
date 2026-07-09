@@ -1,0 +1,477 @@
+You are the Lead Staff Software Engineer, Creative Director, UX Architect, Enterprise UI Designer, Brand Designer, SEO Specialist, Accessibility Expert and Frontend Architect for Autonomatex.
+
+Your job is NOT to build a landing page.
+
+Your job is to build the official corporate website for Autonomatex that can represent the company for the next 20–50 years.
+
+Think like you are building the first public website for a future billion-dollar AI company.
+
+====================================================
+
+COMPANY
+
+====================================================
+
+Company Name
+
+Autonomatex
+
+====================================================
+
+MISSION
+
+====================================================
+
+Autonomatex builds AI-powered Operational Intelligence Systems that transform operational experience into long-term business intelligence.
+
+We believe businesses should never lose valuable knowledge.
+
+People change.
+
+Experience should remain.
+
+AI should assist—not replace.
+
+Humans always make the final decision.
+
+====================================================
+
+VERY IMPORTANT
+
+====================================================
+
+This is NOT a trucking website.
+
+This is NOT a dispatch website.
+
+This is NOT a fleet website.
+
+This is NOT a DPP website.
+
+This is NOT a battery website.
+
+Those are products.
+
+This website represents the company.
+
+It must remain industry-neutral while hinting that the architecture can support many operational industries over time.
+
+Never mention dispatch.
+
+Never mention drivers.
+
+Never mention fleets.
+
+Never mention owner operators.
+
+Never mention trucking.
+
+Never mention batteries.
+
+Never mention compliance products.
+
+Never mention DPP.
+
+Never mention pricing.
+
+Never mention demo.
+
+Never mention free trial.
+
+Never mention products.
+
+Never mention customers.
+
+Never mention sales.
+
+====================================================
+
+DESIGN PHILOSOPHY
+
+====================================================
+
+The design should feel like
+
+OpenAI
+
+Anthropic
+
+Stripe
+
+Linear
+
+Vercel
+
+Palantir
+
+Apple
+
+Minimal
+
+Timeless
+
+Enterprise
+
+Professional
+
+Huge white space
+
+Excellent typography
+
+Micro animations
+
+Beautiful scrolling
+
+Premium cards
+
+Soft shadows
+
+Rounded corners
+
+Excellent responsiveness
+
+Fast loading
+
+Accessibility AA compliant
+
+====================================================
+
+STYLE
+
+====================================================
+
+White background
+
+Navy headings
+
+Blue accent
+
+Professional typography
+
+Large spacing
+
+Glass effects only if subtle
+
+No flashy gradients
+
+No marketing gimmicks
+
+No stock photos
+
+Use premium abstract AI / network / operational intelligence illustrations (SVG where possible).
+
+====================================================
+
+WEBSITE TYPE
+
+====================================================
+
+Single-page manifesto website.
+
+Smooth scrolling navigation.
+
+Sticky navigation.
+
+Modern.
+
+Elegant.
+
+====================================================
+
+NAVIGATION
+
+====================================================
+
+Home
+
+Why
+
+Architecture
+
+Principles
+
+Security
+
+Vision
+
+Contact
+
+Navigation should smoothly scroll.
+
+====================================================
+
+SECTION 1
+
+HERO
+
+====================================================
+
+Headline
+
+The Intelligence Layer for Operational Businesses.
+
+Subheading
+
+Autonomatex builds AI Operating Systems that transform operational experience into long-term business intelligence—helping organizations make faster, smarter, and more consistent decisions while keeping humans in control.
+
+Small line underneath
+
+Built for industries where experience matters, decisions matter, and knowledge must never be lost.
+
+Buttons
+
+Explore Technology
+
+Contact
+
+Hero should be visually stunning.
+
+====================================================
+
+SECTION 2
+
+WHY WE EXIST
+
+====================================================
+
+Storytelling.
+
+Businesses lose valuable knowledge every day.
+
+Experienced people leave.
+
+Critical decisions disappear.
+
+Operational patterns are forgotten.
+
+Teams start over.
+
+Autonomatex exists to preserve operational intelligence and help organizations continuously improve through experience.
+
+====================================================
+
+SECTION 3
+
+OPERATIONAL INTELLIGENCE
+
+====================================================
+
+Explain the philosophy.
+
+No technical jargon.
+
+No AI buzzwords.
+
+Explain operational intelligence simply.
+
+====================================================
+
+SECTION 4
+
+AUTONOMATEX INTELLIGENCE ARCHITECTURE
+
+====================================================
+
+Beautiful enterprise cards.
+
+Human Intelligence
+
+Memory Intelligence
+
+Decision Intelligence
+
+Operational Intelligence
+
+Continuous Intelligence
+
+Each card contains a concise explanation.
+
+====================================================
+
+SECTION 5
+
+OUR PRINCIPLES
+
+====================================================
+
+Cards.
+
+AI should assist.
+
+Humans remain in control.
+
+Knowledge should never disappear.
+
+Every decision should improve the next.
+
+Technology should reduce complexity.
+
+Trust must be earned.
+
+Intelligence compounds over time.
+
+====================================================
+
+SECTION 6
+
+SECURITY
+
+====================================================
+
+Enterprise wording.
+
+Privacy
+
+Security by Design
+
+Responsible AI
+
+Human Oversight
+
+Transparency
+
+Compliance Ready Architecture
+
+Scalable Infrastructure
+
+====================================================
+
+SECTION 7
+
+VISION
+
+====================================================
+
+The future belongs to organizations that preserve experience, improve decision quality, and continuously learn from operations.
+
+Autonomatex is building the intelligence layer that enables that future.
+
+Do not mention industries.
+
+Keep it timeless.
+
+====================================================
+
+SECTION 8
+
+CONTACT
+
+====================================================
+
+Simple contact form.
+
+Name
+
+Company
+
+Business Email
+
+Message
+
+Placeholder
+
+Tell us about your organization and how Autonomatex may help.
+
+====================================================
+
+FOOTER
+
+====================================================
+
+Privacy
+
+Terms
+
+Security
+
+Contact
+
+Copyright
+
+====================================================
+
+TECHNICAL REQUIREMENTS
+
+====================================================
+
+Pure HTML5
+
+Modern CSS
+
+Vanilla JavaScript
+
+No React
+
+No Vue
+
+No Angular
+
+No Bootstrap
+
+No Tailwind CDN
+
+Use CSS variables.
+
+Responsive.
+
+Lazy loading.
+
+SEO optimized.
+
+Open Graph.
+
+Twitter cards.
+
+Structured Schema.org metadata.
+
+robots.txt
+
+sitemap.xml
+
+Netlify ready.
+
+_redirects included.
+
+Fast loading.
+
+Lighthouse 95+
+
+Accessibility AA.
+
+====================================================
+
+FOLDER STRUCTURE
+
+====================================================
+
+Generate a complete production-ready project.
+
+Do not generate snippets.
+
+Generate every file.
+
+Create professional SVG illustrations where appropriate.
+
+Generate favicon.
+
+Generate README.
+
+====================================================
+
+QUALITY
+
+====================================================
+
+Think like a Principal Engineer at Apple.
+
+Think like a Brand Designer at Stripe.
+
+Think like a Product Designer at Linear.
+
+Think like an Enterprise Architect at Palantir.
+
+Do not compromise quality.
+
+Build something timeless.
+
+This is the official corporate identity of Autonomatex.

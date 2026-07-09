@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/"
+title = "Autonomatex"
+version = "1.0.0"
+id = "artifacts/autonomatex"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18594
+
+[services.development]
+run = "pnpm --filter @workspace/autonomatex run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/autonomatex", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/autonomatex/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18594"
+BASE_PATH = "/"
