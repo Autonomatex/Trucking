@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { NavHref } from './NavHref';
@@ -27,19 +26,25 @@ function AtxMark({ size = 20 }: { size?: number }) {
 }
 
 const NAV_LINKS = [
-  { label: 'How It Works',  href: '/#how-it-works'   },
-  { label: 'Segments',      href: '/#segments'       },
-  { label: 'Pricing',       href: '/#pricing'        },
-  { label: 'FAQ',           href: '/#faq'            },
-  { label: 'Contact',       href: '/#contact'        },
+  { label: 'Quick Summary', href: '/#quick-summary'    },
+  { label: 'Workflow',      href: '/#how-it-works'     },
+  { label: "Who It's For",  href: '/#segments'         },
+  { label: 'Intelligence',  href: '/#intelligence'     },
+  { label: 'Technical',     href: '/#technical-side'   },
+  { label: 'Pricing',       href: '/#pricing'          },
+  { label: 'FAQ',           href: '/#faq'              },
+  { label: 'Contact',       href: '/#contact'          },
 ];
 
 const MOBILE_LINKS = [
-  { label: 'How It Works',  href: '/#how-it-works',  sub: 'Simple interface, powerful backend' },
-  { label: 'Segments',      href: '/#segments',      sub: 'One product for every fleet size' },
-  { label: 'Pricing',       href: '/#pricing',       sub: 'Start simple, scale when ready' },
-  { label: 'FAQ',           href: '/#faq',           sub: 'Common questions answered' },
-  { label: 'Contact',       href: '/#contact',       sub: 'Get in touch via email' },
+  { label: 'Quick Summary', href: '/#quick-summary',  sub: 'What Autonomatex does and why'    },
+  { label: 'Workflow',      href: '/#how-it-works',   sub: 'Simple interface, powerful backend' },
+  { label: "Who It's For",  href: '/#segments',       sub: 'Every fleet size supported'       },
+  { label: 'Intelligence',  href: '/#intelligence',   sub: 'What the platform learns'         },
+  { label: 'Technical',     href: '/#technical-side', sub: 'How the intelligence works'       },
+  { label: 'Pricing',       href: '/#pricing',        sub: 'Start with a paid pilot'          },
+  { label: 'FAQ',           href: '/#faq',            sub: 'Common questions answered'        },
+  { label: 'Contact',       href: '/#contact',        sub: 'Get in touch via email'           },
 ];
 
 export function Nav() {
@@ -68,9 +73,13 @@ export function Nav() {
           transition: 'all 0.25s ease',
         }}
       >
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 24px', height: 72, display: 'flex', alignItems: 'center', gap: 32 }}>
+        <div style={{
+          maxWidth: 1280, margin: '0 auto', padding: '0 24px', height: 68,
+          display: 'flex', alignItems: 'center', gap: 8,
+        }}>
+          {/* Logo */}
           <NavHref href="/">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', flexShrink: 0 }}>
               <AtxMark size={20} />
               <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em', color: '#101828' }}>
                 Autonomatex
@@ -78,15 +87,21 @@ export function Nav() {
             </div>
           </NavHref>
 
-          <nav style={{ alignItems: 'center', gap: 4, marginLeft: 'auto' }}
-               className="hidden md:flex" aria-label="Primary navigation">
+          {/* Desktop nav */}
+          <nav
+            style={{ alignItems: 'center', gap: 0, marginLeft: 'auto', marginRight: 12 }}
+            className="hidden lg:flex"
+            aria-label="Primary navigation"
+          >
             {NAV_LINKS.map(link => (
               <NavHref key={link.label} href={link.href}>
-                <span style={{
-                  fontSize: 13.5, fontWeight: 500, color: '#667085', padding: '6px 12px',
-                  borderRadius: 6, cursor: 'pointer', transition: 'color 0.15s, background 0.15s',
-                  display: 'block',
-                }}
+                <span
+                  style={{
+                    fontSize: 13, fontWeight: 500, color: '#667085',
+                    padding: '6px 10px', borderRadius: 6, cursor: 'pointer',
+                    transition: 'color 0.15s, background 0.15s', display: 'block',
+                    whiteSpace: 'nowrap',
+                  }}
                   onMouseEnter={e => { (e.target as HTMLElement).style.color = '#101828'; (e.target as HTMLElement).style.background = '#F5F7FA'; }}
                   onMouseLeave={e => { (e.target as HTMLElement).style.color = '#667085'; (e.target as HTMLElement).style.background = ''; }}
                 >
@@ -96,14 +111,16 @@ export function Nav() {
             ))}
           </nav>
 
+          {/* CTA */}
           <NavHref href="/#paid-pilot">
-            <span style={{
-              fontSize: 13.5, fontWeight: 600, color: '#fff',
-              background: ACCENT, padding: '8px 18px', borderRadius: 8,
-              cursor: 'pointer', whiteSpace: 'nowrap',
-              transition: 'background 0.15s',
-            }}
-              className="hidden md:inline-block"
+            <span
+              style={{
+                fontSize: 13.5, fontWeight: 600, color: '#fff',
+                background: ACCENT, padding: '8px 16px', borderRadius: 8,
+                cursor: 'pointer', whiteSpace: 'nowrap',
+                transition: 'background 0.15s', flexShrink: 0,
+              }}
+              className="hidden lg:inline-block"
               onMouseEnter={e => { (e.target as HTMLElement).style.background = '#0f766e'; }}
               onMouseLeave={e => { (e.target as HTMLElement).style.background = ACCENT; }}
             >
@@ -111,8 +128,9 @@ export function Nav() {
             </span>
           </NavHref>
 
+          {/* Mobile hamburger */}
           <button
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setOpen(v => !v)}
             aria-label={open ? 'Close navigation' : 'Open navigation'}
             aria-expanded={open}
@@ -123,6 +141,7 @@ export function Nav() {
         </div>
       </header>
 
+      {/* Mobile drawer */}
       <AnimatePresence>
         {open && (
           <>
@@ -143,13 +162,11 @@ export function Nav() {
                 boxShadow: '-8px 0 32px rgba(16,24,40,0.12)',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                 {MOBILE_LINKS.map(link => (
                   <NavHref key={link.label} href={link.href} onClick={() => setOpen(false)}>
-                    <div style={{
-                      padding: '12px 16px', borderRadius: 8, cursor: 'pointer',
-                      transition: 'background 0.15s',
-                    }}
+                    <div
+                      style={{ padding: '12px 16px', borderRadius: 8, cursor: 'pointer', transition: 'background 0.15s' }}
                       onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = '#F5F7FA'; }}
                       onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = ''; }}
                     >
@@ -159,7 +176,7 @@ export function Nav() {
                   </NavHref>
                 ))}
               </div>
-              <div style={{ marginTop: 24 }}>
+              <div style={{ marginTop: 20 }}>
                 <NavHref href="/#paid-pilot" onClick={() => setOpen(false)}>
                   <div style={{
                     background: ACCENT, color: '#fff', fontWeight: 600, fontSize: 14,
@@ -174,7 +191,7 @@ export function Nav() {
         )}
       </AnimatePresence>
 
-      <div style={{ height: 72 }} />
+      <div style={{ height: 68 }} />
     </>
   );
 }
