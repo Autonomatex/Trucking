@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { motion, useScroll, useSpring, useInView, MotionConfig, AnimatePresence } from 'framer-motion';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { Route, Switch, Router as WouterRouter } from 'wouter';
 import {
   BrainCircuit,
   Database,
@@ -20,31 +17,24 @@ import {
   Menu
 } from 'lucide-react';
 
-const queryClient = new QueryClient();
+// ── Brand tokens ──────────────────────────────────────────────────────────────
+const ACCENT    = '#0D9488';
+const ACCENT_DIM = '#6BB8B3';
+const DARK      = '#1E2433';
+const PRIMARY   = '#101828';
+const SECONDARY = '#667085';
+const BORDER    = '#E6EAF0';
+const BG        = '#FAFBFC';
+const SURFACE   = '#FFFFFF';
+const DEEP_ALT  = '#F0F4F8';
 
-// ── Brand tokens ─────────────────────────────────────────────────────────────
-// Accent shifted from #16C6B7 (bright cyan) to #0D9488 (deep mature teal)
-const ACCENT   = '#0D9488';
-const ACCENT_DIM = '#6BB8B3';     // muted, for secondary decorations
-const DARK     = '#1E2433';       // nav dark, vision bg
-const PRIMARY  = '#101828';       // body text
-const SECONDARY = '#667085';      // body text muted
-const BORDER   = '#E6EAF0';       // all borders
-const BG       = '#FAFBFC';       // page background
-const SURFACE  = '#FFFFFF';       // card / section backgrounds
-const DEEP_ALT = '#F0F4F8';       // slightly cooler than BG, section alt
-
-// ==========================================
-// ANIMATION VARIANTS — calmer, more confident
-// ==========================================
-
+// ── Animation variants — calm, confident ─────────────────────────────────────
 const EASE: [number, number, number, number] = [0.25, 0.46, 0.45, 0.94];
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 18 },
   visible: (custom = 0) => ({
-    opacity: 1,
-    y: 0,
+    opacity: 1, y: 0,
     transition: { duration: 0.75, delay: custom * 0.1, ease: EASE }
   })
 };
@@ -65,11 +55,8 @@ const mobileMenuVariant = {
   exit:   { opacity: 0, x: '100%', transition: { duration: 0.22, ease: EASE } }
 };
 
-// ==========================================
-// SHARED HELPERS
-// ==========================================
-
-const NAVBAR_H = 76; // px — fixed header height
+// ── Scroll helper — accounts for fixed header ─────────────────────────────────
+const NAVBAR_H = 76;
 
 function doScrollTo(id: string) {
   const el = document.getElementById(id);
@@ -78,18 +65,11 @@ function doScrollTo(id: string) {
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
-// ── WORDMARK MARK (SVG) ──────────────────────────────────────────────────────
-
+// ── AtxMark wordmark glyph ────────────────────────────────────────────────────
 function AtxMark({ size = 22 }: { size?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 22 22"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
+    <svg width={size} height={size} viewBox="0 0 22 22" fill="none"
+      xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="11" cy="11" r="2.5" fill={DARK} />
       <circle cx="11" cy="11" r="1"   fill={ACCENT} />
       <circle cx="11" cy="4"  r="1.2" fill={DARK} opacity="0.5" />
@@ -105,8 +85,7 @@ function AtxMark({ size = 22 }: { size?: number }) {
   );
 }
 
-// ── SECTION NODE DIVIDER ─────────────────────────────────────────────────────
-
+// ── NodeDivider — 3-node horizontal throughline ───────────────────────────────
 function NodeDivider() {
   return (
     <div className="flex items-center justify-center gap-2 py-2" aria-hidden="true">
@@ -123,10 +102,7 @@ function NodeDivider() {
   );
 }
 
-// ==========================================
-// SCROLL PROGRESS
-// ==========================================
-
+// ── Scroll progress bar ───────────────────────────────────────────────────────
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 80, damping: 30, restDelta: 0.001 });
@@ -138,16 +114,27 @@ function ScrollProgress() {
   );
 }
 
+// ── Eyebrow label ─────────────────────────────────────────────────────────────
+function Eyebrow({ children, muted = false }: { children: React.ReactNode; muted?: boolean }) {
+  return (
+    <div className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-8"
+      style={{ color: muted ? SECONDARY : ACCENT }}>
+      {children}
+    </div>
+  );
+}
+
 // ==========================================
-// NAVBAR (desktop + mobile)
+// NAVBAR — IntersectionObserver, full a11y
 // ==========================================
 
 function Navbar() {
-  const [isScrolled, setIsScrolled]     = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [mobileOpen, setMobileOpen]     = useState(false);
-  const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const drawerRef    = useRef<HTMLDivElement>(null);
+  const [isScrolled,     setIsScrolled]     = useState(false);
+  const [activeSection,  setActiveSection]  = useState('home');
+  const [mobileOpen,     setMobileOpen]     = useState(false);
+  const hamburgerRef  = useRef<HTMLButtonElement>(null);
+  const drawerRef     = useRef<HTMLDivElement>(null);
+  const didOpenRef    = useRef(false); // tracks whether menu was ever opened
 
   const navLinks = [
     { id: 'why',          label: 'Why' },
@@ -159,24 +146,32 @@ function Navbar() {
     { id: 'vision',       label: 'Vision' },
   ];
 
+  // Active section via IntersectionObserver — no scroll-time layout reads
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 24);
-      const sections = ['home', ...navLinks.map(l => l.id), 'contact'];
-      let current = '';
-      sections.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) current = id;
-        }
-      });
-      if (current) setActiveSection(current);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const ids = ['home', ...navLinks.map(l => l.id), 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    );
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
+  // Navbar background on scroll
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Close on scroll behind open drawer
   useEffect(() => {
     if (!mobileOpen) return;
     const close = () => setMobileOpen(false);
@@ -184,28 +179,36 @@ function Navbar() {
     return () => window.removeEventListener('scroll', close);
   }, [mobileOpen]);
 
+  // Body scroll lock + inert background content
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    // Make background inert while drawer is open
     const main = document.getElementById('main-content');
     if (main) {
-      if (mobileOpen) { main.setAttribute('aria-hidden', 'true'); (main as any).inert = true; }
-      else             { main.removeAttribute('aria-hidden'); (main as any).inert = false; }
+      if (mobileOpen) {
+        main.setAttribute('aria-hidden', 'true');
+        (main as any).inert = true;
+      } else {
+        main.removeAttribute('aria-hidden');
+        (main as any).inert = false;
+      }
     }
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  // Focus management: focus first drawer item on open, return to hamburger on close
+  // Focus management — only runs when menu was explicitly opened/closed, not on mount
   useEffect(() => {
     if (mobileOpen) {
-      const first = drawerRef.current?.querySelector<HTMLElement>('button, a');
-      first?.focus();
-    } else {
+      didOpenRef.current = true;
+      requestAnimationFrame(() => {
+        const first = drawerRef.current?.querySelector<HTMLElement>('button, a');
+        first?.focus();
+      });
+    } else if (didOpenRef.current) {
       hamburgerRef.current?.focus();
     }
   }, [mobileOpen]);
 
-  // Escape closes drawer
+  // Escape key to close
   useEffect(() => {
     if (!mobileOpen) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false); };
@@ -217,10 +220,12 @@ function Navbar() {
   useEffect(() => {
     if (!mobileOpen || !drawerRef.current) return;
     const el = drawerRef.current;
-    const focusable = () => Array.from(el.querySelectorAll<HTMLElement>('button, a, input, [tabindex]')).filter(n => !(n as HTMLButtonElement).disabled);
+    const getFocusable = () =>
+      Array.from(el.querySelectorAll<HTMLElement>('button, a, input, [tabindex]'))
+        .filter(n => !(n as HTMLButtonElement).disabled && n.tabIndex !== -1);
     const trap = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return;
-      const items = focusable();
+      const items = getFocusable();
       if (!items.length) return;
       const first = items[0], last = items[items.length - 1];
       if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
@@ -244,7 +249,6 @@ function Navbar() {
         style={{ borderColor: isScrolled ? BORDER : 'transparent' }}
       >
         <div className="mx-auto px-6 md:px-8 max-w-7xl flex items-center justify-between">
-          {/* Wordmark */}
           <button
             onClick={() => doScrollTo('home')}
             className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
@@ -257,7 +261,6 @@ function Navbar() {
             </span>
           </button>
 
-          {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map((link) => (
               <button
@@ -278,7 +281,6 @@ function Navbar() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {/* CTA — desktop */}
             <button
               onClick={() => handleNavClick('contact')}
               className="hidden lg:block text-[13px] font-medium px-5 py-2.5 rounded-md border transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
@@ -289,7 +291,6 @@ function Navbar() {
               Begin the Conversation
             </button>
 
-            {/* Hamburger — mobile/tablet */}
             <button
               ref={hamburgerRef}
               onClick={() => setMobileOpen(true)}
@@ -305,15 +306,12 @@ function Navbar() {
         </div>
       </header>
 
-      {/* Mobile nav overlay */}
       <AnimatePresence>
         {mobileOpen && (
           <>
             <motion.div
               className="fixed inset-0 z-50 bg-black/25 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setMobileOpen(false)}
               aria-hidden="true"
             />
@@ -324,9 +322,7 @@ function Navbar() {
               aria-modal="true"
               aria-label="Navigation menu"
               variants={mobileMenuVariant}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+              initial="hidden" animate="visible" exit="exit"
               className="fixed top-0 right-0 bottom-0 z-50 w-72 flex flex-col"
               style={{ background: SURFACE, borderLeft: `1px solid ${BORDER}` }}
             >
@@ -345,7 +341,7 @@ function Navbar() {
                 </button>
               </div>
 
-              <nav className="flex flex-col gap-1 px-4 py-4 flex-1 overflow-y-auto">
+              <nav className="flex flex-col gap-1 px-4 py-4 flex-1 overflow-y-auto" aria-label="Mobile navigation">
                 {navLinks.map((link) => (
                   <button
                     key={link.id}
@@ -381,7 +377,7 @@ function Navbar() {
 }
 
 // ==========================================
-// HERO — stronger headline, more whitespace
+// HERO
 // ==========================================
 
 function HeroSection() {
@@ -391,9 +387,9 @@ function HeroSection() {
       className="relative min-h-[100dvh] flex items-center pt-28 pb-28 overflow-hidden"
       style={{ background: BG }}
     >
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
         style={{
           backgroundImage:
             'linear-gradient(to right, #1E2433 1px, transparent 1px), linear-gradient(to bottom, #1E2433 1px, transparent 1px)',
@@ -401,60 +397,41 @@ function HeroSection() {
           opacity: 0.03
         }}
       />
-      {/* Accent glow — very subtle */}
       <div
         className="absolute top-1/3 right-1/4 w-[600px] h-[600px] rounded-full pointer-events-none"
+        aria-hidden="true"
         style={{ background: `radial-gradient(circle, ${ACCENT}, transparent 68%)`, opacity: 0.04 }}
       />
 
       <div className="mx-auto px-6 md:px-8 max-w-7xl relative z-10 grid lg:grid-cols-2 gap-20 items-center w-full">
-        {/* Text */}
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
+          initial="hidden" animate="visible" variants={staggerContainer}
           className="max-w-xl"
         >
           <motion.div variants={staggerItem}>
-            <span
-              className="inline-block text-[11px] font-semibold tracking-[0.22em] uppercase mb-12"
-              style={{ color: ACCENT }}
-            >
+            <span className="inline-block text-[11px] font-semibold tracking-[0.22em] uppercase mb-12"
+              style={{ color: ACCENT }}>
               Operational Intelligence
             </span>
           </motion.div>
 
-          {/* Hero headline */}
-          <motion.h1
-            variants={staggerItem}
-            className="tracking-[-0.022em] leading-[1.05] mb-12"
-          >
-            <span
-              className="block font-bold"
-              style={{ fontSize: 'clamp(2.8rem, 5.2vw, 4.75rem)', color: PRIMARY }}
-            >
+          <motion.h1 variants={staggerItem} className="tracking-[-0.022em] leading-[1.05] mb-12">
+            <span className="block font-bold"
+              style={{ fontSize: 'clamp(2.8rem, 5.2vw, 4.75rem)', color: PRIMARY }}>
               Every organization
               <br />creates experience.
             </span>
-            <span
-              className="block font-light italic mt-4"
-              style={{
-                fontSize: 'clamp(1.65rem, 2.8vw, 2.9rem)',
-                color: SECONDARY,
-                letterSpacing: '-0.01em'
-              }}
-            >
+            <span className="block font-light italic mt-4"
+              style={{ fontSize: 'clamp(1.65rem, 2.8vw, 2.9rem)', color: SECONDARY, letterSpacing: '-0.01em' }}>
               Very few transform it into intelligence.
             </span>
           </motion.h1>
 
-          <motion.p
-            variants={staggerItem}
+          <motion.p variants={staggerItem}
             className="text-[17px] leading-[1.8] mb-12 max-w-[440px]"
-            style={{ color: SECONDARY }}
-          >
-            Autonomatex preserves operational knowledge, improves decision
-            quality, and keeps humans in control — permanently.
+            style={{ color: SECONDARY }}>
+            Autonomatex preserves operational knowledge, improves decision quality,
+            and keeps humans in control — permanently.
           </motion.p>
 
           <motion.div variants={staggerItem} className="flex flex-col sm:flex-row gap-4">
@@ -479,7 +456,7 @@ function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Abstract SVG — cross-browser safe, no CSS transformOrigin on SVG elements */}
+        {/* Hero SVG — cross-browser safe, no CSS transformOrigin on SVG elements */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -487,24 +464,21 @@ function HeroSection() {
           className="hidden lg:flex items-center justify-center"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 480 480" className="w-full max-w-[440px]" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Rings */}
+          <svg viewBox="0 0 480 480" className="w-full max-w-[440px]" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
             <circle cx="240" cy="240" r="210" stroke={BORDER} strokeWidth="1" />
             <circle cx="240" cy="240" r="150" stroke={BORDER} strokeWidth="1" />
             <circle cx="240" cy="240" r="90"  stroke={BORDER} strokeWidth="1" />
             <circle cx="240" cy="240" r="32"  stroke={BORDER} strokeWidth="1" />
 
-            {/* Pulse rings — use <g transform> at center */}
             <g transform="translate(240 240)">
-              <motion.circle
-                cx="0" cy="0" r="32"
+              <motion.circle cx="0" cy="0" r="32"
                 stroke={ACCENT} strokeWidth="1.5"
                 initial={{ scale: 1, opacity: 0.5 }}
                 animate={{ scale: 4.2, opacity: 0 }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'linear', repeatDelay: 1 }}
               />
-              <motion.circle
-                cx="0" cy="0" r="32"
+              <motion.circle cx="0" cy="0" r="32"
                 stroke={ACCENT} strokeWidth="1"
                 initial={{ scale: 1, opacity: 0.25 }}
                 animate={{ scale: 6.5, opacity: 0 }}
@@ -512,7 +486,6 @@ function HeroSection() {
               />
             </g>
 
-            {/* Connection lines */}
             <line x1="240" y1="240" x2="360" y2="120" stroke="#2F3A4D" strokeWidth="0.7" opacity="0.35" />
             <line x1="240" y1="240" x2="100" y2="150" stroke="#2F3A4D" strokeWidth="0.7" opacity="0.35" />
             <line x1="240" y1="240" x2="90"  y2="320" stroke="#2F3A4D" strokeWidth="0.7" opacity="0.35" />
@@ -521,11 +494,9 @@ function HeroSection() {
             <line x1="100" y1="150" x2="360" y2="120" stroke="#2F3A4D" strokeWidth="0.5" opacity="0.15" />
             <line x1="90"  y1="320" x2="370" y2="340" stroke="#2F3A4D" strokeWidth="0.5" opacity="0.15" />
 
-            {/* Core */}
             <circle cx="240" cy="240" r="10" fill={DARK} />
             <circle cx="240" cy="240" r="4"  fill={ACCENT} />
 
-            {/* Peripheral nodes */}
             <circle cx="360" cy="120" r="9"   fill={DARK} />
             <circle cx="360" cy="120" r="3.5" fill={ACCENT_DIM} />
             <circle cx="100" cy="150" r="7"   fill="#2F3A4D" />
@@ -536,7 +507,6 @@ function HeroSection() {
             <circle cx="370" cy="340" r="2.5" fill={ACCENT_DIM} />
             <circle cx="240" cy="50"  r="5"   fill="#2F3A4D" opacity="0.5" />
 
-            {/* Orbiting dots — <g> with style originX/originY for React */}
             <motion.g
               animate={{ rotate: 360 }}
               transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
@@ -544,7 +514,6 @@ function HeroSection() {
             >
               <circle cx="240" cy="90" r="5" fill={ACCENT} />
             </motion.g>
-
             <motion.g
               animate={{ rotate: -360 }}
               transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
@@ -556,11 +525,9 @@ function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.28 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        initial={{ opacity: 0 }} animate={{ opacity: 0.28 }}
         transition={{ delay: 2.2 }}
         aria-hidden="true"
       >
@@ -578,17 +545,19 @@ function ManifestoSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-20%' });
 
+  // Solid accessible colors — cascading dark to light to achieve visual weight
+  // All pass WCAG AA for large text (3:1) against SURFACE (#FFFFFF)
   const lines = [
-    { text: 'Operations change.',    opacity: 0.52, weight: '300' },
-    { text: 'People change.',        opacity: 0.68, weight: '300' },
-    { text: "Experience shouldn't.", opacity: 1.0,  weight: '600' },
+    { text: 'Operations change.',    color: '#808892' },  // 3.4:1 on white ✓
+    { text: 'People change.',        color: '#5E6878' },  // 5.0:1 on white ✓
+    { text: "Experience shouldn't.", color: PRIMARY   },  // 17:1 on white ✓
   ];
 
   return (
     <section
       className="py-44 md:py-64 px-6 md:px-8 text-center"
       style={{ background: SURFACE }}
-      aria-label="Manifesto"
+      aria-label="Core belief"
     >
       <div className="mx-auto max-w-4xl" ref={ref}>
         <div className="space-y-5 md:space-y-6">
@@ -602,9 +571,8 @@ function ManifestoSection() {
               className="tracking-tight leading-[1.1]"
               style={{
                 fontSize: 'clamp(2.4rem, 5.5vw, 5rem)',
-                color: PRIMARY,
-                opacity: line.opacity,
-                fontWeight: line.weight
+                color: line.color,
+                fontWeight: i === 2 ? '600' : '300'
               }}
             >
               {line.text}
@@ -617,21 +585,6 @@ function ManifestoSection() {
 }
 
 // ==========================================
-// EYEBROW
-// ==========================================
-
-function Eyebrow({ children, muted = false }: { children: React.ReactNode; muted?: boolean }) {
-  return (
-    <div
-      className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-8"
-      style={{ color: muted ? SECONDARY : ACCENT }}
-    >
-      {children}
-    </div>
-  );
-}
-
-// ==========================================
 // WHY WE EXIST
 // ==========================================
 
@@ -639,11 +592,13 @@ function WhySection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-15%' });
 
+  // Solid accessible colors — cascading build-up effect without opacity hack
+  // All pass WCAG AA large text (3:1) on BG (#FAFBFC)
   const statements = [
-    'Knowledge disappears.',
-    'Experience leaves.',
-    'Operations restart.',
-    'Teams begin again.',
+    { text: 'Knowledge disappears.', color: '#808892' },  // 3.4:1 ✓
+    { text: 'Experience leaves.',    color: '#667085' },  // 4.7:1 ✓
+    { text: 'Operations restart.',   color: '#4A5568' },  // 7.2:1 ✓
+    { text: 'Teams begin again.',    color: PRIMARY   },  // 17:1  ✓
   ];
 
   return (
@@ -652,7 +607,7 @@ function WhySection() {
         <Eyebrow>Why We Exist</Eyebrow>
 
         <div className="space-y-7 mb-20">
-          {statements.map((text, i) => (
+          {statements.map((s, i) => (
             <motion.p
               key={i}
               custom={i}
@@ -660,13 +615,9 @@ function WhySection() {
               animate={isInView ? 'visible' : 'hidden'}
               variants={fadeUpVariant}
               className="font-medium tracking-tight leading-[1.1]"
-              style={{
-                fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)',
-                color: PRIMARY,
-                opacity: 0.25 + i * 0.2
-              }}
+              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)', color: s.color }}
             >
-              {text}
+              {s.text}
             </motion.p>
           ))}
         </div>
@@ -679,10 +630,8 @@ function WhySection() {
           className="border-l-[3px] pl-8 py-2"
           style={{ borderColor: ACCENT }}
         >
-          <p
-            className="text-2xl md:text-[1.7rem] font-semibold leading-[1.3] mb-4"
-            style={{ color: PRIMARY }}
-          >
+          <p className="text-2xl md:text-[1.7rem] font-semibold leading-[1.3] mb-4"
+            style={{ color: PRIMARY }}>
             Autonomatex exists so that operational intelligence compounds instead of disappearing.
           </p>
           <p className="text-base leading-[1.8] max-w-lg" style={{ color: SECONDARY }}>
@@ -712,8 +661,7 @@ function OperationalIntelligenceSection() {
 
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <motion.h2
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
             variants={fadeUpVariant}
             className="text-3xl md:text-[2.1rem] font-semibold leading-[1.2] tracking-tight"
             style={{ color: PRIMARY }}
@@ -722,8 +670,7 @@ function OperationalIntelligenceSection() {
           </motion.h2>
 
           <motion.div
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
             variants={staggerContainer}
             className="space-y-6"
           >
@@ -731,7 +678,8 @@ function OperationalIntelligenceSection() {
               'Most systems are built to process data. Operational Intelligence is built to preserve experience — the knowledge of what actually happened, what decisions were made, and why they worked.',
               'Organizations that build Operational Intelligence don\'t just operate better today. They grow wiser with every passing year.'
             ].map((para, i) => (
-              <motion.p key={i} variants={staggerItem} className="text-base leading-[1.85]" style={{ color: SECONDARY }}>
+              <motion.p key={i} variants={staggerItem}
+                className="text-base leading-[1.85]" style={{ color: SECONDARY }}>
                 {para}
               </motion.p>
             ))}
@@ -746,7 +694,7 @@ function OperationalIntelligenceSection() {
 }
 
 // ==========================================
-// OUR THINKING — typographic drama
+// OUR THINKING
 // ==========================================
 
 function OurThinkingSection() {
@@ -754,50 +702,36 @@ function OurThinkingSection() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const pillars = [
-    {
-      number: '01',
-      title: 'Technology should reduce complexity.',
-      body: 'If a system makes operations harder to understand, it is the wrong system. Clarity is a design requirement.'
-    },
-    {
-      number: '02',
-      title: 'Humans remain responsible.',
-      body: 'AI surfaces patterns and supports decisions. Accountability belongs to people. Every recommendation is a suggestion — never a mandate.'
-    },
-    {
-      number: '03',
-      title: 'Knowledge compounds.',
-      body: 'The longer an intelligence system operates within an environment, the more accurate and valuable it becomes. This is the architecture.'
-    },
-    {
-      number: '04',
-      title: 'Build for decades, not quarters.',
-      body: 'We make decisions about technology the way sound organizations make decisions about anything important — with long-term consequences in mind.'
-    }
+    { number: '01', title: 'Technology should reduce complexity.',
+      body: 'If a system makes operations harder to understand, it is the wrong system. Clarity is a design requirement.' },
+    { number: '02', title: 'Humans remain responsible.',
+      body: 'AI surfaces patterns and supports decisions. Accountability belongs to people. Every recommendation is a suggestion — never a mandate.' },
+    { number: '03', title: 'Knowledge compounds.',
+      body: 'The longer an intelligence system operates within an environment, the more accurate and valuable it becomes. This is the architecture.' },
+    { number: '04', title: 'Build for decades, not quarters.',
+      body: 'We make decisions about technology the way sound organizations make decisions about anything important — with long-term consequences in mind.' }
   ];
 
   return (
-    <section id="thinking" className="py-28 md:py-36 border-y" style={{ background: BG, borderColor: BORDER }}>
+    <section id="thinking" className="py-28 md:py-36 border-y"
+      style={{ background: BG, borderColor: BORDER }}>
       <div className="mx-auto px-6 md:px-8 max-w-7xl" ref={ref}>
         <Eyebrow>Our Thinking</Eyebrow>
 
         <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2"
         >
           {pillars.map((pillar, idx) => (
             <motion.div
-              key={idx}
-              variants={staggerItem}
+              key={idx} variants={staggerItem}
               className="relative overflow-hidden p-10 md:p-14"
               style={{
                 borderRight: idx % 2 === 0 ? `1px solid ${BORDER}` : 'none',
                 borderBottom: idx < 2 ? `1px solid ${BORDER}` : 'none'
               }}
             >
-              {/* Display-scale ghost number */}
               <div
                 className="absolute top-6 right-6 font-bold select-none pointer-events-none"
                 style={{ fontSize: '7rem', color: DARK, opacity: 0.035, lineHeight: 1 }}
@@ -805,18 +739,12 @@ function OurThinkingSection() {
               >
                 {pillar.number}
               </div>
-
-              <div
-                className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-6"
-                style={{ color: ACCENT }}
-              >
+              <div className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-6"
+                style={{ color: ACCENT }}>
                 {pillar.number}
               </div>
-
-              <h3
-                className="text-xl md:text-[1.3rem] font-semibold mb-4 leading-[1.25] relative z-10"
-                style={{ color: PRIMARY }}
-              >
+              <h3 className="text-xl md:text-[1.3rem] font-semibold mb-4 leading-[1.25] relative z-10"
+                style={{ color: PRIMARY }}>
                 {pillar.title}
               </h3>
               <p className="text-[15px] leading-[1.8] relative z-10" style={{ color: SECONDARY }}>
@@ -831,7 +759,7 @@ function OurThinkingSection() {
 }
 
 // ==========================================
-// INTELLIGENCE ARCHITECTURE — SVG diagram
+// ARCHITECTURE — SVG layer diagram
 // ==========================================
 
 function ArchitectureDiagram() {
@@ -839,32 +767,37 @@ function ArchitectureDiagram() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const layers = [
-    { id: 'human',       label: 'Human Intelligence',        sub: 'Every insight begins with the people who do the work.',           icon: BrainCircuit },
-    { id: 'memory',      label: 'Memory Intelligence',        sub: 'Operational patterns are captured so knowledge compounds.',        icon: Database },
-    { id: 'decision',    label: 'Decision Intelligence',      sub: 'Context-aware frameworks guide consistent, high-quality decisions.', icon: GitMerge },
-    { id: 'operational', label: 'Operational Intelligence',   sub: 'Human experience and operational data create a living layer.',     icon: Cpu },
-    { id: 'continuous',  label: 'Continuous Intelligence',    sub: 'Each decision feeds the system forward. The organization grows smarter.', icon: RefreshCcw },
+    { id: 'human',       label: 'Human Intelligence',      sub: 'Every insight begins with the people who do the work.',        icon: BrainCircuit },
+    { id: 'memory',      label: 'Memory Intelligence',      sub: 'Operational patterns are captured so knowledge compounds.',    icon: Database },
+    { id: 'decision',    label: 'Decision Intelligence',    sub: 'Context-aware frameworks guide consistent decisions.',         icon: GitMerge },
+    { id: 'operational', label: 'Operational Intelligence', sub: 'Human experience and data create a living intelligence layer.', icon: Cpu },
+    { id: 'continuous',  label: 'Continuous Intelligence',  sub: 'Each decision feeds forward. The organization grows wiser.',   icon: RefreshCcw },
   ];
 
-  const BOX_W = 560;
-  const BOX_H = 58;
-  const GAP   = 26;
-  const STEP  = BOX_H + GAP;
-  const SVG_W = BOX_W + 80;
-  const SVG_H = layers.length * STEP - GAP + 2;
-  const X0    = 40;
+  const BOX_W = 520, BOX_H = 58, GAP = 26, STEP = BOX_H + GAP;
+  const SVG_W = BOX_W + 40, SVG_H = layers.length * STEP - GAP;
+  const X0 = 20;
 
   return (
     <div ref={ref}>
-      {/* Desktop: SVG diagram */}
-      <div className="hidden md:block" aria-label="Five-layer intelligence architecture diagram">
+      {/* Desktop SVG diagram — accessible */}
+      <div className="hidden md:block">
         <svg
           viewBox={`0 0 ${SVG_W} ${SVG_H}`}
           className="w-full"
-          style={{ maxWidth: 680 }}
+          style={{ maxWidth: 640 }}
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-labelledby="arch-title arch-desc"
         >
+          <title id="arch-title">Intelligence Architecture</title>
+          <desc id="arch-desc">
+            Five-layer system diagram: Human Intelligence feeds Memory Intelligence,
+            which feeds Decision Intelligence, which feeds Operational Intelligence,
+            which feeds Continuous Intelligence in a compounding loop.
+          </desc>
+
           {layers.map((layer, i) => {
             const y = i * STEP;
             const isCore = layer.id === 'operational';
@@ -872,59 +805,47 @@ function ArchitectureDiagram() {
 
             return (
               <g key={layer.id}>
-                {/* Connector line to next layer */}
                 {i < layers.length - 1 && (
                   <motion.line
                     x1={X0 + BOX_W / 2} y1={y + BOX_H}
                     x2={X0 + BOX_W / 2} y2={y + BOX_H + GAP}
-                    stroke={BORDER}
-                    strokeWidth="1.5"
-                    strokeDasharray="3 3"
+                    stroke={BORDER} strokeWidth="1.5" strokeDasharray="3 3"
                     initial={{ opacity: 0 }}
                     animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ delay: delay + 0.3, duration: 0.4 }}
                   />
                 )}
 
-                {/* Animated data dot on connector */}
+                {/* Animated data dot */}
                 {i < layers.length - 1 && isInView && (
-                  <motion.circle
-                    r="3"
-                    fill={ACCENT}
+                  <motion.circle r="3" fill={ACCENT}
                     initial={{ cx: X0 + BOX_W / 2, cy: y + BOX_H }}
                     animate={{ cx: X0 + BOX_W / 2, cy: y + BOX_H + GAP }}
                     transition={{
-                      delay: delay + 1.2,
-                      duration: 0.6,
-                      repeat: Infinity,
-                      repeatDelay: layers.length * 0.5 + 1,
+                      delay: delay + 1.2, duration: 0.55,
+                      repeat: Infinity, repeatDelay: layers.length * 0.6 + 1,
                       ease: EASE
                     }}
-                    opacity={0.7}
+                    opacity={0.8}
                   />
                 )}
 
-                {/* Layer box */}
                 <motion.rect
-                  x={X0} y={y}
-                  width={BOX_W} height={BOX_H}
-                  rx="8"
+                  x={X0} y={y} width={BOX_W} height={BOX_H} rx="8"
                   fill={isCore ? DARK : SURFACE}
                   stroke={isCore ? ACCENT : BORDER}
                   strokeWidth={isCore ? 1.5 : 1}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                   transition={{ delay, duration: 0.55, ease: EASE }}
                 />
 
-                {/* Label */}
                 <motion.text
-                  x={X0 + 48}
-                  y={y + BOX_H / 2 + 5}
-                  fontSize="15"
-                  fontWeight={isCore ? '600' : '500'}
+                  x={X0 + 46} y={y + BOX_H / 2 + 5}
+                  fontSize="14.5" fontWeight={isCore ? '600' : '500'}
                   fill={isCore ? '#FAFBFC' : PRIMARY}
                   fontFamily="Inter, system-ui, sans-serif"
+                  letterSpacing="-0.01em"
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: delay + 0.15, duration: 0.4 }}
@@ -932,47 +853,32 @@ function ArchitectureDiagram() {
                   {layer.label}
                 </motion.text>
 
-                {/* Icon dot */}
-                <motion.circle
-                  cx={X0 + 24}
-                  cy={y + BOX_H / 2}
-                  r="7"
-                  fill={isCore ? `${ACCENT}30` : DEEP_ALT}
+                <motion.circle cx={X0 + 22} cy={y + BOX_H / 2} r="7"
+                  fill={isCore ? `${ACCENT}28` : DEEP_ALT}
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: delay + 0.1, duration: 0.4 }}
                 />
-                <motion.circle
-                  cx={X0 + 24}
-                  cy={y + BOX_H / 2}
-                  r="3"
+                <motion.circle cx={X0 + 22} cy={y + BOX_H / 2} r="3"
                   fill={isCore ? ACCENT : '#2F3A4D'}
                   initial={{ opacity: 0 }}
                   animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                   transition={{ delay: delay + 0.2, duration: 0.4 }}
                 />
-
-                {/* Sub-label to the right of box */}
-                <motion.text
-                  x={X0 + BOX_W + 20}
-                  y={y + BOX_H / 2 + 4}
-                  fontSize="11.5"
-                  fill={SECONDARY}
-                  fontFamily="Inter, system-ui, sans-serif"
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 0.7 } : { opacity: 0 }}
-                  transition={{ delay: delay + 0.3, duration: 0.5 }}
-                >
-                  {/* Wrapped manually for SVG — show short version */}
-                  {layer.sub.length > 48 ? layer.sub.slice(0, 48) + '…' : layer.sub}
-                </motion.text>
               </g>
             );
           })}
         </svg>
+
+        {/* Visually-hidden text equivalent for screen readers */}
+        <ul className="sr-only">
+          {layers.map(l => (
+            <li key={l.id}><strong>{l.label}:</strong> {l.sub}</li>
+          ))}
+        </ul>
       </div>
 
-      {/* Mobile: clean vertical list */}
+      {/* Mobile — card list */}
       <div className="md:hidden space-y-3">
         {layers.map((layer, i) => {
           const isCore = layer.id === 'operational';
@@ -985,30 +891,17 @@ function ArchitectureDiagram() {
               animate={isInView ? 'visible' : 'hidden'}
               variants={fadeUpVariant}
               className="flex items-start gap-4 p-5 rounded-xl border"
-              style={{
-                background: isCore ? DARK : SURFACE,
-                borderColor: isCore ? ACCENT : BORDER
-              }}
+              style={{ background: isCore ? DARK : SURFACE, borderColor: isCore ? ACCENT : BORDER }}
             >
-              <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
-                style={{ background: isCore ? `${ACCENT}25` : DEEP_ALT }}
-              >
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5"
+                style={{ background: isCore ? `${ACCENT}25` : DEEP_ALT }}>
                 <Icon className="w-4 h-4" style={{ color: isCore ? ACCENT : '#2F3A4D' }} />
               </div>
               <div>
-                <h3
-                  className="text-[15px] font-semibold mb-1"
-                  style={{ color: isCore ? '#FAFBFC' : PRIMARY }}
-                >
-                  {layer.label}
-                </h3>
-                <p
-                  className="text-[13px] leading-[1.7]"
-                  style={{ color: isCore ? `${ACCENT_DIM}cc` : SECONDARY }}
-                >
-                  {layer.sub}
-                </p>
+                <h3 className="text-[15px] font-semibold mb-1"
+                  style={{ color: isCore ? '#FAFBFC' : PRIMARY }}>{layer.label}</h3>
+                <p className="text-[13px] leading-[1.7]"
+                  style={{ color: isCore ? `${ACCENT_DIM}cc` : SECONDARY }}>{layer.sub}</p>
               </div>
             </motion.div>
           );
@@ -1026,11 +919,9 @@ function ArchitectureSection() {
     <section id="architecture" className="py-28 md:py-40" style={{ background: SURFACE }}>
       <div className="mx-auto px-6 md:px-8 max-w-5xl" ref={ref}>
         <Eyebrow>Intelligence Architecture</Eyebrow>
-
         <div className="mb-14 max-w-xl">
           <motion.h2
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
             variants={fadeUpVariant}
             className="text-3xl md:text-[2.1rem] font-semibold leading-[1.2] tracking-tight"
             style={{ color: PRIMARY }}
@@ -1038,18 +929,14 @@ function ArchitectureSection() {
             Five layers.<br />One compounding system.
           </motion.h2>
           <motion.p
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={fadeUpVariant}
-            custom={1}
-            className="mt-5 text-[15px] leading-[1.8]"
-            style={{ color: SECONDARY }}
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+            variants={fadeUpVariant} custom={1}
+            className="mt-5 text-[15px] leading-[1.8]" style={{ color: SECONDARY }}
           >
             Each layer builds on the one before it. Over time, the entire system
             becomes more accurate, more consistent, and more valuable.
           </motion.p>
         </div>
-
         <ArchitectureDiagram />
       </div>
     </section>
@@ -1065,7 +952,7 @@ function PrinciplesSection() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const principles = [
-    { title: 'Experience compounds.',     text: 'Every operational cycle adds to the intelligence of the system. Value grows with time, not against it.' },
+    { title: 'Experience compounds.',      text: 'Every operational cycle adds to the intelligence of the system. Value grows with time, not against it.' },
     { title: 'Humans remain accountable.', text: 'Intelligence advises. People decide. Responsibility is never delegated to a machine.' },
     { title: 'Knowledge should survive.',  text: 'When experience exits the organization, the intelligence stays. Continuity is built in.' },
     { title: 'Trust is earned.',           text: 'We build incrementally, transparently, and only claim what we can demonstrate.' },
@@ -1079,18 +966,14 @@ function PrinciplesSection() {
         <Eyebrow>Our Principles</Eyebrow>
 
         <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
         >
           {principles.map((p, idx) => (
-            <motion.div
-              key={idx}
-              variants={staggerItem}
+            <motion.div key={idx} variants={staggerItem}
               className="border rounded-xl p-8"
-              style={{ borderColor: BORDER, background: SURFACE }}
-            >
+              style={{ borderColor: BORDER, background: SURFACE }}>
               <h3 className="text-[16px] font-semibold mb-3 leading-snug" style={{ color: PRIMARY }}>
                 {p.title}
               </h3>
@@ -1101,12 +984,10 @@ function PrinciplesSection() {
 
         {/* Human warmth — one quiet line */}
         <motion.p
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUpVariant}
-          custom={principles.length + 1}
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant} custom={principles.length + 1}
           className="mt-16 text-center text-[15px] font-light italic"
-          style={{ color: SECONDARY, opacity: 0.75 }}
+          style={{ color: '#5E6878' }}
         >
           Technology should help people do their best work. Not replace them.
         </motion.p>
@@ -1119,7 +1000,7 @@ function PrinciplesSection() {
 }
 
 // ==========================================
-// SECURITY
+// SECURITY AND TRUST
 // ==========================================
 
 function SecuritySection() {
@@ -1127,24 +1008,22 @@ function SecuritySection() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const items = [
-    { label: 'Privacy',                     desc: 'Data sovereignty and privacy-by-design at every layer. Your operational data belongs to you.',          icon: <Lock       className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Security by Design',           desc: 'Security is a foundation, not a feature. Every system is built on zero-trust principles from day one.', icon: <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Responsible AI',               desc: 'All AI systems undergo rigorous evaluation for reliability, consistency, and alignment with human values.', icon: <Scale      className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Human Oversight',              desc: 'No automated action occurs without defined human review checkpoints. Autonomy is always bounded.',       icon: <Eye        className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Transparency',                 desc: 'Organizations have full visibility into how their intelligence systems operate and inform decisions.',    icon: <Activity   className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Compliance-Ready',             desc: 'Built to accommodate regulatory requirements across jurisdictions without architectural rework.',         icon: <FileCheck  className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Enterprise Infrastructure',    desc: 'Infrastructure that scales with operational demand without compromising availability or reliability.',    icon: <Server     className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> }
+    { label: 'Privacy',                  desc: 'Data sovereignty and privacy-by-design at every layer. Your operational data belongs to you.',           icon: <Lock       className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Security by Design',       desc: 'Security is a foundation, not a feature. Every system is built on zero-trust principles from day one.',  icon: <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Responsible AI',           desc: 'All AI systems undergo rigorous evaluation for reliability, consistency, and alignment with human values.', icon: <Scale      className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Human Oversight',          desc: 'No automated action occurs without defined human review checkpoints. Autonomy is always bounded.',        icon: <Eye        className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Transparency',             desc: 'Organizations have full visibility into how their intelligence systems operate and inform decisions.',     icon: <Activity   className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Compliance-Ready',         desc: 'Built to accommodate regulatory requirements across jurisdictions without architectural rework.',          icon: <FileCheck  className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Enterprise Infrastructure', desc: 'Infrastructure that scales with operational demand without compromising availability or reliability.',   icon: <Server     className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
   ];
 
   return (
     <section id="security" className="py-28 md:py-40" style={{ background: DEEP_ALT }}>
       <div className="mx-auto px-6 md:px-8 max-w-6xl" ref={ref}>
         <Eyebrow>Security and Trust</Eyebrow>
-
         <div className="mb-14 max-w-2xl">
           <motion.h2
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
             variants={fadeUpVariant}
             className="text-3xl font-semibold leading-[1.2] tracking-tight"
             style={{ color: PRIMARY }}
@@ -1154,8 +1033,7 @@ function SecuritySection() {
         </div>
 
         <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
           className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10"
         >
@@ -1175,7 +1053,7 @@ function SecuritySection() {
 }
 
 // ==========================================
-// VISION — closed narrative arc
+// VISION
 // ==========================================
 
 function VisionSection() {
@@ -1185,40 +1063,26 @@ function VisionSection() {
   return (
     <section id="vision" className="py-40 md:py-56 text-center px-6 md:px-8" style={{ background: DARK }}>
       <div className="mx-auto max-w-3xl" ref={ref}>
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-        >
+        <motion.div initial="hidden" animate={isInView ? 'visible' : 'hidden'} variants={staggerContainer}>
           <motion.div variants={staggerItem}>
-            <span
-              className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-16 inline-block"
-              style={{ color: ACCENT }}
-            >
+            <span className="text-[11px] font-semibold tracking-[0.22em] uppercase mb-16 inline-block"
+              style={{ color: ACCENT }}>
               Vision
             </span>
           </motion.div>
 
-          <motion.p
-            variants={staggerItem}
+          <motion.p variants={staggerItem}
             className="font-semibold leading-[1.15] tracking-tight mb-10"
-            style={{
-              fontSize: 'clamp(2rem, 4.5vw, 3.8rem)',
-              color: '#FAFBFC'
-            }}
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.8rem)', color: '#FAFBFC' }}
           >
             Experience becomes intelligence
             <br />only when it is remembered.
           </motion.p>
 
-          <motion.div
-            variants={staggerItem}
-            className="w-8 h-[2px] mx-auto mb-10"
-            style={{ background: ACCENT }}
-          />
+          <motion.div variants={staggerItem}
+            className="w-8 h-[2px] mx-auto mb-10" style={{ background: ACCENT }} />
 
-          <motion.p
-            variants={staggerItem}
+          <motion.p variants={staggerItem}
             className="text-[1.05rem] font-light leading-[1.85] max-w-xl mx-auto"
             style={{ color: '#8899A8' }}
           >
@@ -1237,29 +1101,29 @@ function VisionSection() {
 // ==========================================
 
 function ContactSection() {
-  const [status, setStatus] = useState<'idle' | 'submitted'>('idle');
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted'>('idle');
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setStatus('submitting');
+    // Simulate network delay; replace with real POST when backend is wired
+    await new Promise(r => setTimeout(r, 800));
     setStatus('submitted');
   };
 
   const inputClass = [
     'w-full bg-white border rounded-md px-4 py-3 text-[14px] transition-all',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-    'placeholder:text-[#667085]/50'
+    'placeholder:text-[#667085]/50',
   ].join(' ');
-
   const inputStyle = { borderColor: BORDER, color: PRIMARY, '--tw-ring-color': ACCENT } as React.CSSProperties;
 
   return (
     <section id="contact" className="py-28 md:py-40" style={{ background: SURFACE }}>
       <div className="mx-auto px-6 md:px-8 max-w-2xl">
         <Eyebrow>Begin the Conversation</Eyebrow>
-        <h2
-          className="text-3xl md:text-[2.1rem] font-semibold tracking-tight leading-[1.2] mb-4"
-          style={{ color: PRIMARY }}
-        >
+        <h2 className="text-3xl md:text-[2.1rem] font-semibold tracking-tight leading-[1.2] mb-4"
+          style={{ color: PRIMARY }}>
           We would be glad to learn about your organization.
         </h2>
         <p className="text-[15px] mb-12 leading-[1.8]" style={{ color: SECONDARY }}>
@@ -1274,15 +1138,13 @@ function ContactSection() {
             className="rounded-xl p-14 flex flex-col items-center border"
             style={{ background: BG, borderColor: BORDER }}
           >
-            <div
-              className="w-11 h-11 rounded-full flex items-center justify-center mb-6"
-              style={{ background: `${ACCENT}18` }}
-            >
+            <div className="w-11 h-11 rounded-full flex items-center justify-center mb-6"
+              style={{ background: `${ACCENT}18` }}>
               <ShieldCheck className="w-5 h-5" style={{ color: ACCENT }} />
             </div>
             <h3 className="text-xl font-semibold mb-2" style={{ color: PRIMARY }}>Message received.</h3>
             <p className="text-[14px] text-center" style={{ color: SECONDARY }}>
-              Thank you for reaching out. A representative will be in touch shortly.
+              Thank you for reaching out. We review every message personally and will be in touch.
             </p>
           </div>
         ) : (
@@ -1293,25 +1155,33 @@ function ContactSection() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-[13px] font-medium" style={{ color: PRIMARY }}>Name</label>
+                <label htmlFor="name" className="text-[13px] font-medium" style={{ color: PRIMARY }}>
+                  Name
+                </label>
                 <input required type="text" id="name" name="name" autoComplete="name"
                   className={inputClass} style={inputStyle} />
               </div>
               <div className="space-y-2">
-                <label htmlFor="company" className="text-[13px] font-medium" style={{ color: PRIMARY }}>Company</label>
+                <label htmlFor="company" className="text-[13px] font-medium" style={{ color: PRIMARY }}>
+                  Company
+                </label>
                 <input required type="text" id="company" name="company" autoComplete="organization"
                   className={inputClass} style={inputStyle} />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="email" className="text-[13px] font-medium" style={{ color: PRIMARY }}>Business Email</label>
+              <label htmlFor="email" className="text-[13px] font-medium" style={{ color: PRIMARY }}>
+                Business Email
+              </label>
               <input required type="email" id="email" name="email" autoComplete="email"
                 className={inputClass} style={inputStyle} />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="message" className="text-[13px] font-medium" style={{ color: PRIMARY }}>Message</label>
+              <label htmlFor="message" className="text-[13px] font-medium" style={{ color: PRIMARY }}>
+                Message
+              </label>
               <textarea
                 required id="message" name="message" autoComplete="off" rows={5}
                 placeholder="Tell us about your organization."
@@ -1322,10 +1192,11 @@ function ContactSection() {
 
             <button
               type="submit"
-              className="w-full py-4 rounded-md text-[14px] font-medium text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 hover:bg-[#2F3A4D]"
+              disabled={status === 'submitting'}
+              className="w-full py-4 rounded-md text-[14px] font-medium text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed hover:bg-[#2F3A4D]"
               style={{ background: DARK, '--tw-ring-color': ACCENT } as React.CSSProperties}
             >
-              Send Message
+              {status === 'submitting' ? 'Sending…' : 'Send Message'}
             </button>
           </form>
         )}
@@ -1335,7 +1206,7 @@ function ContactSection() {
 }
 
 // ==========================================
-// FOOTER — extremely minimal
+// FOOTER — minimal
 // ==========================================
 
 function Footer() {
@@ -1348,18 +1219,6 @@ function Footer() {
         </div>
 
         <div className="flex items-center gap-6">
-          {['Privacy', 'Terms'].map((label) => (
-            <a
-              key={label}
-              href="#"
-              className="text-[12px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
-              style={{ color: SECONDARY, '--tw-ring-color': ACCENT } as React.CSSProperties}
-              onMouseEnter={e => { e.currentTarget.style.color = PRIMARY; }}
-              onMouseLeave={e => { e.currentTarget.style.color = SECONDARY; }}
-            >
-              {label}
-            </a>
-          ))}
           <button
             onClick={() => doScrollTo('contact')}
             className="text-[12px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded-sm"
@@ -1369,9 +1228,9 @@ function Footer() {
           >
             Contact
           </button>
-          <p className="text-[12px]" style={{ color: `${SECONDARY}80` }}>
-            &copy; {new Date().getFullYear()} Autonomatex
-          </p>
+          <span className="text-[12px]" style={{ color: SECONDARY }}>
+            &copy; {new Date().getFullYear()} Autonomatex. All rights reserved.
+          </span>
         </div>
       </div>
     </footer>
@@ -1379,7 +1238,7 @@ function Footer() {
 }
 
 // ==========================================
-// MAIN PAGE
+// MAIN APP
 // ==========================================
 
 function SinglePageSite() {
@@ -1412,28 +1271,11 @@ function SinglePageSite() {
   );
 }
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={SinglePageSite} />
-      <Route component={() => (
-        <div className="p-20 text-center text-xl" style={{ color: PRIMARY }}>Page not found</div>
-      )} />
-    </Switch>
-  );
-}
-
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <MotionConfig reducedMotion="user">
-          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-            <Router />
-          </WouterRouter>
-        </MotionConfig>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <MotionConfig reducedMotion="user">
+      <SinglePageSite />
+    </MotionConfig>
   );
 }
 
