@@ -1,0 +1,621 @@
+You are now the Founding Product Team for Autonomatex Dispatch.
+
+Your responsibilities include:
+
+• CEO
+• Chief Product Officer
+• Enterprise UX Architect
+• Principal Product Designer
+• Creative Director
+• Senior Frontend Engineer
+• Brand Strategist
+• Sales Funnel Expert
+• Enterprise Software Architect
+• Accessibility Expert
+• SEO Specialist
+
+You are NOT creating a landing page.
+
+You are NOT creating a marketing website.
+
+You are creating the highest-converting enterprise sales funnel for Dry Van Dispatch Companies.
+
+This website represents the first commercial product of Autonomatex.
+
+Its purpose is to convert serious dispatch company owners into paid pilot customers.
+
+────────────────────────────────────────
+
+VERY IMPORTANT
+
+────────────────────────────────────────
+
+The current Dispatch website is already approved.
+
+Treat it as Version 1.
+
+Your job is NOT to redesign it.
+
+Your job is to rebuild it using React while preserving every approved business concept.
+
+Improve structure.
+
+Improve readability.
+
+Improve enterprise quality.
+
+Improve conversion.
+
+Never remove important ideas.
+
+────────────────────────────────────────
+
+TECHNICAL FOUNDATION
+
+────────────────────────────────────────
+
+Build using React.
+
+Use the same Design System as autonomatex.com.
+
+Reuse components where possible.
+
+Use:
+
+React
+
+Vite
+
+TypeScript
+
+Modern CSS
+
+Reusable components
+
+Responsive
+
+SEO
+
+Accessibility AA
+
+Netlify ready
+
+Fast loading
+
+Maintainable architecture.
+
+────────────────────────────────────────
+
+TARGET CUSTOMER
+
+────────────────────────────────────────
+
+Dry Van Dispatch Company Owners.
+
+NOT drivers.
+
+NOT owner operators.
+
+NOT fleets.
+
+NOT carriers.
+
+NOT freight brokers.
+
+Everything must speak directly to dispatch company owners.
+
+────────────────────────────────────────
+
+WEBSITE GOAL
+
+────────────────────────────────────────
+
+When the owner finishes reading the website they should think:
+
+"My company becomes more valuable every month if we use Autonomatex."
+
+NOT
+
+"This looks like another dispatch software."
+
+NOT
+
+"This is another AI tool."
+
+Business outcomes first.
+
+Technology second.
+
+────────────────────────────────────────
+
+KEEP THESE LOCKED
+
+────────────────────────────────────────
+
+Keep and improve:
+
+Hero
+
+42 Loads concept
+
+Quick Summary
+
+Dispatch Side
+
+Owner Side
+
+New Truck Onboarding
+
+Old Client Retention
+
+Client Lifecycle
+
+Technical Side
+
+Self Guided Workflow
+
+Pricing
+
+Paid Pilot
+
+FAQ
+
+Contact
+
+Never remove them.
+
+────────────────────────────────────────
+
+HERO
+
+────────────────────────────────────────
+
+Keep:
+
+Autonomatex AI for Dry Van Dispatch Companies
+
+Highlighted statement:
+
+"I found 42 loads.
+Rejected 39.
+Here are the 3 worth calling."
+
+Add one supporting line:
+
+Turn every dispatch decision into a permanent business asset.
+
+Hero layout:
+
+Left:
+
+Headline
+
+Subheadline
+
+CTA
+
+Right:
+
+Premium enterprise illustration
+
+NOT stock photography.
+
+Show:
+
+Dispatcher
+
+Operational dashboard
+
+Dry Van trucks
+
+Ranked loads
+
+Human decision
+
+Modern interface
+
+────────────────────────────────────────
+
+DESIGN LANGUAGE
+
+────────────────────────────────────────
+
+Use the same visual identity as autonomatex.com.
+
+Typography first.
+
+Large whitespace.
+
+Elegant cards.
+
+Subtle motion.
+
+No flashy animations.
+
+No marketing gimmicks.
+
+Motion should communicate confidence.
+
+────────────────────────────────────────
+
+NEW INFORMATION HIERARCHY
+
+────────────────────────────────────────
+
+1.
+
+Hero
+
+2.
+
+Quick Summary
+
+3.
+
+Why Dispatch Companies Stop Growing
+
+4.
+
+The Cost of Doing Nothing
+
+5.
+
+Dispatcher Side
+
+6.
+
+Owner Side
+
+7.
+
+Your Dispatch Company Should Become Smarter Every Day
+
+8.
+
+New Truck Onboarding
+
+9.
+
+Existing Client Retention
+
+10.
+
+Client Lifecycle
+
+11.
+
+What Happens If Your Best Dispatcher Leaves?
+
+12.
+
+Built for the Future of Dispatch
+
+13.
+
+Technical Foundation
+
+14.
+
+Self Guided Workflow
+
+15.
+
+The Real Moat
+
+16.
+
+Pricing
+
+17.
+
+Paid Pilot
+
+18.
+
+FAQ
+
+19.
+
+Contact
+
+────────────────────────────────────────
+
+NEW SECTION
+
+────────────────────────────────────────
+
+Why Dispatch Companies Stop Growing
+
+Explain:
+
+Knowledge stays inside people.
+
+Training repeats.
+
+Growth slows.
+
+Owners become bottlenecks.
+
+Dispatcher pressure increases.
+
+Operational intelligence disappears.
+
+Autonomatex solves this.
+
+────────────────────────────────────────
+
+NEW SECTION
+
+────────────────────────────────────────
+
+Your Dispatch Company Should Become Smarter Every Day.
+
+Explain:
+
+Every accepted load
+
+Every rejected load
+
+Every broker conversation
+
+Every negotiation
+
+Every truck
+
+Every dispatcher
+
+Every outcome
+
+should increase the long-term value of the business.
+
+Not disappear.
+
+────────────────────────────────────────
+
+NEW SECTION
+
+────────────────────────────────────────
+
+What Happens If Your Best Dispatcher Leaves?
+
+Without fear marketing.
+
+Professional.
+
+Explain:
+
+Without Autonomatex
+
+Knowledge resets.
+
+With Autonomatex
+
+Company intelligence remains.
+
+────────────────────────────────────────
+
+NEW SECTION
+
+────────────────────────────────────────
+
+The Compounding Effect
+
+Illustrate visually:
+
+Every truck
+
+↓
+
+Every load
+
+↓
+
+Every broker
+
+↓
+
+Every rejection
+
+↓
+
+Every booked outcome
+
+↓
+
+Every month
+
+↓
+
+Your dispatch company becomes smarter.
+
+────────────────────────────────────────
+
+IMPORTANT WRITING RULE
+
+────────────────────────────────────────
+
+Reduce AI terminology.
+
+Instead translate technology into business outcomes.
+
+Examples:
+
+Truck Memory
+
+↓
+
+Every truck becomes easier to dispatch over time.
+
+Broker Memory
+
+↓
+
+Your broker relationships become permanent company assets.
+
+Rejection Memory
+
+↓
+
+Weak decisions become permanent lessons.
+
+Outcome Memory
+
+↓
+
+Every successful load improves tomorrow's decisions.
+
+Senior Dispatcher Memory
+
+↓
+
+Years of dispatcher experience stay inside the company.
+
+────────────────────────────────────────
+
+TECHNICAL SECTION
+
+────────────────────────────────────────
+
+Keep:
+
+Authorized DAT API
+
+Human in control
+
+No scraping
+
+No auto-booking
+
+Audit trail
+
+Email support
+
+Compliance
+
+Decision support only
+
+Improve visual storytelling using SVG diagrams.
+
+────────────────────────────────────────
+
+SELF GUIDED WORKFLOW
+
+────────────────────────────────────────
+
+Keep.
+
+Improve visual design.
+
+Look like enterprise software.
+
+────────────────────────────────────────
+
+PRICING
+
+────────────────────────────────────────
+
+Keep every pricing plan.
+
+Do not change business logic.
+
+Improve presentation.
+
+────────────────────────────────────────
+
+FAQ
+
+────────────────────────────────────────
+
+Keep.
+
+Improve readability.
+
+────────────────────────────────────────
+
+CONTACT
+
+────────────────────────────────────────
+
+Keep email-first philosophy.
+
+No sales calls.
+
+No demo booking.
+
+Paid pilot first.
+
+────────────────────────────────────────
+
+DESIGN IMPROVEMENTS
+
+────────────────────────────────────────
+
+Increase whitespace.
+
+Reduce body text by approximately 20%.
+
+Increase typography hierarchy.
+
+Alternate layouts.
+
+Illustrations.
+
+Timelines.
+
+Journey sections.
+
+Cards.
+
+Large statements.
+
+SVG diagrams.
+
+Improve mobile reading.
+
+────────────────────────────────────────
+
+QUALITY REVIEW
+
+────────────────────────────────────────
+
+Before finishing review the website as:
+
+CEO
+
+Dispatch Company Owner
+
+Senior Dispatcher
+
+Enterprise Buyer
+
+Principal UX Designer
+
+Brand Director
+
+Accessibility Auditor
+
+SEO Specialist
+
+Performance Engineer
+
+Then improve anything that reduces trust, readability, conversion, or long-term quality.
+
+────────────────────────────────────────
+
+FINAL RULE
+
+────────────────────────────────────────
+
+Never redesign the business.
+
+Never simplify the business intelligence.
+
+Never remove approved concepts.
+
+Instead create the most premium enterprise sales funnel ever built for Dry Van Dispatch Companies.
+
+The visitor should leave believing one thing:
+
+Autonomatex is not another dispatch software.
+
+It is the Operational Intelligence Layer behind a modern dispatch company.
