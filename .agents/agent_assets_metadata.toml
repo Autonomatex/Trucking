@@ -24,3 +24,15 @@ id = "hBXy4fHPY1K1p7GKvqb4O"
 uri = "file://autonomatex-dispatch-dist.zip"
 type = "unspecified"
 title = "autonomatex-dispatch-dist.zip (drag-and-drop ready)"
+
+[[outputs]]
+id = "Eam_LVl51E9hlHSgBq-md"
+uri = "file://autonomatex-drive-v1.zip"
+type = "unspecified"
+title = "Autonomatex Drive — Source ZIP (Netlify CI build)"
+
+[[outputs]]
+id = "03OHpVlr0p2Cu8Jvga5ht"
+uri = "file://autonomatex-drive-dist.zip"
+type = "unspecified"
+title = "Autonomatex Drive — Pre-built dist ZIP (drag-and-drop)"
