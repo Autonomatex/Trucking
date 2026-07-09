@@ -121,8 +121,8 @@ export function Nav() {
             </div>
           </NavHref>
 
-          {/* Desktop nav */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: 4, marginLeft: 'auto' }}
+          {/* Desktop nav — display controlled by Tailwind class only */}
+          <nav style={{ alignItems: 'center', gap: 4, marginLeft: 'auto' }}
                className="hidden md:flex" aria-label="Primary navigation">
             {NAV_LINKS.map(link => (
               <NavHref key={link.label} href={link.href}>
@@ -140,16 +140,15 @@ export function Nav() {
             ))}
           </nav>
 
-          {/* CTA */}
+          {/* CTA — display controlled by Tailwind class only */}
           <NavHref href="/#paid-pilot">
             <span style={{
               fontSize: 13.5, fontWeight: 600, color: '#fff',
               background: ACCENT, padding: '8px 18px', borderRadius: 8,
               cursor: 'pointer', whiteSpace: 'nowrap',
               transition: 'background 0.15s',
-              display: 'none',
             }}
-              className="md:inline-block"
+              className="hidden md:inline-block"
               onMouseEnter={e => { (e.target as HTMLElement).style.background = '#0f766e'; }}
               onMouseLeave={e => { (e.target as HTMLElement).style.background = ACCENT; }}
             >

@@ -73,6 +73,58 @@
 }
 
 /* ============================================================
+   RESPONSIVE LAYOUT HELPERS
+   (inline styles can't do media queries, so we use classes here)
+   ============================================================ */
+
+/* Hero: 2-column on desktop, 1-column on mobile */
+.atx-hero-g {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* Generic 2-column section grid */
+.atx-g2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 2-column with large gap + top-aligned */
+.atx-g2-wide {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Paid-pilot asymmetric grid */
+.atx-g-pilot {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* Workflow section sidebar grid */
+.atx-g-workflow {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 320px;
+}
+
+@media (max-width: 767px) {
+  .atx-hero-g        { grid-template-columns: 1fr; gap: 32px; }
+  .atx-hero-illustration { display: none !important; }
+  .atx-g2            { grid-template-columns: 1fr; }
+  .atx-g2-wide       { grid-template-columns: 1fr; gap: 28px; }
+  .atx-g-pilot       { grid-template-columns: 1fr; gap: 32px; }
+  .atx-g-workflow    { grid-template-columns: 1fr; }
+  .atx-workflow-sidebar { display: none; }
+}
+
+/* ============================================================
    UTILITIES
    ============================================================ */
 

@@ -1,4 +1,4 @@
-import { Route, Switch, Router as WouterRouter } from 'wouter';
+import { Route, Switch, Router as WouterRouter, useLocation } from 'wouter';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { HomePage } from '@/pages/HomePage';

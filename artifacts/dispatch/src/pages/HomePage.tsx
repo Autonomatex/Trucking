@@ -1,9 +1,9 @@
-import { useState, useRef, FormEvent } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useState, FormEvent } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'wouter';
 import { NavHref } from '@/components/NavHref';
 import { FadeUp, staggerContainer, staggerItem } from '@/components/FadeUp';
-import { getPaymentUrl, isPlaceholder, PAYMENT_LINKS } from '@/config/stripe';
+import { getPaymentUrl } from '@/config/stripe';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 // ── Design tokens ────────────────────────────────────────────────────────────
@@ -169,8 +169,8 @@ function HeroIllustration() {
 // ── S1: Hero ─────────────────────────────────────────────────────────────────
 function HeroSection() {
   return (
-    <section style={{ background: BG, padding: '80px 24px 96px' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+    <section style={{ background: BG, padding: '72px 24px 80px' }}>
+      <div className="atx-hero-g" style={{ maxWidth: 1200, margin: '0 auto' }}>
         {/* Left */}
         <div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
@@ -232,8 +232,8 @@ function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right — illustration */}
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        {/* Right — illustration (hidden on mobile) */}
+        <div className="atx-hero-illustration" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <HeroIllustration />
         </div>
       </div>
@@ -333,7 +333,7 @@ function CostOfNothingSection() {
   return (
     <SectionWrap id="cost-of-nothing" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
       <SectionHead center eyebrow="The cost of doing nothing" title="Every week without operational intelligence is a week of compounding cost." />
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+      <div className="atx-g2" style={{ gap: 24 }}>
         <FadeUp>
           <div style={{ background: 'rgba(240,68,56,0.04)', border: '1px solid rgba(240,68,56,0.15)', borderRadius: 12, padding: 28, height: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid rgba(240,68,56,0.1)' }}>
@@ -416,7 +416,7 @@ function OwnerSideSection() {
 
   return (
     <SectionWrap id="owner-side" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
+      <div className="atx-g2-wide">
         <FadeUp>
           <Eyebrow>Dispatch company owner side</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
@@ -426,7 +426,7 @@ function OwnerSideSection() {
             Every accepted load, rejected load, broker note, lane pattern, and final outcome can become part of your company's private dispatch knowledge base — not disappear when a dispatcher goes home.
           </p>
         </FadeUp>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginTop: 0 }}>
           {items.map((item, i) => (
             <FadeUp key={item.n} delay={i * 0.08}>
               <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
@@ -543,7 +543,7 @@ function ClientRetentionSection() {
   return (
     <section id="client-retention" style={{ background: D }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '96px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
+        <div className="atx-g2-wide">
           <FadeUp>
             <Eyebrow>Existing client retention</Eyebrow>
             <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
@@ -558,7 +558,7 @@ function ClientRetentionSection() {
               </span>
             </NavHref>
           </FadeUp>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="atx-g2" style={{ gap: 16 }}>
             {cards.map((c, i) => (
               <FadeUp key={c.title} delay={i * 0.07}>
                 <DarkCard title={c.title} body={c.body} />
@@ -623,7 +623,7 @@ function DispatcherLeavesSection() {
           <p style={{ fontSize: 16, color: S, lineHeight: 1.7, marginBottom: 40 }}>
             This is not a fear question. It is a business continuity question. Most dispatch companies have no answer for it. Autonomatex provides one.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+          <div className="atx-g2" style={{ gap: 20 }}>
             <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 12, padding: 28 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: `1px solid ${B}` }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#F04438' }} />
@@ -668,7 +668,7 @@ function FutureOfDispatchSection() {
 
   return (
     <SectionWrap id="future-of-dispatch" style={{ borderTop: `1px solid ${B}` }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+      <div className="atx-g2-wide" style={{ alignItems: 'center' }}>
         <FadeUp>
           <Eyebrow>Built for the future of dispatch</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
@@ -773,9 +773,9 @@ function WorkflowSection() {
             <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.5)', fontWeight: 500 }}>Autonomatex · Dispatch Console · Sample Data</span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', minHeight: 320 }}>
-            {/* Sidebar */}
-            <div style={{ background: '#151c2a', padding: '24px 16px', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="atx-g-workflow">
+            {/* Sidebar — hidden on mobile */}
+            <div className="atx-workflow-sidebar" style={{ background: '#151c2a', padding: '24px 16px', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
               <p style={{ fontSize: 12, fontWeight: 700, color: '#fff', marginBottom: 4 }}>Autonomatex</p>
               <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', marginBottom: 24 }}>Dispatch Console</p>
               {['Dashboard','Trucks','Load Ranking','Rejections','Outcomes'].map((item, i) => (
@@ -845,7 +845,7 @@ function RealMoatSection() {
   return (
     <section id="the-real-moat" style={{ background: D }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '96px 24px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+        <div className="atx-g2-wide" style={{ alignItems: 'center' }}>
           <FadeUp>
             <Eyebrow>The real moat</Eyebrow>
             <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
@@ -858,7 +858,7 @@ function RealMoatSection() {
               <span style={{ display: 'inline-block', fontSize: 14, fontWeight: 600, color: A, cursor: 'pointer' }}>Start paid pilot access →</span>
             </NavHref>
           </FadeUp>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div className="atx-g2" style={{ gap: 16 }}>
             {cards.map((c, i) => <FadeUp key={c.title} delay={i * 0.07}><DarkCard title={c.title} body={c.body} /></FadeUp>)}
           </div>
         </div>
@@ -952,7 +952,7 @@ function PaidPilotSection() {
 
   return (
     <SectionWrap id="paid-pilot" bg="#F5F7FA" style={{ borderTop: `1px solid ${B}` }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 64, alignItems: 'start' }}>
+      <div className="atx-g-pilot">
         <FadeUp>
           <Eyebrow>No call required</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight:700, color:P, letterSpacing:'-0.025em', lineHeight:1.22, marginBottom:16 }}>Start paid pilot access.</h2>
@@ -1109,7 +1109,6 @@ export function HomePage() {
   return (
     <main>
       <HeroSection />
-      <Divider />
       <QuickSummarySection />
       <WhyStopGrowingSection />
       <CostOfNothingSection />
