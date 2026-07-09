@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Autonomatex | Operational Intelligence for Dry Van Dispatch Companies</title>
+    <meta name="description" content="Autonomatex helps dry van dispatch companies rank loads worth calling first, protect dispatcher knowledge, and build company intelligence that grows every month." />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content="https://dispatch.autonomatex.com/" />
+    <meta property="og:title"       content="Autonomatex AI for Dry Van Dispatch Companies" />
+    <meta property="og:description" content="Turn every dispatch decision into a permanent business asset. Rank loads, protect knowledge, grow smarter every month." />
+    <meta property="og:image"       content="https://dispatch.autonomatex.com/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Autonomatex | Dry Van Dispatch Intelligence" />
+    <meta name="twitter:description" content="Your dispatcher stays in control. Autonomatex becomes the intelligence behind every smarter dispatch decision." />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://dispatch.autonomatex.com/" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Autonomatex Dispatch",
+      "applicationCategory": "BusinessApplication",
+      "description": "AI-powered operational intelligence for dry van dispatch companies.",
+      "offers": { "@type": "Offer", "price": "79", "priceCurrency": "USD" },
+      "provider": { "@type": "Organization", "name": "Autonomatex", "url": "https://autonomatex.com" }
+    }
+    </script>
+
+    <!--
+      Netlify Forms — hidden forms for bot detection at build time.
+      React components POST to these via fetch with URL-encoded data.
+    -->
+    <form name="autonomatex-paid-pilot-interest" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="autonomatex-paid-pilot-interest" />
+      <input name="name" />
+      <input name="company" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="plan_interest" />
+      <input name="dry_van_trucks" />
+      <input name="load_board" />
+      <input name="payment_link_needed" />
+      <textarea name="message"></textarea>
+    </form>
+
+    <form name="autonomatex-paid-pilot-onboarding" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="autonomatex-paid-pilot-onboarding" />
+      <input name="name" />
+      <input name="company" />
+      <input name="email" />
+      <input name="paid_plan" />
+      <input name="active_dry_van_trucks" />
+      <input name="load_source" />
+      <textarea name="truck_message"></textarea>
+      <textarea name="truck_rules"></textarea>
+      <textarea name="pain"></textarea>
+    </form>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

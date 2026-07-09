@@ -1,0 +1,27 @@
+kind = "web"
+previewPath = "/dispatch/"
+title = "Autonomatex Dispatch"
+version = "1.0.0"
+id = "artifacts/dispatch"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/dispatch/" ]
+localPort = 23083
+
+[services.development]
+run = "pnpm --filter @workspace/dispatch run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dispatch", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/dispatch/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23083"
+BASE_PATH = "/dispatch/"
