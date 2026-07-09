@@ -1,0 +1,299 @@
+IMPORTANT
+
+The current website direction has already been approved.
+
+Do NOT redesign.
+
+Do NOT regenerate the website.
+
+Do NOT change the Design System.
+
+Do NOT change the approved visual language.
+
+Do NOT rewrite approved business concepts.
+
+Your job is only to strengthen the business storytelling and improve the sales funnel.
+
+────────────────────────────────────
+
+1. ADD THE FOLLOWING QUICK SUMMARY
+
+Use this text exactly.
+
+Do not rewrite.
+
+Do not shorten.
+
+Do not simplify.
+
+------------------------------------
+
+Quick Summary
+
+Autonomatex helps truck owners make better load decisions while quietly building long-term operational intelligence behind every truck.
+
+Whether you have a brand-new MC, an owner operator business, a growing fleet or an established operation, Autonomatex identifies the few loads worth calling while continuously learning from your truck's operational history, dispatcher decisions, broker interactions, driver feedback, market conditions and business outcomes.
+
+If you decide to change dispatchers or even switch dispatch companies, your truck's operational intelligence stays with your business—not with an individual dispatcher. Your new dispatcher starts with your truck's accumulated knowledge instead of starting from zero, helping them become productive faster while your business continues getting smarter over time.
+
+The interface remains intentionally simple. Behind the scenes, Autonomatex operates as a complete Operational Intelligence Platform, continuously improving every recommendation while keeping humans in complete control.
+
+One Truck. One Intelligence Layer. A Business That Becomes More Valuable Every Month.
+
+------------------------------------
+
+Display this section immediately after the Hero.
+
+Design it similarly to the approved Dispatch website Quick Summary.
+
+Include a beautiful enterprise three-line expandable summary for mobile.
+
+Desktop should display the complete section.
+
+────────────────────────────────────
+
+2.
+
+Add a new section:
+
+WHY TRUCK OWNERS CHOOSE AUTONOMATEX
+
+Focus only on business outcomes.
+
+Examples:
+
+Better load decisions.
+
+Less wasted calling.
+
+Knowledge never disappears.
+
+Faster dispatcher transitions.
+
+Improved long-term profitability.
+
+Lower operational stress.
+
+Growing operational intelligence.
+
+────────────────────────────────────
+
+3.
+
+Add a new section:
+
+THE COST OF STARTING OVER
+
+Explain professionally what happens today when:
+
+A dispatcher changes.
+
+A dispatch company changes.
+
+A new employee joins.
+
+A new operations manager takes over.
+
+Knowledge resets.
+
+Then explain how Autonomatex prevents this.
+
+No fear marketing.
+
+Enterprise tone.
+
+────────────────────────────────────
+
+4.
+
+Add a new section:
+
+OPERATIONAL INTELLIGENCE STARTS ON DAY ONE
+
+Explain that every carrier has a different journey.
+
+Examples:
+
+Brand-new MC.
+
+Three-month authority.
+
+Six-month authority.
+
+Established carrier.
+
+Long-term operation.
+
+Autonomatex begins preserving operational intelligence immediately.
+
+Avoid making promises about guaranteed broker acceptance.
+
+Instead explain that recommendations improve as the company's own operational history grows.
+
+────────────────────────────────────
+
+5.
+
+Create enterprise cards for:
+
+New MC
+
+Owner Operator
+
+Small Fleet
+
+Growing Fleet
+
+Enterprise Fleet
+
+Each card should explain the operational challenges at that stage and how Autonomatex helps.
+
+────────────────────────────────────
+
+6.
+
+Create a premium timeline.
+
+New MC
+
+↓
+
+Growing Reputation
+
+↓
+
+Established Carrier
+
+↓
+
+Trusted Business
+
+↓
+
+Compounding Operational Intelligence
+
+────────────────────────────────────
+
+7.
+
+Add a new section.
+
+YOUR TRUCK HAS A MEMORY.
+
+YOUR BUSINESS HAS INTELLIGENCE.
+
+Explain the difference.
+
+Truck remembers:
+
+Load history.
+
+Lane history.
+
+Equipment preferences.
+
+Operating patterns.
+
+Business remembers:
+
+Broker relationships.
+
+Dispatcher experience.
+
+Customer preferences.
+
+Operational knowledge.
+
+AI continuously strengthens both.
+
+────────────────────────────────────
+
+8.
+
+Strengthen the dispatcher switching section.
+
+This is one of the biggest differentiators.
+
+Explain that operational intelligence belongs to the truck owner and the business.
+
+Not to an individual dispatcher.
+
+When changing dispatchers, the truck keeps learning.
+
+The new dispatcher starts with accumulated operational intelligence instead of starting from zero.
+
+Use wording that avoids implying confidential information from another dispatch company is transferred.
+
+Focus on preserving the truck owner's own operational intelligence.
+
+────────────────────────────────────
+
+9.
+
+Keep the product experience extremely simple.
+
+Customers should only see:
+
+42 Loads
+
+39 Rejected
+
+3 Worth Calling
+
+Call Broker
+
+Nothing else.
+
+Behind the scenes the enterprise platform performs the complex work.
+
+────────────────────────────────────
+
+10.
+
+Add a small Trust section.
+
+Human remains in control.
+
+No automatic booking.
+
+Decision support only.
+
+Secure by design.
+
+Built for long-term operations.
+
+────────────────────────────────────
+
+11.
+
+Reduce body text by approximately 20%.
+
+Increase whitespace.
+
+Increase typography hierarchy.
+
+Improve mobile readability.
+
+Use premium SVG illustrations.
+
+Use timelines.
+
+Use enterprise cards.
+
+Improve visual storytelling.
+
+────────────────────────────────────
+
+FINAL PRINCIPLE
+
+Do not add complexity to the interface.
+
+Complexity belongs inside the platform.
+
+Simplicity belongs to the customer.
+
+The visitor should leave believing one thing:
+
+"My truck and my business become smarter and more profitable every month, regardless of who dispatches it."
+
+Build everything around that belief.
