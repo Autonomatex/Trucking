@@ -1,0 +1,152 @@
+IMPORTANT PRODUCT STRATEGY UPDATE
+
+Before implementing the website, update the product positioning according to the following approved business strategy.
+
+Do NOT redesign the website.
+
+Do NOT change the overall flow.
+
+Do NOT change the approved business concepts.
+
+Only update the positioning.
+
+────────────────────────────────────
+
+1. TARGET MARKET
+
+Previously the website focused primarily on Dry Van Dispatch Companies.
+
+Update this.
+
+Autonomatex now serves Truck Dispatch Companies that dispatch one or more of the following:
+
+• Dry Van
+• Reefer
+• Flatbed
+• Hotshot
+• Box Truck
+
+Do not create separate pages for each equipment type.
+
+This is ONE product.
+
+During onboarding, dispatch companies can select the equipment types they dispatch.
+
+The intelligence layer adapts automatically.
+
+────────────────────────────────────
+
+2. HERO
+
+Replace:
+
+"Autonomatex AI for Dry Van Dispatch Companies"
+
+with something like:
+
+"Operational Intelligence for Truck Dispatch Companies"
+
+or another stronger enterprise headline.
+
+Below the headline add a subtle line:
+
+Supports Dry Van • Reefer • Flatbed • Hotshot • Box Truck
+
+Keep the approved highlighted statement exactly as it is:
+
+"I found 42 loads.
+Rejected 39.
+Here are the 3 worth calling."
+
+Do not change this concept.
+
+────────────────────────────────────
+
+3. PRODUCT PHILOSOPHY
+
+The customer should experience an extremely simple product.
+
+The interface should remain minimal.
+
+Simple text.
+
+Simple voice interaction.
+
+Very few buttons.
+
+Very low cognitive load.
+
+Customers should never feel overwhelmed.
+
+────────────────────────────────────
+
+4. PLATFORM PHILOSOPHY
+
+Behind this simple experience the platform should operate as a complete enterprise Operational Intelligence system.
+
+The website should subtly communicate that Autonomatex continuously learns from:
+
+• Load searches
+• Accepted loads
+• Rejected loads
+• Broker relationships
+• Dispatcher experience
+• Truck history
+• Customer preferences
+• Lane preferences
+• Rate history
+• Operational decisions
+
+However...
+
+Do NOT expose all of these features on the website.
+
+The customer buys simplicity.
+
+The intelligence remains behind the scenes.
+
+────────────────────────────────────
+
+5. CORE PROMISE
+
+Never change the core promise.
+
+Autonomatex helps dispatchers quickly identify the few loads that are actually worth calling.
+
+Everything else happens automatically behind the scenes.
+
+────────────────────────────────────
+
+6. DESIGN PRINCIPLE
+
+This principle should guide every design decision:
+
+"Complexity belongs inside the platform, not inside the user's experience."
+
+The interface should feel calm, clean and effortless.
+
+────────────────────────────────────
+
+7. FUTURE PLATFORM
+
+Design the website so it can naturally expand into a complete enterprise platform over time without changing the public positioning.
+
+Do not expose future enterprise modules yet.
+
+The website should sell one clear outcome while the platform quietly builds long-term operational intelligence.
+
+────────────────────────────────────
+
+FINAL RULE
+
+Customers should think:
+
+"This looks incredibly simple."
+
+while the architecture behind the product is powerful enough for enterprise-scale dispatch operations.
+
+Less visible complexity.
+
+More business value.
+
+That is the Autonomatex philosophy.

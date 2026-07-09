@@ -175,7 +175,7 @@ function HeroSection() {
         <div>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
             <div style={{ display: 'inline-block', fontSize: 11, fontWeight: 600, letterSpacing: '0.09em', textTransform: 'uppercase', color: A, background: 'rgba(13,148,136,0.08)', padding: '5px 12px', borderRadius: 20, marginBottom: 24, border: '1px solid rgba(13,148,136,0.18)' }}>
-              For dry van dispatch companies only
+              For truck dispatch companies
             </div>
           </motion.div>
 
@@ -184,8 +184,17 @@ function HeroSection() {
             transition={{ delay: 0.1, duration: 0.75, ease: EASE }}
             style={{ fontSize: 'clamp(30px,3.8vw,50px)', fontWeight: 700, color: P, letterSpacing: '-0.03em', lineHeight: 1.16, marginBottom: 24 }}
           >
-            Autonomatex AI for Dry Van Dispatch Companies
+            Operational Intelligence for Modern Truck Dispatch Companies
           </motion.h1>
+
+          {/* Equipment types */}
+          <motion.p
+            initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18, duration: 0.6, ease: EASE }}
+            style={{ fontSize: 13, color: A, fontWeight: 600, letterSpacing: '0.04em', marginBottom: 22 }}
+          >
+            Supports Dry Van · Reefer · Flatbed · Hotshot · Box Truck
+          </motion.p>
 
           {/* Quote card */}
           <motion.div
@@ -225,7 +234,7 @@ function HeroSection() {
 
             {/* Trust pills */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['No live call required','Email support only','Dry van dispatch only','No auto-booking','Authorized data only'].map(t => (
+              {['No live call required','Email support only','All equipment types','No auto-booking','Authorized data only'].map(t => (
                 <span key={t} style={{ fontSize: 11.5, color: S, background: '#F0F4F8', padding: '4px 10px', borderRadius: 20, border: `1px solid ${B}` }}>{t}</span>
               ))}
             </div>
@@ -249,10 +258,10 @@ function QuickSummarySection() {
         <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
           <Eyebrow>Quick Summary</Eyebrow>
           <h2 style={{ fontSize: 'clamp(24px,2.8vw,34px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.25, marginBottom: 24 }}>
-            AI-Powered Dispatch Intelligence for Dry Van Teams
+            AI-Powered Dispatch Intelligence for Modern Truck Dispatch Companies
           </h2>
           <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 18 }}>
-            Autonomatex is built for dry van dispatch companies that want to handle more trucks, protect senior dispatcher knowledge, reduce daily decision pressure, and create a more professional dispatch operation — without relying only on memory, calls, and scattered notes.
+            Autonomatex is built for truck dispatch companies that want to handle more trucks, protect senior dispatcher knowledge, reduce daily decision pressure, and create a more professional dispatch operation — without relying only on memory, calls, and scattered notes.
           </p>
           <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 18 }}>
             It acts as an operational intelligence layer for your dispatch business. Every truck becomes easier to dispatch over time. Your broker relationships become permanent company assets. Weak decisions become permanent lessons. Every successful load improves tomorrow's decisions.
@@ -378,7 +387,7 @@ function DispatcherSideSection() {
     { title: 'Better driver relationships', body: 'When weak loads are filtered faster, dispatchers spend more time with drivers, carrier clients, brokers, and team members.' },
     { title: 'Calmer senior dispatchers', body: 'Senior dispatchers make stronger decisions when current market data, stored company history, and decision support reinforce their judgment.' },
     { title: 'Faster team training', body: 'New team members learn from stored rejection reasons, broker history, lane performance, and outcome logs instead of guessing from scratch.' },
-    { title: 'More trucks with control', body: 'A cleaner decision workflow helps a dispatch team support more dry van trucks without losing visibility or professionalism.' },
+    { title: 'More trucks with control', body: 'A cleaner decision workflow helps a dispatch team support more trucks without losing visibility or professionalism.' },
     { title: 'Better work rhythm', body: 'Less chaos, fewer repeated checks, clearer priorities, and less dependence on scattered notes help create a smoother daily operation.' },
   ];
 
@@ -410,7 +419,7 @@ function DispatcherSideSection() {
 function OwnerSideSection() {
   const items = [
     { n: '01', title: 'Retain senior knowledge', body: 'Your company becomes less dependent on one person\'s memory. Key dispatch knowledge stays inside the business, not inside one dispatcher\'s head.' },
-    { n: '02', title: 'Win larger accounts with confidence', body: 'A professional AI-backed workflow gives your company a stronger operational story when handling more dry van trucks or larger carrier clients.' },
+    { n: '02', title: 'Win larger accounts with confidence', body: 'A professional AI-backed workflow gives your company a stronger operational story when handling more trucks or larger carrier clients.' },
     { n: '03', title: 'Build a stronger operating base', body: 'The more your team uses Autonomatex, the more your dispatch intelligence, rejection logic, and outcome knowledge improve — making the business more valuable every month.' },
   ];
 
@@ -420,7 +429,7 @@ function OwnerSideSection() {
         <FadeUp>
           <Eyebrow>Dispatch company owner side</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
-            Turn Dry Van Dispatch Knowledge Into Company Intelligence.
+            Turn Dispatch Knowledge Into Company Intelligence.
           </h2>
           <p style={{ fontSize: 16, color: S, lineHeight: 1.7 }}>
             Every accepted load, rejected load, broker note, lane pattern, and final outcome can become part of your company's private dispatch knowledge base — not disappear when a dispatcher goes home.
@@ -499,17 +508,17 @@ function SmarterEveryDaySection() {
 // ── S8: New Truck Onboarding ──────────────────────────────────────────────────
 function NewTruckOnboardingSection() {
   const cards = [
-    { title: 'Professional first impression', body: 'New dry van clients often test a dispatch company for a few days. Autonomatex helps your team show structure, memory, and professionalism from day one.' },
+    { title: 'Professional first impression', body: 'New clients often test a dispatch company for a few days. Autonomatex helps your team show structure, memory, and professionalism from day one.' },
     { title: 'New truck profile from day one', body: 'Home base, preferred lanes, no-go areas, minimum RPM, deadhead limits, driver preferences, broker notes, and load history are organized in one place.' },
     { title: 'First 72-hour plan', body: 'Autonomatex helps your team build a clear first 72-hour dispatch plan so the new truck does not feel randomly managed.' },
     { title: 'Less guessing for dispatchers', body: 'Your dispatcher does not start from zero every time a new truck comes in. Company history and load-ranking logic come forward faster.' },
     { title: 'Better team handoff', body: 'If one dispatcher is busy, another team member can understand the truck quickly because the operating memory stays inside the system — not in one person.' },
-    { title: 'Retention risk protection', body: 'Autonomatex helps reduce early confusion, repeated mistakes, weak communication, and poor-fit load decisions that make new dry van clients leave too soon.' },
+    { title: 'Retention risk protection', body: 'Autonomatex helps reduce early confusion, repeated mistakes, weak communication, and poor-fit load decisions that make new clients leave too soon.' },
   ];
 
   return (
     <SectionWrap id="new-truck-onboarding" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead eyebrow="New truck onboarding" title="Keep New Dry Van Trucks From Slipping Away." desc="For many dispatch companies, the hardest part is not only finding loads. It is keeping new dry van trucks long enough to prove value." />
+      <SectionHead eyebrow="New truck onboarding" title="Keep New Trucks From Slipping Away." desc="For many dispatch companies, the hardest part is not only finding loads. It is keeping new trucks long enough to prove value." />
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginBottom: 32 }}>
         {cards.map(c => (
@@ -550,7 +559,7 @@ function ClientRetentionSection() {
               Old clients should feel remembered, understood, and professionally managed.
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, marginBottom: 24 }}>
-              Every week your dispatch company works with a dry van truck, valuable knowledge is created. The longer the relationship continues, the stronger the intelligence becomes.
+              Every week your dispatch company works with a truck, valuable knowledge is created. The longer the relationship continues, the stronger the intelligence becomes.
             </p>
             <NavHref href="/#paid-pilot">
               <span style={{ display: 'inline-block', fontSize: 14, fontWeight: 600, color: A, cursor: 'pointer' }}>
@@ -585,7 +594,7 @@ function ClientLifecycleSection() {
 
   return (
     <SectionWrap id="client-lifecycle" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead eyebrow="Client lifecycle system" title="From the First Welcome Call, Autonomatex Starts Building the Truck's Intelligence." desc="When a new dry van driver, truck owner, or fleet owner joins your dispatch company, the first few days matter most. That is when trust is built — or lost." />
+      <SectionHead eyebrow="Client lifecycle system" title="From the First Welcome Call, Autonomatex Starts Building the Truck's Intelligence." desc="When a new driver, truck owner, or fleet owner joins your dispatch company, the first few days matter most. That is when trust is built — or lost." />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
         {steps.map((step, i) => (
           <FadeUp key={step.n} delay={i * 0.06}>
@@ -672,13 +681,13 @@ function FutureOfDispatchSection() {
         <FadeUp>
           <Eyebrow>Built for the future of dispatch</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
-            The Operational Intelligence Layer Behind Your Dry Van Dispatch Operation.
+            The Operational Intelligence Layer Behind Your Truck Dispatch Operation.
           </h2>
           <p style={{ fontSize: 16, color: S, lineHeight: 1.7, marginBottom: 16 }}>
             Freight technology is moving fast. AI recommendations, load-matching systems, and real-time decision software are becoming part of the market.
           </p>
           <p style={{ fontSize: 16, color: S, lineHeight: 1.7, marginBottom: 24 }}>
-            Autonomatex is built to handle that intelligence layer for dry van dispatch companies — so your team stays focused on dispatch operations, driver relationships, carrier-client trust, and business growth.
+            Autonomatex is built to handle that intelligence layer for truck dispatch companies — so your team stays focused on dispatch operations, driver relationships, carrier-client trust, and business growth.
           </p>
           <div style={{ background: D, borderRadius: 10, padding: '18px 22px', borderLeft: `3px solid ${A}` }}>
             <p style={{ fontSize: 15, fontWeight: 600, color: '#fff', lineHeight: 1.5 }}>
@@ -722,7 +731,7 @@ function TechnicalFoundationSection() {
 
   return (
     <SectionWrap id="technical-side" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead eyebrow="Technical foundation" title="How Autonomatex works behind the scenes." desc="A simple decision stack for dry van dispatch companies: authorized data, truck intelligence, AI ranking, and human final control." />
+      <SectionHead eyebrow="Technical foundation" title="How Autonomatex works behind the scenes." desc="A simple decision stack for truck dispatch companies: authorized data, truck intelligence, AI ranking, and human final control." />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 56 }}>
         {steps.map((step, i) => (
           <FadeUp key={step.n} delay={i * 0.06}>
@@ -760,7 +769,7 @@ function TechnicalFoundationSection() {
 function WorkflowSection() {
   return (
     <SectionWrap id="self-guided-workflow" style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead center eyebrow="Self-guided workflow" title="No live call required. See the dry van workflow yourself." desc="The workflow preview uses sample data to show how Autonomatex ranks loads, rejects weak options, and builds company intelligence. Paid pilot access is separate and begins after account activation." />
+      <SectionHead center eyebrow="Self-guided workflow" title="No live call required. See the dispatch workflow yourself." desc="The workflow preview uses sample data to show how Autonomatex ranks loads, rejects weak options, and builds company intelligence. Paid pilot access is separate and begins after account activation." />
 
       {/* Dashboard mockup */}
       <FadeUp>
@@ -852,7 +861,7 @@ function RealMoatSection() {
               Company-owned operational intelligence that compounds every month.
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, marginBottom: 24 }}>
-              Autonomatex becomes more valuable because it learns what each dry van truck accepts, rejects, wins, loses, and repeats. The operating intelligence compounds inside the dispatch company — not inside a person.
+              Autonomatex becomes more valuable because it learns what each truck accepts, rejects, wins, loses, and repeats. The operating intelligence compounds inside the dispatch company — not inside a person.
             </p>
             <NavHref href="/#paid-pilot">
               <span style={{ display: 'inline-block', fontSize: 14, fontWeight: 600, color: A, cursor: 'pointer' }}>Start paid pilot access →</span>
@@ -871,12 +880,12 @@ function RealMoatSection() {
 function PricingSection() {
   const [notice, setNotice] = useState<string | null>(null);
   const plans = [
-    { id: 'pilot',    label: 'Paid Pilot Access', price: '$79',      tag: 'Start here', desc: '7 days after account activation · up to 2 dry van trucks · email support only · credit toward first month if you upgrade.', primary: true },
-    { id: 'oneTruck', label: '1 Truck Access',    price: '$99/mo',   tag: null,         desc: 'For a dispatcher testing one active dry van truck before expanding.', primary: false },
-    { id: 'fourTruck',label: '4 Truck Team',      price: '$199/mo',  tag: null,         desc: 'For a small dry van dispatch team that wants to compare value across several trucks.', primary: false },
-    { id: 'core',     label: 'Core Dispatch',     price: '$299/mo',  tag: 'Best base',  desc: 'Up to 10 dry van trucks. Full dispatch intelligence, load ranking, rejection reasons, broker and lane notes, and outcomes.', primary: true },
-    { id: 'growth',   label: 'Growth Dispatch',   price: '$749/mo',  tag: null,         desc: 'Up to 30 dry van trucks. Better for growing dry van dispatch teams with multiple dispatchers.', primary: false },
-    { id: 'pro',      label: 'Pro Dispatch',      price: '$1,499/mo',tag: null,         desc: 'Up to 75 dry van trucks. For high-volume dry van dispatch operations.', primary: false },
+    { id: 'pilot',    label: 'Paid Pilot Access', price: '$79',      tag: 'Start here', desc: '7 days after account activation · up to 2 trucks · email support only · credit toward first month if you upgrade.', primary: true },
+    { id: 'oneTruck', label: '1 Truck Access',    price: '$99/mo',   tag: null,         desc: 'For a dispatcher testing one active truck before expanding.', primary: false },
+    { id: 'fourTruck',label: '4 Truck Team',      price: '$199/mo',  tag: null,         desc: 'For a small dispatch team that wants to compare value across several trucks.', primary: false },
+    { id: 'core',     label: 'Core Dispatch',     price: '$299/mo',  tag: 'Best base',  desc: 'Up to 10 trucks. Full dispatch intelligence, load ranking, rejection reasons, broker and lane notes, and outcomes.', primary: true },
+    { id: 'growth',   label: 'Growth Dispatch',   price: '$749/mo',  tag: null,         desc: 'Up to 30 trucks. Better for growing dispatch teams with multiple dispatchers.', primary: false },
+    { id: 'pro',      label: 'Pro Dispatch',      price: '$1,499/mo',tag: null,         desc: 'Up to 75 trucks. For high-volume truck dispatch operations.', primary: false },
   ];
 
   const handlePlanClick = (planId: string, planLabel: string) => {
@@ -892,7 +901,7 @@ function PricingSection() {
 
   return (
     <SectionWrap id="pricing" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead center eyebrow="Pricing" title="Start small, then scale the dry van dispatch brain." desc="Pricing is designed to show value per truck while keeping the serious dispatch-company path clear." />
+      <SectionHead center eyebrow="Pricing" title="Start small, then scale the dispatch brain." desc="Pricing is designed to show value per truck while keeping the serious dispatch-company path clear." />
       {notice && (
         <div style={{ background: 'rgba(247,144,9,0.08)', border: '1px solid rgba(247,144,9,0.25)', borderRadius: 10, padding: '14px 20px', marginBottom: 24, fontSize: 13.5, color: '#b45309' }}>
           <strong>Stripe payment link needed.</strong> The {notice} button is ready. Add the real Stripe payment link to <code>src/config/stripe.ts</code> before public outreach. Scrolling to the paid pilot form now.
@@ -924,8 +933,8 @@ function PricingSection() {
 }
 
 // ── S17: Paid Pilot ───────────────────────────────────────────────────────────
-type PilotForm = { name: string; company: string; email: string; phone: string; plan_interest: string; dry_van_trucks: string; load_board: string; payment_link_needed: string; message: string; };
-const PILOT_INIT: PilotForm = { name:'', company:'', email:'', phone:'', plan_interest:'', dry_van_trucks:'', load_board:'', payment_link_needed:'Yes, send secure payment link', message:'' };
+type PilotForm = { name: string; company: string; email: string; phone: string; plan_interest: string; trucks_dispatched: string; load_board: string; payment_link_needed: string; message: string; };
+const PILOT_INIT: PilotForm = { name:'', company:'', email:'', phone:'', plan_interest:'', trucks_dispatched:'', load_board:'', payment_link_needed:'Yes, send secure payment link', message:'' };
 const encode = (d: Record<string, string>) => Object.keys(d).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(d[k])}`).join('&');
 
 const inp: React.CSSProperties = { width:'100%', padding:'11px 14px', borderRadius:8, border:`1px solid ${B}`, fontSize:14, color:P, background:'#fff', outline:'none', transition:'border-color 0.15s', fontFamily:'Inter, system-ui, sans-serif' };
@@ -958,7 +967,7 @@ function PaidPilotSection() {
           <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight:700, color:P, letterSpacing:'-0.025em', lineHeight:1.22, marginBottom:16 }}>Start paid pilot access.</h2>
           <p style={{ fontSize:16, color:S, lineHeight:1.7, marginBottom:20 }}>Use this path if you want to test Autonomatex without a live sales call. Pay first, complete onboarding, then use email support for questions.</p>
           <ul style={{ paddingLeft:20, listStyle:'disc', display:'flex', flexDirection:'column', gap:8 }}>
-            {['7-day paid pilot begins after account activation.','Questions are handled by email and form for paid users.','No auto-booking. Dispatcher remains in control.','Dry van dispatch companies only.'].map(item => <li key={item} style={{ fontSize:14, color:S, lineHeight:1.6 }}>{item}</li>)}
+            {['7-day paid pilot begins after account activation.','Questions are handled by email and form for paid users.','No auto-booking. Dispatcher remains in control.','All equipment types supported.'].map(item => <li key={item} style={{ fontSize:14, color:S, lineHeight:1.6 }}>{item}</li>)}
           </ul>
           <div style={{ marginTop:28, background:SF, border:`1px solid ${B}`, borderRadius:12, padding:'20px 24px' }}>
             <p style={{ fontSize:13, fontWeight:700, color:P, marginBottom:10 }}>How to contact Autonomatex</p>
@@ -985,8 +994,8 @@ function PaidPilotSection() {
                     {['$79 Paid Pilot Access','$99/mo — 1 Truck Access','$199/mo — 4 Truck Team','$299/mo — Core Dispatch up to 10 trucks','$749/mo — Growth up to 30 trucks','$1,499/mo — Pro up to 75 trucks'].map(o => <option key={o}>{o}</option>)}
                   </select>
                 </div>
-                <div><label htmlFor="pp-trucks" style={lbl}>Dry van trucks dispatched <span style={{color:'#F04438'}}>*</span></label>
-                  <select id="pp-trucks" required style={{...inp, appearance:'none'}} value={form.dry_van_trucks} onChange={set('dry_van_trucks')} onFocus={focus} onBlur={blur}>
+                <div><label htmlFor="pp-trucks" style={lbl}>Trucks dispatched <span style={{color:'#F04438'}}>*</span></label>
+                  <select id="pp-trucks" required style={{...inp, appearance:'none'}} value={form.trucks_dispatched} onChange={set('trucks_dispatched')} onFocus={focus} onBlur={blur}>
                     <option value="">Select</option>
                     {['1','2–4','5–10','11–30','31–75','75+'].map(o => <option key={o}>{o}</option>)}
                   </select>
@@ -1022,16 +1031,16 @@ function FAQSection() {
   const faqs = [
     { q: 'Do I need to book a live call?',        a: 'No. The website includes a self-guided workflow preview. Paid users can submit questions by email and form. No live call is required to start.' },
     { q: 'How do I contact Autonomatex?',          a: 'Use the paid pilot form or onboarding form. Autonomatex is designed for email-first support, so serious paid users can get focused answers without long live calls.' },
-    { q: 'Is this only for dry van dispatch companies?', a: 'Yes. The first public version is focused only on dry van dispatch companies and dry van dispatch workflows.' },
+    { q: 'What equipment types does Autonomatex support?', a: 'Autonomatex supports Dry Van, Reefer, Flatbed, Hotshot, and Box Truck dispatch operations. During onboarding you select the equipment types your company dispatches and the intelligence layer adapts automatically.' },
     { q: 'When does the paid pilot start?',        a: 'The 7-day paid pilot starts after account activation — not immediately after submitting the form.' },
     { q: 'Does Autonomatex book loads?',           a: 'No. Autonomatex ranks and explains. The dispatcher calls, negotiates, books manually, and logs outcomes. The dispatcher stays in full control.' },
     { q: 'Is DAT connected?',                      a: 'The platform is designed for approved DAT API or customer-authorized data sources. The workflow preview uses sample data until an approved connection is active.' },
-    { q: 'What happens after the pilot?',          a: 'Upgrade to the monthly plan that matches your dry van truck count. Pilot payment can be credited toward the first month.' },
+    { q: 'What happens after the pilot?',          a: 'Upgrade to the monthly plan that matches your truck count. Pilot payment can be credited toward the first month.' },
   ];
 
   return (
     <SectionWrap id="faq" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead eyebrow="FAQ" title="Questions dry van dispatch companies may ask before paying." />
+      <SectionHead eyebrow="FAQ" title="Questions truck dispatch companies may ask before paying." />
       <div style={{ maxWidth: 720, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {faqs.map((faq, i) => (
           <FadeUp key={i} delay={i * 0.04}>
@@ -1060,13 +1069,13 @@ function FAQSection() {
 function ContactSection() {
   const steps = [
     { n: '1.', title: 'Start paid pilot access', desc: 'Use the paid pilot path to show serious interest before support begins.' },
-    { n: '2.', title: 'Complete onboarding',     desc: 'Share your dry van truck count, current load source, dispatch challenge, and first workflow needs.' },
+    { n: '2.', title: 'Complete onboarding',     desc: 'Share your truck count, equipment types, current load source, dispatch challenge, and first workflow needs.' },
     { n: '3.', title: 'Submit questions by email or form', desc: 'Questions are answered through email support for paid pilot users, without requiring a live call or laptop demo.' },
   ];
 
   return (
     <SectionWrap id="contact" style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead center eyebrow="Contact Autonomatex" title="Start with paid pilot access. Ask questions by email or form." desc="Autonomatex is built for a no-call buying flow. Choose paid pilot access, complete onboarding, and submit questions through the form or email. This keeps support focused on serious dry van dispatch companies." />
+      <SectionHead center eyebrow="Contact Autonomatex" title="Start with paid pilot access. Ask questions by email or form." desc="Autonomatex is built for a no-call buying flow. Choose paid pilot access, complete onboarding, and submit questions through the form or email. This keeps support focused on serious truck dispatch companies." />
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
         style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:20, maxWidth:760, margin:'0 auto' }}>
         {steps.map((step, i) => (

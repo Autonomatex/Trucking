@@ -50,10 +50,10 @@ export function WorkflowPage() {
               Self-guided workflow preview
             </div>
             <h1 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 700, color: '#101828', letterSpacing: '-0.025em', lineHeight: 1.2, marginBottom: 18 }}>
-              See how Autonomatex ranks dry van loads without a live sales call.
+              See how Autonomatex ranks loads without a live sales call.
             </h1>
             <p style={{ fontSize: 17, color: '#667085', lineHeight: 1.7, maxWidth: 560, marginBottom: 28 }}>
-              This sample workflow shows how a dry van truck request becomes a ranked decision: weak loads rejected, top three worth calling, and the dispatcher makes the final call.
+              This sample workflow shows how a dispatch request becomes a ranked decision: weak loads rejected, top three worth calling, and the dispatcher makes the final call.
             </p>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <NavHref href="/#paid-pilot">

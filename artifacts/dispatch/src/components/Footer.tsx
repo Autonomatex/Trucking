@@ -36,7 +36,7 @@ export function Footer() {
               <span style={{ fontSize: 15, fontWeight: 600, letterSpacing: '-0.01em' }}>Autonomatex</span>
             </div>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>
-              The Operational Intelligence Layer behind modern dry van dispatch companies.
+              The Operational Intelligence Layer behind modern truck dispatch companies.
             </p>
           </div>
 
@@ -59,7 +59,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 24, display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'space-between', alignItems: 'center' }}>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>
-            © 2026 Autonomatex. Built first for dry van dispatch companies.
+            © 2026 Autonomatex. Built for modern truck dispatch companies.
           </p>
           <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>
             Decision-support only. No auto-booking. Authorized data sources only.

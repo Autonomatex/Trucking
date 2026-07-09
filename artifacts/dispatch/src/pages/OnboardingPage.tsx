@@ -7,14 +7,14 @@ const BORDER = '#E6EAF0';
 
 type FormData = {
   name: string; company: string; email: string;
-  paid_plan: string; active_dry_van_trucks: string;
+  paid_plan: string; active_trucks: string;
   load_source: string; truck_message: string;
   truck_rules: string; pain: string;
 };
 
 const INITIAL: FormData = {
   name: '', company: '', email: '', paid_plan: '',
-  active_dry_van_trucks: '', load_source: '', truck_message: '',
+  active_trucks: '', load_source: '', truck_message: '',
   truck_rules: '', pain: '',
 };
 
@@ -61,13 +61,13 @@ export function OnboardingPage() {
           Paid pilot onboarding
         </div>
         <h1 style={{ fontSize: 'clamp(26px, 3.5vw, 36px)', fontWeight: 700, color: '#101828', letterSpacing: '-0.025em', lineHeight: 1.25, marginBottom: 14 }}>
-          Tell us how your dry van dispatch operation works.
+          Tell us how your truck dispatch operation works.
         </h1>
         <p style={{ fontSize: 16, color: '#667085', lineHeight: 1.7, marginBottom: 8 }}>
           This form is for paid pilot users preparing their dispatch setup. It helps us configure your truck profile without a long call.
         </p>
         <ul style={{ paddingLeft: 20, listStyle: 'disc', display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 48 }}>
-          {['No live call required.', 'Email support only.', 'Dry van dispatch workflow only.'].map(item => (
+          {['No live call required.', 'Email support only.', 'All equipment types supported.'].map(item => (
             <li key={item} style={{ fontSize: 13.5, color: '#667085' }}>{item}</li>
           ))}
         </ul>
@@ -111,8 +111,8 @@ export function OnboardingPage() {
               </select>
             </div>
             <div>
-              <label htmlFor="ob-trucks" style={labelStyle}>Active dry van trucks <span style={{ color: '#F04438' }}>*</span></label>
-              <input id="ob-trucks" required type="number" min="1" style={inputStyle} value={form.active_dry_van_trucks} onChange={set('active_dry_van_trucks')} placeholder="e.g. 8"
+              <label htmlFor="ob-trucks" style={labelStyle}>Active trucks dispatched <span style={{ color: '#F04438' }}>*</span></label>
+              <input id="ob-trucks" required type="number" min="1" style={inputStyle} value={form.active_trucks} onChange={set('active_trucks')} placeholder="e.g. 8"
                 onFocus={e => e.target.style.borderColor = ACCENT} onBlur={e => e.target.style.borderColor = BORDER} />
             </div>
           </div>
