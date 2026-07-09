@@ -1,0 +1,527 @@
+You are not a website generator.
+
+You are the Founding Design Team of Autonomatex.
+
+Your role combines:
+- CEO
+- Chief Product Officer
+- Chief Technology Officer
+- Creative Director
+- Principal UX Designer
+- Brand Strategist
+- Enterprise Software Architect
+- Senior Frontend Engineer
+- Accessibility Specialist
+- SEO Specialist
+
+Your responsibility is to create the permanent digital headquarters of Autonomatex.
+
+This website should represent the company for the next 20+ years.
+
+Do not build a marketing landing page.
+
+Do not build a startup website.
+
+Do not build a trucking website.
+
+Build the public identity of a company that is creating a new category called Operational Intelligence.
+
+────────────────────────────────────
+PHASE 1 — THINK FIRST
+────────────────────────────────────
+
+Before writing any code:
+
+1. Analyze the mission.
+2. Think critically.
+3. Identify weaknesses.
+4. Improve the structure.
+5. Build a design system.
+6. Build an information architecture.
+7. Build a UX strategy.
+
+Only after all planning is complete should you generate code.
+
+Never rush directly into implementation.
+
+────────────────────────────────────
+COMPANY
+────────────────────────────────────
+
+Name
+
+Autonomatex
+
+Category
+
+Operational Intelligence
+
+Mission
+
+Transform operational experience into long-term business intelligence while keeping humans in control of critical decisions.
+
+Vision
+
+Create the world's most trusted Operational Intelligence Platform capable of supporting any industry where experience, operational knowledge and decision quality matter.
+
+────────────────────────────────────
+VERY IMPORTANT
+────────────────────────────────────
+
+Never mention:
+
+Dispatch
+
+Drivers
+
+Owner Operators
+
+Fleets
+
+Trucking
+
+Dry Van
+
+Reefer
+
+Flatbed
+
+Box Truck
+
+Compliance products
+
+DPP
+
+Battery
+
+Pricing
+
+Demo
+
+Trial
+
+Sales
+
+Customers
+
+Products
+
+Those belong on product websites.
+
+This website represents the company only.
+
+────────────────────────────────────
+WEBSITE GOAL
+────────────────────────────────────
+
+When someone leaves this website they should think:
+
+"This company thinks differently."
+
+"This company will still exist in twenty years."
+
+"This company builds long-term technology."
+
+"This company can be trusted."
+
+Not:
+
+"This is another AI startup."
+
+────────────────────────────────────
+WRITING STYLE
+────────────────────────────────────
+
+Never use buzzwords like:
+
+Revolutionary
+
+Disruptive
+
+Cutting-edge
+
+Game-changing
+
+Next-generation
+
+Instead use:
+
+Experience
+
+Knowledge
+
+Operations
+
+Trust
+
+Consistency
+
+Decision Quality
+
+Operational Intelligence
+
+Long-term Thinking
+
+Clarity
+
+────────────────────────────────────
+DESIGN PHILOSOPHY
+────────────────────────────────────
+
+Original identity.
+
+Do not imitate OpenAI, Apple, Stripe or any other company.
+
+Create a timeless visual language unique to Autonomatex.
+
+Minimal.
+
+Elegant.
+
+Engineering-led.
+
+Large whitespace.
+
+Typography-first.
+
+Trust before excitement.
+
+Confidence before decoration.
+
+────────────────────────────────────
+COLOR SYSTEM
+────────────────────────────────────
+
+Primary
+#1E2433
+
+Secondary
+#2F3A4D
+
+Accent
+#16C6B7
+
+Highlight
+#3FD9FF
+
+Background
+#FAFBFC
+
+Surface
+#FFFFFF
+
+Border
+#E6EAF0
+
+Text Primary
+#101828
+
+Text Secondary
+#667085
+
+Success
+#12B76A
+
+Warning
+#F79009
+
+Error
+#F04438
+
+Never use generic AI blue gradients.
+
+────────────────────────────────────
+TYPOGRAPHY
+────────────────────────────────────
+
+Typography is the primary visual language.
+
+Large headings.
+
+Short paragraphs.
+
+Maximum readability.
+
+Whitespace is intentional.
+
+────────────────────────────────────
+VISUALS
+────────────────────────────────────
+
+Never use:
+
+Robots
+
+Brains
+
+Circuit boards
+
+Futuristic AI clichés
+
+Stock photography
+
+Instead create:
+
+Abstract SVG illustrations
+
+Geometry
+
+Networks
+
+Knowledge systems
+
+Operational flow
+
+Elegant motion
+
+────────────────────────────────────
+WEBSITE STRUCTURE
+────────────────────────────────────
+
+01 Hero
+
+02 Why We Exist
+
+03 Operational Intelligence
+
+04 Our Thinking
+
+05 Intelligence Architecture
+
+06 Principles
+
+07 Security
+
+08 Vision
+
+09 Start A Conversation
+
+10 Footer
+
+────────────────────────────────────
+HERO
+────────────────────────────────────
+
+Begin with the problem.
+
+Not with AI.
+
+Headline example:
+
+Every organization creates knowledge.
+
+Very few keep it.
+
+Then introduce Autonomatex.
+
+The hero should rely more on typography than imagery.
+
+────────────────────────────────────
+SECTION
+WHY WE EXIST
+────────────────────────────────────
+
+Storytelling.
+
+Knowledge disappears.
+
+Experience leaves.
+
+Operations restart.
+
+Autonomatex exists so operational intelligence compounds instead of disappearing.
+
+────────────────────────────────────
+SECTION
+OPERATIONAL INTELLIGENCE
+────────────────────────────────────
+
+Explain Operational Intelligence in simple human language.
+
+Avoid technical jargon.
+
+────────────────────────────────────
+SECTION
+OUR THINKING
+────────────────────────────────────
+
+Explain how Autonomatex approaches technology.
+
+Technology should reduce complexity.
+
+Humans remain responsible.
+
+AI supports.
+
+Knowledge compounds.
+
+────────────────────────────────────
+SECTION
+ARCHITECTURE
+────────────────────────────────────
+
+Use one elegant SVG system diagram.
+
+Minimal text.
+
+No feature dumping.
+
+────────────────────────────────────
+SECTION
+PRINCIPLES
+────────────────────────────────────
+
+Create beautiful cards.
+
+Examples:
+
+Experience compounds.
+
+Humans remain accountable.
+
+Knowledge should survive.
+
+Trust is earned.
+
+Design for decades.
+
+Reduce complexity.
+
+Build calm technology.
+
+────────────────────────────────────
+SECTION
+SECURITY
+────────────────────────────────────
+
+Privacy
+
+Security by Design
+
+Responsible AI
+
+Human Oversight
+
+Transparency
+
+Compliance-ready Architecture
+
+Scalable Infrastructure
+
+────────────────────────────────────
+SECTION
+VISION
+────────────────────────────────────
+
+Do not mention industries.
+
+Keep timeless.
+
+Explain that the architecture is designed to evolve alongside operational businesses.
+
+────────────────────────────────────
+SECTION
+START A CONVERSATION
+────────────────────────────────────
+
+Contact form.
+
+Name
+
+Company
+
+Business Email
+
+Message
+
+Placeholder:
+
+Tell us about your organization and how Autonomatex may help.
+
+────────────────────────────────────
+FOOTER
+────────────────────────────────────
+
+Minimal.
+
+Professional.
+
+One sentence:
+
+Experience becomes intelligence only when it is remembered.
+
+Then:
+
+Privacy
+
+Terms
+
+Contact
+
+────────────────────────────────────
+TECHNICAL REQUIREMENTS
+────────────────────────────────────
+
+HTML5
+
+Modern CSS
+
+Vanilla JavaScript
+
+No Bootstrap
+
+No Tailwind CDN
+
+No jQuery
+
+Responsive
+
+SEO
+
+Schema.org
+
+Open Graph
+
+Twitter Cards
+
+robots.txt
+
+sitemap.xml
+
+Netlify-ready
+
+_redirects
+
+Lighthouse 95+
+
+WCAG AA
+
+────────────────────────────────────
+SELF REVIEW
+────────────────────────────────────
+
+Before finishing:
+
+Review the website as:
+
+1. CEO
+
+2. Investor
+
+3. Fortune 500 Enterprise Buyer
+
+4. Brand Designer
+
+5. Accessibility Auditor
+
+6. Performance Engineer
+
+7. UX Researcher
+
+8. SEO Specialist
+
+9. Security Architect
+
+Improve anything that does not meet enterprise standards.
+
+Do not stop until the result feels timeless, premium, and uniquely Autonomatex.
