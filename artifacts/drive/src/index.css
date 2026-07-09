@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   AUTONOMATEX DESIGN TOKENS — Drive
+   ============================================================ */
+
+@theme inline {
+  --color-atx-primary:   #101828;
+  --color-atx-dark:      #1E2433;
+  --color-atx-secondary-color: #2F3A4D;
+  --color-atx-bg:        #FAFBFC;
+  --color-surface:       #FFFFFF;
+  --color-atx-border:    #E6EAF0;
+  --color-atx-secondary: #667085;
+  --color-accent:        #0D9488;
+  --color-highlight:     #3FD9FF;
+  --color-success:       #12B76A;
+  --color-warning:       #F79009;
+  --color-error:         #F04438;
+
+  --color-background:    var(--color-atx-bg);
+  --color-foreground:    var(--color-atx-primary);
+  --color-border:        var(--color-atx-border);
+  --color-ring:          var(--color-accent);
+
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono:  Menlo, monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 20px;
+
+  --shadow-sm:  0 1px 2px 0 rgba(16, 24, 40, 0.05);
+  --shadow:     0 1px 3px 0 rgba(16, 24, 40, 0.1), 0 1px 2px -1px rgba(16, 24, 40, 0.06);
+  --shadow-md:  0 4px 6px -1px rgba(16, 24, 40, 0.07), 0 2px 4px -2px rgba(16, 24, 40, 0.05);
+  --shadow-lg:  0 10px 15px -3px rgba(16, 24, 40, 0.07), 0 4px 6px -4px rgba(16, 24, 40, 0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(16, 24, 40, 0.06), 0 8px 10px -6px rgba(16, 24, 40, 0.04);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FAFBFC;
+    color: #101828;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  ::selection {
+    background-color: rgba(13, 148, 136, 0.15);
+    color: #1E2433;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE LAYOUT HELPERS
+   ============================================================ */
+
+/* Hero 2-col */
+.atx-hero-g { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+@media (max-width: 767px) { .atx-hero-g { grid-template-columns: 1fr; gap: 32px; } .atx-hero-illustration { display: none !important; } }
+
+/* Generic 2-col */
+.atx-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 767px) { .atx-g2 { grid-template-columns: 1fr; } }
+
+/* 2-col wide (40/60) */
+.atx-g2-wide { display: grid; grid-template-columns: 1fr 1.4fr; gap: 56px; align-items: start; }
+@media (max-width: 767px) { .atx-g2-wide { grid-template-columns: 1fr; gap: 32px; } }
+
+/* 3-col */
+.atx-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+@media (max-width: 767px) { .atx-g3 { grid-template-columns: 1fr; } }
+
+/* Form 2-col (collapses on mobile) */
+.atx-form-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .atx-form-g2 { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+
+@layer utilities {
+  .text-atx-primary   { color: #101828; }
+  .text-atx-secondary { color: #667085; }
+  .text-accent        { color: #0D9488; }
+  .bg-atx-bg          { background-color: #FAFBFC; }
+  .bg-surface         { background-color: #FFFFFF; }
+  .bg-atx-dark        { background-color: #1E2433; }
+  .bg-atx-deeper      { background-color: #151c2a; }
+  .border-atx-border  { border-color: #E6EAF0; }
+  .bg-accent          { background-color: #0D9488; }
+
+  input[type='search']::-webkit-search-cancel-button { display: none; }
+}

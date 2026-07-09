@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://drive.autonomatex.com/sitemap.xml
