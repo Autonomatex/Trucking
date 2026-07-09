@@ -6,3 +6,9 @@ id = "2rgysZHMpEI0jyhWRgYTp"
 uri = "file://autonomatex-website.zip"
 type = "unspecified"
 title = "Autonomatex — Launch-Ready Build"
+
+[[outputs]]
+id = "CWp_X2DBRE47r9g0x0AWr"
+uri = "file://autonomatex-dispatch.zip"
+type = "unspecified"
+title = "autonomatex-dispatch.zip"
