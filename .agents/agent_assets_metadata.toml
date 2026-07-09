@@ -12,3 +12,9 @@ id = "CWp_X2DBRE47r9g0x0AWr"
 uri = "file://autonomatex-dispatch.zip"
 type = "unspecified"
 title = "autonomatex-dispatch.zip"
+
+[[outputs]]
+id = "gbWtHe46sd5hqOnkT7R4W"
+uri = "file://autonomatex-dispatch-v2.zip"
+type = "unspecified"
+title = "autonomatex-dispatch-v2.zip"

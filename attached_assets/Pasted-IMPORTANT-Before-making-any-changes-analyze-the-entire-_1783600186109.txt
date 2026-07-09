@@ -1,0 +1,357 @@
+IMPORTANT
+
+Before making any changes, analyze the entire existing project.
+
+This project is already the approved Version 1 of dispatch.autonomatex.com.
+
+Do NOT redesign it.
+
+Do NOT rebuild the business logic.
+
+Do NOT remove any approved business concepts.
+
+Your task is to produce the final production-ready Version 2.
+
+────────────────────────────────────────
+PART 1 — FIX THE PROJECT
+────────────────────────────────────────
+
+The current project builds in Replit but fails on Netlify.
+
+The Netlify error is:
+
+npm error Unsupported URL Type "catalog:"
+catalog:
+
+Your first priority is to make the project fully Netlify compatible.
+
+Requirements:
+
+• Remove every dependency using the "catalog:" protocol.
+• Replace them with normal npm versions.
+• Use a standard package.json.
+• Ensure npm install succeeds on Netlify.
+• Ensure npm run build succeeds on Netlify.
+• Keep React + Vite + TypeScript.
+• Publish folder must be:
+dist
+• Build command:
+npm run build
+• Generate a proper netlify.toml file.
+• Make sure there are no Replit-only configurations.
+• Make sure the project can be deployed by uploading the ZIP directly into an existing Netlify project.
+• The final ZIP should require zero manual edits after upload.
+
+netlify.toml should include:
+
+[build]
+command = "npm run build"
+publish = "dist"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+────────────────────────────────────────
+PART 2 — WEBSITE STRATEGY
+────────────────────────────────────────
+
+This is NOT a landing page.
+
+This is the enterprise sales funnel for the first commercial product of Autonomatex.
+
+The purpose is to convert serious dispatch company owners into paid pilot customers.
+
+Build using the same Design System as autonomatex.com.
+
+Same colors.
+
+Same typography.
+
+Same spacing.
+
+Same animations.
+
+Same premium enterprise feeling.
+
+────────────────────────────────────────
+UPDATED PRODUCT POSITIONING
+────────────────────────────────────────
+
+Autonomatex now serves Truck Dispatch Companies.
+
+Supported equipment:
+
+• Dry Van
+• Reefer
+• Flatbed
+• Hotshot
+• Box Truck
+
+Do NOT create separate pages.
+
+This is ONE product.
+
+During onboarding the customer selects the equipment they dispatch.
+
+The intelligence layer adapts automatically.
+
+────────────────────────────────────────
+KEEP THESE APPROVED CONCEPTS
+────────────────────────────────────────
+
+Do NOT remove:
+
+• Hero
+• "I found 42 loads. Rejected 39. Here are the 3 worth calling."
+• Quick Summary
+• Dispatcher Side
+• Owner Side
+• New Truck Onboarding
+• Existing Client Retention
+• Client Lifecycle
+• Technical Side
+• Self Guided Workflow
+• Pricing
+• Paid Pilot
+• FAQ
+• Contact
+
+Improve them.
+
+Do not replace them.
+
+────────────────────────────────────────
+NEW HERO
+────────────────────────────────────────
+
+Headline:
+
+Operational Intelligence for Modern Truck Dispatch Companies
+
+Subheading:
+
+Supports Dry Van • Reefer • Flatbed • Hotshot • Box Truck
+
+Highlighted statement:
+
+"I found 42 loads.
+Rejected 39.
+Here are the 3 worth calling."
+
+Supporting line:
+
+Turn every dispatch decision into a permanent business asset.
+
+Hero layout:
+
+Left:
+
+Headline
+
+Subheading
+
+CTA
+
+Right:
+
+Premium enterprise illustration
+
+NOT stock photography.
+
+Illustration should show:
+
+Dispatcher
+
+Modern workstation
+
+Operational dashboard
+
+Truck map
+
+Ranked loads
+
+Human making final decision
+
+────────────────────────────────────────
+PRODUCT PHILOSOPHY
+────────────────────────────────────────
+
+The customer should experience an incredibly simple product.
+
+Simple text.
+
+Simple voice.
+
+Very few buttons.
+
+Low cognitive load.
+
+Calm interface.
+
+Behind the scenes the platform operates as a complete enterprise Operational Intelligence System.
+
+Do NOT expose all enterprise features on the website.
+
+Customers buy simplicity.
+
+The intelligence stays behind the scenes.
+
+────────────────────────────────────────
+ADD THESE NEW SECTIONS
+────────────────────────────────────────
+
+1.
+
+Why Dispatch Companies Stop Growing
+
+2.
+
+The Cost of Doing Nothing
+
+3.
+
+Your Dispatch Company Should Become Smarter Every Day
+
+Explain that every:
+
+• accepted load
+• rejected load
+• broker conversation
+• negotiation
+• dispatcher decision
+• truck
+• customer
+
+should increase the long-term value of the company.
+
+4.
+
+What Happens If Your Best Dispatcher Leaves?
+
+Explain professionally:
+
+Without Autonomatex
+
+Knowledge disappears.
+
+With Autonomatex
+
+Company intelligence remains.
+
+5.
+
+The Compounding Effect
+
+Visual timeline:
+
+Every truck
+
+↓
+
+Every load
+
+↓
+
+Every broker
+
+↓
+
+Every dispatcher
+
+↓
+
+Every month
+
+↓
+
+Your company becomes smarter.
+
+────────────────────────────────────────
+WRITING STYLE
+────────────────────────────────────────
+
+Reduce AI terminology.
+
+Translate technology into business outcomes.
+
+Instead of:
+
+Truck Memory
+
+Write:
+
+Every truck becomes easier to dispatch over time.
+
+Instead of:
+
+Broker Memory
+
+Write:
+
+Your broker knowledge becomes a permanent company asset.
+
+Instead of:
+
+Rejection Memory
+
+Write:
+
+Weak decisions become permanent lessons.
+
+Instead of:
+
+Senior Dispatcher Memory
+
+Write:
+
+Years of dispatcher experience remain inside the company.
+
+Never overwhelm visitors with technical language.
+
+────────────────────────────────────────
+DESIGN
+────────────────────────────────────────
+
+Single-page enterprise sales funnel.
+
+Large typography.
+
+Large whitespace.
+
+Premium cards.
+
+SVG illustrations.
+
+Subtle motion.
+
+Excellent mobile experience.
+
+Enterprise quality.
+
+────────────────────────────────────────
+QUALITY
+────────────────────────────────────────
+
+Before generating the ZIP:
+
+Run:
+
+npm install
+
+Run:
+
+npm run build
+
+Verify the project builds successfully.
+
+Verify the dist folder is generated.
+
+Verify Netlify compatibility.
+
+Fix every build error before exporting.
+
+Only generate the final ZIP after the project is production-ready.
+
+The ZIP must deploy to Netlify without requiring any manual fixes.
