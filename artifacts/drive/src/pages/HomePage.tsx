@@ -29,13 +29,13 @@ function SectionWrap({ id, children, bg, style }: { id?: string; children: React
   );
 }
 
-function SectionHead({ eyebrow, title, desc, center }: { eyebrow: string; title: React.ReactNode; desc?: string; center?: boolean }) {
+function SectionHead({ eyebrow, title, desc, descColor, center }: { eyebrow: string; title: React.ReactNode; desc?: string; descColor?: string; center?: boolean }) {
   return (
     <FadeUp>
       <div style={{ textAlign: center ? 'center' : 'left', marginBottom: 56 }}>
         <Eyebrow>{eyebrow}</Eyebrow>
         <h2 style={{ fontSize: 'clamp(26px,3.2vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: desc ? 16 : 0, maxWidth: center ? 680 : 680, margin: center ? '0 auto' : undefined }}>{title}</h2>
-        {desc && <p style={{ fontSize: 17, color: S, lineHeight: 1.7, maxWidth: 640, marginTop: 14, margin: center ? '14px auto 0' : '14px 0 0' }}>{desc}</p>}
+        {desc && <p style={{ fontSize: 17, color: descColor ?? S, lineHeight: 1.7, maxWidth: 640, marginTop: 14, margin: center ? '14px auto 0' : '14px 0 0' }}>{desc}</p>}
       </div>
     </FadeUp>
   );
@@ -605,7 +605,7 @@ function PilotFormSection() {
 
   return (
     <SectionWrap id="paid-pilot" bg={D}>
-      <SectionHead center eyebrow="Start Your Paid Pilot" title={<span style={{color: '#fff'}}>Your Truck. Your Intelligence.</span>} desc="Complete the form below. We'll follow up by email. No calls required." />
+      <SectionHead center eyebrow="Start Your Paid Pilot" title={<span style={{color: '#fff'}}>Your Truck. Your Intelligence.</span>} desc="Complete the form below. We'll follow up by email. No calls required." descColor="rgba(255,255,255,0.6)" />
       <FadeUp>
         <Card style={{ maxWidth: 600, margin: '0 auto', background: SF }}>
           {status === 'success' ? (
