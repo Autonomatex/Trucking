@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "2rgysZHMpEI0jyhWRgYTp"
+uri = "file://autonomatex-website.zip"
+type = "unspecified"
+title = "Autonomatex Website (Production Build)"
