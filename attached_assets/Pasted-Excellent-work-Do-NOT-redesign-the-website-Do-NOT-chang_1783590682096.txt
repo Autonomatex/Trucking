@@ -1,0 +1,299 @@
+Excellent work.
+
+Do NOT redesign the website.
+
+Do NOT change the philosophy.
+
+Do NOT change the writing style.
+
+Do NOT change the overall layout.
+
+Instead, refine the current website until it feels like the digital headquarters of a world-class enterprise technology company.
+
+Think like a Principal Designer reviewing the website before the public launch.
+
+────────────────────────────────────
+
+OBJECTIVE
+
+────────────────────────────────────
+
+The current website is approximately 90% complete.
+
+Your task is to improve the remaining 10%.
+
+Do not rebuild.
+
+Refine.
+
+Everything should feel calmer, cleaner, more premium and more timeless.
+
+────────────────────────────────────
+
+1. HERO
+
+────────────────────────────────────
+
+The hero is good but lacks emotional impact.
+
+Keep the same structure.
+
+Reduce the amount of text.
+
+Increase typography hierarchy.
+
+Create one unforgettable statement.
+
+Suggested direction:
+
+"Every organization creates experience.
+
+Very few transform it into intelligence."
+
+or something even stronger.
+
+Do not use marketing language.
+
+The hero should rely more on typography than graphics.
+
+Whitespace should become part of the design.
+
+────────────────────────────────────
+
+2. ADD A SIGNATURE SECTION
+
+────────────────────────────────────
+
+Between the Hero and Why We Exist create one premium statement section.
+
+Almost empty.
+
+Very large typography.
+
+Very generous whitespace.
+
+Example direction:
+
+Operations change.
+
+People change.
+
+Experience shouldn't.
+
+or
+
+Technology evolves.
+
+Experience should remain.
+
+This section should become the emotional heart of the website.
+
+────────────────────────────────────
+
+3. REDUCE TEXT
+
+────────────────────────────────────
+
+Reduce body copy by approximately 20%.
+
+Keep the meaning.
+
+Increase readability.
+
+Enterprise buyers scan.
+
+Do not create long paragraphs.
+
+────────────────────────────────────
+
+4. IMPROVE VISUAL STORYTELLING
+
+────────────────────────────────────
+
+Replace text-heavy architecture with one elegant SVG system diagram.
+
+Use subtle motion.
+
+Very minimal labels.
+
+The architecture should communicate visually rather than verbally.
+
+────────────────────────────────────
+
+5. CREATE RHYTHM
+
+────────────────────────────────────
+
+The current website feels visually consistent but every section has similar rhythm.
+
+Create visual contrast.
+
+Alternate between:
+
+Large typography.
+
+Minimal sections.
+
+Illustrated sections.
+
+Cards.
+
+Whitespace.
+
+This creates a premium reading experience.
+
+────────────────────────────────────
+
+6. ADD HUMAN WARMTH
+
+────────────────────────────────────
+
+The website feels slightly too corporate.
+
+Without becoming emotional or promotional,
+
+add one short statement somewhere such as:
+
+Technology should help people do their best work.
+
+Not replace them.
+
+Only one sentence.
+
+No more.
+
+────────────────────────────────────
+
+7. REFINED COLOR SYSTEM
+
+────────────────────────────────────
+
+Keep the current palette.
+
+Make it slightly more mature.
+
+Reduce bright cyan.
+
+Introduce deeper emerald/teal accents.
+
+Improve contrast.
+
+Avoid looking like a generic AI startup.
+
+────────────────────────────────────
+
+8. MOTION
+
+────────────────────────────────────
+
+Review every animation.
+
+Remove anything unnecessary.
+
+Motion should communicate confidence.
+
+Not excitement.
+
+No bouncing.
+
+No flashy transitions.
+
+Everything should feel effortless.
+
+────────────────────────────────────
+
+9. ARCHITECTURE
+
+────────────────────────────────────
+
+Keep the five-layer architecture.
+
+Present it visually.
+
+Use elegant SVG.
+
+Minimal text.
+
+Enterprise style.
+
+────────────────────────────────────
+
+10. CONTACT
+
+────────────────────────────────────
+
+Rename
+
+"Start a Conversation"
+
+to something more timeless.
+
+Examples:
+
+Begin the Conversation
+
+or
+
+Let's Build the Future Together
+
+Choose whichever best fits the overall design.
+
+────────────────────────────────────
+
+11. FOOTER
+
+────────────────────────────────────
+
+Keep the footer extremely minimal.
+
+Move the signature quote higher in the website if appropriate.
+
+The footer should feel quiet.
+
+────────────────────────────────────
+
+12. SELF REVIEW
+
+────────────────────────────────────
+
+When finished,
+
+review the website as if you are:
+
+Apple Design Team
+
+Stripe Brand Team
+
+Linear Product Team
+
+Fortune 500 Enterprise Buyer
+
+Accessibility Auditor
+
+SEO Specialist
+
+Performance Engineer
+
+Brand Strategist
+
+Continue improving until no obvious improvements remain.
+
+────────────────────────────────────
+
+FINAL RULE
+
+────────────────────────────────────
+
+Do NOT redesign.
+
+Do NOT change the philosophy.
+
+Do NOT change the structure.
+
+Polish.
+
+Refine.
+
+Elevate.
+
+The result should feel like the permanent public identity of a company that intends to exist for decades.
