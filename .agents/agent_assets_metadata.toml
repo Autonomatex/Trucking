@@ -18,3 +18,9 @@ id = "gbWtHe46sd5hqOnkT7R4W"
 uri = "file://autonomatex-dispatch-v2.zip"
 type = "unspecified"
 title = "autonomatex-dispatch-v2.zip"
+
+[[outputs]]
+id = "hBXy4fHPY1K1p7GKvqb4O"
+uri = "file://autonomatex-dispatch-dist.zip"
+type = "unspecified"
+title = "autonomatex-dispatch-dist.zip (drag-and-drop ready)"
