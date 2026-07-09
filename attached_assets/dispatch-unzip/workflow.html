@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Autonomatex Workflow Preview | Dry Van Dispatch</title>
+  <meta name="description" content="Self-guided workflow preview for Autonomatex dry van dispatch load-ranking and Truck Memory OS." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="demo-page">
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">A</span><span>Autonomatex</span></a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html#quick-summary">Quick Summary</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="index.html#dispatcher-side">Dispatch Side</a>
+      <a href="index.html#technical-side">Technical Side</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#paid-pilot">Paid Pilot</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="mobile-summary-pill" href="index.html#quick-summary">Quick Summary</a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="header-cta" href="index.html#paid-pilot">Start Paid Pilot</a>
+    <div class="menu-panel" aria-label="Expanded navigation">
+      <a class="menu-panel-heading" href="index.html#quick-summary"><strong>Quick Summary</strong><span>Start here for the short version, then explore the full workflow.</span></a>
+      <a href="workflow.html">Self-Guided Workflow</a>
+      <a href="index.html#dispatcher-side">Dispatch Side</a>
+      <a href="index.html#owner-side">Owner Side</a>
+      <a href="index.html#truck-retention">New Truck Onboarding</a>
+      <a href="index.html#client-lifecycle">Client Lifecycle</a>
+      <a href="index.html#technical-side">Technical Side</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#paid-pilot">Paid Pilot</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </header>
+  <main>
+    <section class="section demo-hero">
+      <div>
+        <div class="eyebrow">Self-guided workflow preview</div>
+        <h1>See how Autonomatex ranks dry van loads without a live sales call.</h1>
+        <p class="lead">This sample workflow shows how a dry van truck request can become a ranked decision: weak loads rejected, top 3 worth calling, and memory updated after the dispatcher makes the final call.</p>
+        <div class="hero-actions"><a class="btn primary" href="index.html#paid-pilot">Start Paid Pilot Access</a><a class="btn secondary" href="index.html">Back to Website</a></div>
+      </div>
+      <div class="mini-dashboard">
+        <strong>42 loads scanned</strong>
+        <span>39 rejected · 3 worth calling · 1 human final decision</span>
+        <div class="mini-bars"><i></i><i></i><i></i></div>
+      </div>
+    </section>
+
+    <section class="workflow-steps section">
+      <div class="step active"><span>1</span><strong>Truck request</strong><p>Truck 12 is empty in Dallas tomorrow morning.</p></div>
+      <div class="step"><span>2</span><strong>Authorized data</strong><p>Loads enter from approved API or customer-authorized data.</p></div>
+      <div class="step"><span>3</span><strong>Truck Memory</strong><p>Preferences, RPM, no-go areas, and broker history are checked.</p></div>
+      <div class="step"><span>4</span><strong>AI ranking</strong><p>Autonomatex explains top loads and rejected loads.</p></div>
+      <div class="step"><span>5</span><strong>Human control</strong><p>Dispatcher calls, negotiates, books, and logs outcome.</p></div>
+    </section>
+
+    <section class="section demo-console">
+      <div class="console-head"><div><div class="eyebrow">Sample ranking</div><h2>Truck 12 · Dallas, TX · Dry van</h2></div><button id="rerankBtn" class="btn secondary">Rerun Sample Ranking</button></div>
+      <div class="console-grid">
+        <div class="candidate-panel"><h3>Candidate loads</h3><div id="loadList" class="load-list"></div></div>
+        <div class="result-panel"><h3>Autonomatex decision layer</h3><div id="decisionBox" class="decision-box"></div><div class="no-call-box" style="margin-top:16px"><strong>No auto-booking.</strong><p>The dispatcher stays responsible for calling, negotiating, booking, and logging the final outcome.</p></div></div>
+      </div>
+    </section>
+    <section class="final-cta"><h2>Want to test the paid pilot path?</h2><p>Start with paid pilot access and submit questions by email/form only.</p><a class="btn primary" href="index.html#paid-pilot">Start 7-Day Paid Pilot</a></section>
+  </main>
+  <footer class="footer"><p>© 2026 Autonomatex.</p><p>Decision-support only. No auto-booking. Authorized data sources only.</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

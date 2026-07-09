@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paid Pilot Onboarding | Autonomatex</title>
+  <meta name="description" content="Autonomatex paid pilot onboarding form for dry van dispatch companies." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="brand-mark">A</span><span>Autonomatex</span></a>
+    <nav class="nav" aria-label="Primary navigation">
+      <a href="index.html#quick-summary">Quick Summary</a>
+      <a href="workflow.html">Workflow</a>
+      <a href="index.html#dispatcher-side">Dispatch Side</a>
+      <a href="index.html#technical-side">Technical Side</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#paid-pilot">Paid Pilot</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <a class="mobile-summary-pill" href="index.html#quick-summary">Quick Summary</a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <a class="header-cta" href="index.html#paid-pilot">Start Paid Pilot</a>
+    <div class="menu-panel" aria-label="Expanded navigation">
+      <a class="menu-panel-heading" href="index.html#quick-summary"><strong>Quick Summary</strong><span>Start here for the short version, then explore the full workflow.</span></a>
+      <a href="workflow.html">Self-Guided Workflow</a>
+      <a href="index.html#dispatcher-side">Dispatch Side</a>
+      <a href="index.html#owner-side">Owner Side</a>
+      <a href="index.html#truck-retention">New Truck Onboarding</a>
+      <a href="index.html#client-lifecycle">Client Lifecycle</a>
+      <a href="index.html#technical-side">Technical Side</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#paid-pilot">Paid Pilot</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </header>
+  <main>
+    <section class="section apply" id="onboarding">
+      <div class="apply-card">
+        <div><div class="eyebrow">Paid pilot onboarding</div><h2>Tell us how your dry van dispatch operation works.</h2><p>This form is for paid pilot users or teams ready to receive a payment link. It helps prepare your truck memory setup without a long call.</p><ul class="mini-list"><li>No live call required.</li><li>Email support only.</li><li>Dry van dispatch workflow only.</li></ul></div>
+        <form name="autonomatex-paid-pilot-onboarding" method="POST" action="/thank-you.html" data-netlify="true" class="lead-form">
+          <input type="hidden" name="form-name" value="autonomatex-paid-pilot-onboarding" />
+          <div class="form-explain wide"><strong>How support works</strong><p>Paid pilot users can submit questions through this onboarding form and follow-up email support. No live call is required to start.</p></div>
+          <label>Full name <input required name="name" type="text" /></label>
+          <label>Company <input required name="company" type="text" /></label>
+          <label>Business email <input required name="email" type="email" /></label>
+          <label>Paid plan <select required name="paid_plan"><option value="">Select</option><option>$79 Paid Pilot Access</option><option>$99/mo — 1 Truck Access</option><option>$199/mo — 4 Truck Team</option><option>$299/mo — Core Dispatch</option><option>$749/mo — Growth Dispatch</option><option>$1,499/mo — Pro Dispatch</option></select></label>
+          <label>Number of active dry van trucks <input required name="active_dry_van_trucks" type="number" min="1" /></label>
+          <label>Main load source <input name="load_source" type="text" placeholder="DAT / Truckstop / approved source / internal" /></label>
+          <label class="wide">Typical truck availability message <textarea name="truck_message" rows="3" placeholder="Example: Truck 12 empty Dallas tomorrow 8 AM. Midwest preferred. Min $2.30. No NYC."></textarea></label>
+          <label class="wide">Top 5 truck rules or preferences <textarea name="truck_rules" rows="4" placeholder="No-go areas, minimum RPM, deadhead limits, preferred lanes, broker notes..."></textarea></label>
+          <label class="wide">Main dispatch pain or question for Autonomatex <textarea name="pain" rows="4" placeholder="Weak loads, senior dispatcher overload, junior team training, broker memory, lane memory, stress, truck growth, or any question about pilot access..."></textarea></label>
+          <button class="btn primary full wide" type="submit">Submit Onboarding</button>
+          <p class="form-note wide">This does not auto-book freight. Autonomatex supports dispatch decisions and keeps the dispatcher in control.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><p>© 2026 Autonomatex.</p><p>Decision-support only. Authorized data sources only.</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
