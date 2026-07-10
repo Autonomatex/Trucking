@@ -32,13 +32,16 @@ function SectionWrap({ id, children, bg, style }: { id?: string; children: React
   );
 }
 
-function SectionHead({ eyebrow, title, desc, center }: { eyebrow: string; title: string; desc?: string; center?: boolean }) {
+function SectionHead({ eyebrow, title, desc, descColor, center, light }: {
+  eyebrow: string; title: React.ReactNode; desc?: string;
+  descColor?: string; center?: boolean; light?: boolean;
+}) {
   return (
     <FadeUp>
       <div style={{ textAlign: center ? 'center' : 'left', marginBottom: 56 }}>
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 style={{ fontSize: 'clamp(26px,3.2vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: desc ? 16 : 0, maxWidth: center ? 680 : 680, margin: center ? '0 auto' : undefined }}>{title}</h2>
-        {desc && <p style={{ fontSize: 17, color: S, lineHeight: 1.7, maxWidth: 640, marginTop: 14, margin: center ? '14px auto 0' : '14px 0 0' }}>{desc}</p>}
+        <h2 style={{ fontSize: 'clamp(26px,3.2vw,38px)', fontWeight: 700, color: light ? '#fff' : P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: desc ? 16 : 0, maxWidth: center ? 680 : 680, margin: center ? '0 auto' : undefined }}>{title}</h2>
+        {desc && <p style={{ fontSize: 17, color: descColor ?? S, lineHeight: 1.7, maxWidth: 640, marginTop: 14, margin: center ? '14px auto 0' : '14px 0 0' }}>{desc}</p>}
       </div>
     </FadeUp>
   );
@@ -193,7 +196,7 @@ function HeroSection() {
             transition={{ delay: 0.18, duration: 0.6, ease: EASE }}
             style={{ fontSize: 13, color: A, fontWeight: 600, letterSpacing: '0.04em', marginBottom: 22 }}
           >
-            Supports Dry Van · Reefer · Flatbed · Hotshot · Box Truck
+            Supports Dry Van · Reefer · Flatbed · Hotshot · Box Truck · Power Only
           </motion.p>
 
           {/* Quote card */}
@@ -252,30 +255,43 @@ function HeroSection() {
 
 // ── S2: Quick Summary ────────────────────────────────────────────────────────
 function QuickSummarySection() {
+  const bullets = [
+    'We reduce dispatcher decision pressure — so your team spends less energy on weak loads and more on what matters.',
+    'We preserve company operational intelligence — broker history, lane judgment and rejection logic stay inside the business, not inside one person.',
+    'We help new dispatchers become productive faster — learning from accumulated company knowledge instead of starting from scratch.',
+    'We protect years of senior dispatcher experience — so it compounds inside the company, not disappears when someone leaves.',
+    'We help companies scale professionally — more trucks, cleaner operations, consistent decision quality.',
+    'Humans stay in control — every load decision is made by your dispatcher. Always.',
+  ];
+
   return (
-    <SectionWrap id="quick-summary" bg={SF} style={{ borderTop: `1px solid ${B}`, borderBottom: `1px solid ${B}` }}>
+    <SectionWrap id="quick-summary" bg={D}>
       <FadeUp>
-        <div style={{ maxWidth: 820, margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ maxWidth: 840, margin: '0 auto' }}>
           <Eyebrow>Quick Summary</Eyebrow>
-          <h2 style={{ fontSize: 'clamp(24px,2.8vw,34px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.25, marginBottom: 24 }}>
-            AI-Powered Dispatch Intelligence for Modern Truck Dispatch Companies
+          <h2 style={{ fontSize: 'clamp(24px,2.8vw,34px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.25, marginBottom: 32 }}>
+            Operational Intelligence for Modern Truck Dispatch Companies
           </h2>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 18 }}>
-            Autonomatex is built for truck dispatch companies that want to handle more trucks, protect senior dispatcher knowledge, reduce daily decision pressure, and create a more professional dispatch operation — without relying only on memory, calls, and scattered notes.
-          </p>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 18 }}>
-            It acts as an operational intelligence layer for your dispatch business. Every truck becomes easier to dispatch over time. Your broker relationships become permanent company assets. Weak decisions become permanent lessons. Every successful load improves tomorrow's decisions.
-          </p>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 18 }}>
-            Instead of replacing dispatchers, Autonomatex becomes their right hand. It helps experienced dispatchers make faster, calmer decisions — and helps junior dispatchers learn from company knowledge instead of starting from scratch.
-          </p>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.75, marginBottom: 32 }}>
-            Start with a paid pilot, complete the onboarding form, test the workflow, ask questions through email support, and upgrade when ready.
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 10 }}>
-            {['Company-Owned Intelligence','AI Decision Layer','Operational Memory','Decision Support Only'].map(t => (
-              <span key={t} style={{ fontSize: 12, fontWeight: 600, color: A, background: 'rgba(13,148,136,0.08)', padding: '6px 14px', borderRadius: 20, border: '1px solid rgba(13,148,136,0.18)' }}>{t}</span>
+
+          <ul style={{ display: 'flex', flexDirection: 'column', gap: 16, listStyle: 'none', marginBottom: 36 }}>
+            {bullets.map((b, i) => (
+              <li key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                <div style={{ width: 20, height: 20, borderRadius: '50%', background: 'rgba(13,148,136,0.2)', border: `1.5px solid ${A}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+                  <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke={A} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="1.5 6 4.5 9 10.5 3"/>
+                  </svg>
+                </div>
+                <p style={{ fontSize: 15.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.7 }}>{b}</p>
+              </li>
             ))}
+          </ul>
+
+          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 32, textAlign: 'center' }}>
+            <p style={{ fontSize: 'clamp(18px,2.2vw,24px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1.5 }}>
+              One Company.{' '}
+              <span style={{ color: 'rgba(255,255,255,0.5)' }}>One Intelligence Layer.</span>{' '}
+              A Dispatch Business That Becomes More Valuable Every Month.
+            </p>
           </div>
         </div>
       </FadeUp>
@@ -283,7 +299,48 @@ function QuickSummarySection() {
   );
 }
 
-// ── S3: Why Dispatch Companies Stop Growing (NEW) ────────────────────────────
+// ── S3: Why Autonomatex Exists ───────────────────────────────────────────────
+function WhyExistsSection() {
+  return (
+    <SectionWrap id="why-exists" bg={SF}>
+      <div style={{ maxWidth: 840, margin: '0 auto' }}>
+        <FadeUp>
+          <Eyebrow>Why Autonomatex Exists</Eyebrow>
+          <h2 style={{ fontSize: 'clamp(26px,3.2vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 36 }}>
+            Operational Intelligence Should Compound.<br />Not Disappear.
+          </h2>
+        </FadeUp>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {[
+            { label: 'Every truck creates experience.', sub: 'Lane history. Broker relationships. Rate patterns. Operational rhythms.' },
+            { label: 'Every dispatcher creates knowledge.', sub: 'What works. What to avoid. Who to call. How to negotiate. What rates hold.' },
+            { label: 'Every broker interaction teaches something.', sub: 'Communication quality. Cancellation risk. Detention behavior. Reliability patterns.' },
+            { label: 'People change. Dispatchers change. Markets change.', sub: 'Operations managers transition. Teams restructure. Markets shift. Dispatchers move on.' },
+            { label: 'Knowledge should never disappear.', sub: 'Today, most of it does — because it lives inside people, not inside the business.' },
+          ].map((item, i, arr) => (
+            <motion.div key={i} variants={staggerItem} style={{ borderBottom: i < arr.length - 1 ? `1px solid ${B}` : 'none', padding: '26px 0', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+              <div style={{ width: 10, height: 10, borderRadius: '50%', background: A, marginTop: 7, flexShrink: 0 }} />
+              <div>
+                <p style={{ fontSize: 17, fontWeight: 700, color: P, marginBottom: 5 }}>{item.label}</p>
+                <p style={{ fontSize: 14.5, color: S, lineHeight: 1.65 }}>{item.sub}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+        <FadeUp delay={0.15}>
+          <div style={{ background: D, borderRadius: 12, padding: '26px 36px', marginTop: 48, borderLeft: `3px solid ${A}` }}>
+            <p style={{ fontSize: 17, fontWeight: 600, color: '#fff', lineHeight: 1.5 }}>
+              Autonomatex exists so operational intelligence compounds instead of disappearing every time something changes.
+            </p>
+          </div>
+        </FadeUp>
+      </div>
+    </SectionWrap>
+  );
+}
+
+// ── S4: Why Dispatch Companies Stop Growing (NEW) ────────────────────────────
 function WhyStopGrowingSection() {
   const problems = [
     { n: '01', title: 'Knowledge stays inside people', body: 'Your best dispatcher carries broker history, lane judgment, truck preferences, and years of decision logic in their head — and only in their head.' },
@@ -320,7 +377,81 @@ function WhyStopGrowingSection() {
   );
 }
 
-// ── S4: The Cost of Doing Nothing (NEW) ─────────────────────────────────────
+// ── S6: Comparison ────────────────────────────────────────────────────────────
+function ComparisonSection() {
+  const traditional = [
+    'Knowledge lives inside people.',
+    'Manual remembering.',
+    'Slow onboarding.',
+    'Knowledge disappears.',
+    'Stress increases.',
+  ];
+  const autonomatex = [
+    'Knowledge belongs to the company.',
+    'Operational intelligence compounds.',
+    'Professional onboarding.',
+    'Business continuity.',
+    'Calmer operations.',
+  ];
+
+  return (
+    <SectionWrap id="comparison" bg={BG}>
+      <SectionHead center eyebrow="Why It Matters" title="Traditional Dispatch vs. Autonomatex Dispatch." />
+      <FadeUp delay={0.05}>
+        <div className="atx-g2" style={{ gap: 20, maxWidth: 920, margin: '0 auto 48px' }}>
+          {/* Traditional */}
+          <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 12, padding: 36 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: '#FEF3F2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F04438" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: P }}>Traditional Dispatch</p>
+            </div>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
+              {traditional.map(item => (
+                <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: '#FEF3F2', border: '1.5px solid #FECDCA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#F04438" strokeWidth="2.2" strokeLinecap="round">
+                      <line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 14.5, color: S, lineHeight: 1.6 }}>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Autonomatex */}
+          <div style={{ background: D, borderRadius: 12, padding: 36, border: `1px solid rgba(13,148,136,0.3)` }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(13,148,136,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={A} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: '#fff' }}>Autonomatex Dispatch</p>
+            </div>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
+              {autonomatex.map(item => (
+                <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(13,148,136,0.2)', border: `1.5px solid ${A}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke={A} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="1.5 6 4.5 9 10.5 3"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </FadeUp>
+    </SectionWrap>
+  );
+}
+
+// ── S7: The Cost of Doing Nothing (NEW) ─────────────────────────────────────
 function CostOfNothingSection() {
   const left = [
     'Senior dispatcher knowledge stays trapped in one person\'s head.',
@@ -380,20 +511,20 @@ function CostOfNothingSection() {
   );
 }
 
-// ── S5: Dispatcher Side ───────────────────────────────────────────────────────
-function DispatcherSideSection() {
+// ── S6: Operations Side ───────────────────────────────────────────────────────
+function OperationsSideSection() {
   const cards = [
     { title: 'Less mental load', body: 'Truck preferences, no-go areas, minimum RPM, broker notes, lane history, and past decisions stay organized — not scattered across memory and notes.' },
-    { title: 'Better driver relationships', body: 'When weak loads are filtered faster, dispatchers spend more time with drivers, carrier clients, brokers, and team members.' },
-    { title: 'Calmer senior dispatchers', body: 'Senior dispatchers make stronger decisions when current market data, stored company history, and decision support reinforce their judgment.' },
-    { title: 'Faster team training', body: 'New team members learn from stored rejection reasons, broker history, lane performance, and outcome logs instead of guessing from scratch.' },
-    { title: 'More trucks with control', body: 'A cleaner decision workflow helps a dispatch team support more trucks without losing visibility or professionalism.' },
-    { title: 'Better work rhythm', body: 'Less chaos, fewer repeated checks, clearer priorities, and less dependence on scattered notes help create a smoother daily operation.' },
+    { title: 'Calmer broker communication', body: 'Dispatchers enter broker calls with more context — rate history, past behavior, and lane fit — and spend less energy on calls that should not have happened.' },
+    { title: 'Calmer senior dispatchers', body: 'Senior dispatchers make stronger decisions when company history, market data, and decision support reinforce their judgment instead of adding to their burden.' },
+    { title: 'Faster team training', body: 'New dispatchers learn from stored rejection reasons, broker history, lane performance, and outcome logs instead of guessing from scratch.' },
+    { title: 'Better teamwork', body: 'One shared intelligence layer means every dispatcher on the team works from the same company knowledge — not from fragmented personal notes.' },
+    { title: 'Better work rhythm', body: 'Less chaos, clearer priorities, fewer repeated checks, and less dependence on scattered notes help create a smoother, more professional daily operation.' },
   ];
 
   return (
-    <SectionWrap id="dispatcher-side">
-      <SectionHead eyebrow="Dispatcher side" title="Give your dispatcher more time to think, lead, and build relationships." desc="Autonomatex reduces the burden of remembering every small truck detail manually, so your dispatcher can focus on higher-value work." />
+    <SectionWrap id="operations-side">
+      <SectionHead eyebrow="Operations Side" title="Give your team more time to think, lead, and build relationships." desc="Autonomatex reduces the burden of remembering every small truck detail manually, so dispatchers can focus on higher-value work." />
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
         style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginBottom: 32 }}>
         {cards.map(c => (
@@ -415,33 +546,41 @@ function DispatcherSideSection() {
   );
 }
 
-// ── S6: Owner Side ────────────────────────────────────────────────────────────
-function OwnerSideSection() {
+// ── S7: Business Side ─────────────────────────────────────────────────────────
+function BusinessSideSection() {
   const items = [
-    { n: '01', title: 'Retain senior knowledge', body: 'Your company becomes less dependent on one person\'s memory. Key dispatch knowledge stays inside the business, not inside one dispatcher\'s head.' },
-    { n: '02', title: 'Win larger accounts with confidence', body: 'A professional AI-backed workflow gives your company a stronger operational story when handling more trucks or larger carrier clients.' },
-    { n: '03', title: 'Build a stronger operating base', body: 'The more your team uses Autonomatex, the more your dispatch intelligence, rejection logic, and outcome knowledge improve — making the business more valuable every month.' },
+    { n: '01', title: 'Company memory', body: 'Every accepted load, rejected load, broker note, lane pattern, and outcome becomes part of a private company knowledge base — not scattered across personal notes.' },
+    { n: '02', title: 'Operational continuity', body: 'When dispatchers change, the company does not lose its operational intelligence. Knowledge stays inside the business, not inside any one person.' },
+    { n: '03', title: 'Client retention', body: 'Existing clients feel remembered, understood, and professionally managed — because Autonomatex keeps building intelligence around every truck it dispatches.' },
+    { n: '04', title: 'Business scalability', body: 'Adding trucks does not mean adding chaos. A shared intelligence layer lets the team handle more operations without losing decision quality or professionalism.' },
+    { n: '05', title: 'Knowledge ownership', body: 'Operational intelligence belongs to the dispatch company. Not to any employee, not to any platform. It compounds inside your business.' },
+    { n: '06', title: 'Long-term company value', body: 'The longer you use Autonomatex, the more valuable your dispatch operation becomes — because every decision improves every future decision.' },
   ];
 
   return (
-    <SectionWrap id="owner-side" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
+    <SectionWrap id="business-side" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
       <div className="atx-g2-wide">
         <FadeUp>
-          <Eyebrow>Dispatch company owner side</Eyebrow>
+          <Eyebrow>Business Side</Eyebrow>
           <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
-            Turn Dispatch Knowledge Into Company Intelligence.
+            Turn Dispatch Knowledge Into a Permanent Business Asset.
           </h2>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.7 }}>
-            Every accepted load, rejected load, broker note, lane pattern, and final outcome can become part of your company's private dispatch knowledge base — not disappear when a dispatcher goes home.
+          <p style={{ fontSize: 15.5, color: S, lineHeight: 1.7, marginBottom: 32 }}>
+            Every dispatch decision — every load accepted, every load rejected, every broker interaction — can compound into long-term business value instead of disappearing overnight.
           </p>
+          <div style={{ background: D, borderRadius: 10, padding: '18px 22px', borderLeft: `3px solid ${A}` }}>
+            <p style={{ fontSize: 14.5, fontWeight: 600, color: '#fff', lineHeight: 1.5 }}>
+              The dispatch company becomes smarter, calmer and more valuable every month.
+            </p>
+          </div>
         </FadeUp>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginTop: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
           {items.map((item, i) => (
-            <FadeUp key={item.n} delay={i * 0.08}>
-              <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start' }}>
-                <div style={{ fontSize: 11.5, fontWeight: 700, color: A, flexShrink: 0, paddingTop: 2, letterSpacing: '0.04em' }}>{item.n}</div>
+            <FadeUp key={item.n} delay={i * 0.07}>
+              <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start', background: BG, border: `1px solid ${B}`, borderRadius: 10, padding: '18px 20px' }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: A, flexShrink: 0, paddingTop: 3, letterSpacing: '0.05em' }}>{item.n}</div>
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: P, marginBottom: 6 }}>{item.title}</p>
+                  <p style={{ fontSize: 14.5, fontWeight: 700, color: P, marginBottom: 5 }}>{item.title}</p>
                   <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{item.body}</p>
                 </div>
               </div>
@@ -453,7 +592,104 @@ function OwnerSideSection() {
   );
 }
 
-// ── S7: Your Dispatch Company Should Become Smarter Every Day (NEW) ──────────
+// ── S8: Business Continuity ───────────────────────────────────────────────────
+function BusinessContinuitySection() {
+  const scenarios = [
+    { label: 'Senior dispatcher leaves', body: 'Broker relationships, lane judgment, and years of market knowledge stay inside the company — not leave with the person.' },
+    { label: 'Junior dispatcher joins', body: 'New dispatchers learn from accumulated company intelligence instead of starting from zero. Ramp-up time shortens. Quality stays consistent.' },
+    { label: 'Operations manager changes', body: 'Procedures, truck history, broker strategies, lane knowledge, and business rules remain inside the platform — ready for the next person in the role.' },
+    { label: 'Dispatch manager changes', body: 'Team-level operational context and performance history compound inside the business, not inside the individual who managed it.' },
+    { label: 'Company grows', body: 'New trucks inherit company knowledge from day one. Growth adds capability — not chaos — because intelligence scales with the operation.' },
+    { label: 'Departments expand', body: 'A shared intelligence layer means every team works from the same operational foundation, regardless of how the org structure evolves.' },
+    { label: 'Shift changes', body: 'The next shift starts informed. Truck context, open decisions, and recent outcomes are organized — not lost between handoffs.' },
+    { label: 'Business restructuring', body: 'When teams, roles, or processes change shape, operational intelligence does not scatter. The platform holds what the business has earned.' },
+  ];
+
+  return (
+    <SectionWrap id="business-continuity" bg={BG}>
+      <SectionHead center eyebrow="Business Continuity" title="Knowledge Belongs to the Company. Not to One Employee." desc="Operational intelligence remains with the dispatch company when any role, person, or arrangement changes." />
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, maxWidth: 1000, margin: '0 auto 48px' }}>
+        {scenarios.map(s => (
+          <motion.div key={s.label} variants={staggerItem}>
+            <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 10, padding: '22px 24px', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: A, flexShrink: 0 }} />
+                <p style={{ fontSize: 14, fontWeight: 700, color: P }}>{s.label}</p>
+              </div>
+              <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{s.body}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+      <FadeUp>
+        <div style={{ background: D, borderRadius: 12, padding: '24px 36px', textAlign: 'center', border: `1px solid rgba(13,148,136,0.3)`, maxWidth: 640, margin: '0 auto' }}>
+          <p style={{ fontSize: 18, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
+            Knowledge compounds. The company never starts over.
+          </p>
+        </div>
+      </FadeUp>
+    </SectionWrap>
+  );
+}
+
+// ── S12: Compounding Timeline ─────────────────────────────────────────────────
+function CompoundingTimelineSection() {
+  const years = [
+    { label: 'Year 1', desc: 'Foundation built. Every dispatcher decision, every truck profile, every broker interaction starts building the intelligence layer. The company stops repeating early mistakes.' },
+    { label: 'Year 2', desc: 'Recommendations sharpen. Rate floors clarify. Transitions become smooth. The dispatch team becomes more consistent — regardless of who is dispatching.' },
+    { label: 'Year 3', desc: 'Operational consistency compounds. New dispatchers onboard faster. Fleet decisions become more informed. Business value grows month over month.' },
+    { label: 'Year 5', desc: 'Institutional knowledge is deep. The company is more resilient, more efficient, and more valuable than any single-person operation could achieve.' },
+    { label: 'Smarter Dispatch Company', desc: 'Every dispatcher. Every truck. Every broker. Every rejection. Every booked load. Every outcome. Improves tomorrow\'s operation.', accent: true },
+  ];
+
+  return (
+    <SectionWrap id="compounding-timeline" bg={D}>
+      <SectionHead center light eyebrow="Operational Intelligence Compounds"
+        title={<span style={{ color: '#fff' }}>Every Decision Increases Long-Term Business Intelligence.</span>}
+        desc="The longer your company uses Autonomatex, the more intelligent your operation becomes. Intelligence does not reset — it compounds."
+        descColor="rgba(255,255,255,0.55)"
+      />
+      <div style={{ maxWidth: 540, margin: '0 auto', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 28, bottom: 28, left: 19, width: 2, background: 'rgba(13,148,136,0.3)' }} />
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}>
+          {years.map((y, i) => (
+            <motion.div key={y.label} variants={staggerItem} style={{ position: 'relative', paddingLeft: 58, marginBottom: i < years.length - 1 ? 48 : 0 }}>
+              {i < years.length - 1 && (
+                <div style={{ position: 'absolute', left: 16, top: 44, zIndex: 1 }}>
+                  <svg width="8" height="16" viewBox="0 0 8 16" fill="none">
+                    <path d="M4 0 L4 10 M1 7 L4 11 L7 7" stroke={A} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
+                  </svg>
+                </div>
+              )}
+              <div style={{
+                position: 'absolute', left: 8, top: 4, width: 24, height: 24, borderRadius: '50%',
+                background: y.accent ? A : 'rgba(13,148,136,0.15)',
+                border: `2px solid ${A}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2,
+              }}>
+                {y.accent
+                  ? <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff' }} />
+                  : <div style={{ width: 6, height: 6, borderRadius: '50%', background: A, opacity: 0.8 }} />
+                }
+              </div>
+              <div style={{
+                background: y.accent ? 'rgba(13,148,136,0.12)' : 'rgba(255,255,255,0.04)',
+                border: `1px solid ${y.accent ? 'rgba(13,148,136,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                borderRadius: 10, padding: '18px 22px',
+              }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: y.accent ? A : 'rgba(255,255,255,0.9)', marginBottom: 6 }}>{y.label}</p>
+                <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>{y.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </SectionWrap>
+  );
+}
+
+// ── S13: Your Dispatch Company Should Become Smarter Every Day (NEW) ──────────
 function SmarterEveryDaySection() {
   const flow = ['Every truck','Every load','Every broker','Every rejection','Every booked outcome','Every month'];
 
@@ -505,70 +741,77 @@ function SmarterEveryDaySection() {
   );
 }
 
-// ── S8: New Truck Onboarding ──────────────────────────────────────────────────
+// ── S10: New Truck Onboarding ─────────────────────────────────────────────────
 function NewTruckOnboardingSection() {
-  const cards = [
-    { title: 'Professional first impression', body: 'New clients often test a dispatch company for a few days. Autonomatex helps your team show structure, memory, and professionalism from day one.' },
-    { title: 'New truck profile from day one', body: 'Home base, preferred lanes, no-go areas, minimum RPM, deadhead limits, driver preferences, broker notes, and load history are organized in one place.' },
-    { title: 'First 72-hour plan', body: 'Autonomatex helps your team build a clear first 72-hour dispatch plan so the new truck does not feel randomly managed.' },
-    { title: 'Less guessing for dispatchers', body: 'Your dispatcher does not start from zero every time a new truck comes in. Company history and load-ranking logic come forward faster.' },
-    { title: 'Better team handoff', body: 'If one dispatcher is busy, another team member can understand the truck quickly because the operating memory stays inside the system — not in one person.' },
-    { title: 'Retention risk protection', body: 'Autonomatex helps reduce early confusion, repeated mistakes, weak communication, and poor-fit load decisions that make new clients leave too soon.' },
+  const timeline = [
+    { label: 'Welcome Call', desc: 'Your dispatcher captures home base, preferred lanes, no-go areas, minimum RPM, deadhead limits, home-time needs, broker restrictions, and first-week expectations.' },
+    { label: 'Truck Profile', desc: 'Autonomatex turns the welcome-call details into a working truck profile — organized and ready before load decisions begin.' },
+    { label: 'First 72 Hours', desc: 'A focused first-week dispatch plan using truck preferences, market data, lane intelligence, and company experience. No random start.' },
+    { label: 'Daily Operations', desc: 'Autonomatex ranks the loads worth calling first, explains weak loads, and helps the dispatcher make faster decisions with less pressure.' },
+    { label: 'Learning', desc: 'Every accepted and rejected load refines the model. The truck\'s profile deepens. Recommendations improve continuously.' },
+    { label: 'Retention', desc: 'Existing clients feel remembered and professionally managed. Company intelligence keeps building around every truck.' },
+    { label: 'Long-Term Growth', desc: 'The longer the relationship continues, the stronger the intelligence becomes. Old trucks become more valuable every week, every month, every year.' },
   ];
 
   return (
     <SectionWrap id="new-truck-onboarding" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
-      <SectionHead eyebrow="New truck onboarding" title="Keep New Trucks From Slipping Away." desc="For many dispatch companies, the hardest part is not only finding loads. It is keeping new trucks long enough to prove value." />
-      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18, marginBottom: 32 }}>
-        {cards.map(c => (
-          <motion.div key={c.title} variants={staggerItem}>
-            <Card>
-              <p style={{ fontSize: 14.5, fontWeight: 700, color: P, marginBottom: 8 }}>{c.title}</p>
-              <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{c.body}</p>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-      <FadeUp>
-        <div style={{ background: '#F0F9F8', border: `1px solid rgba(13,148,136,0.2)`, borderRadius: 12, padding: '24px 28px' }}>
-          <p style={{ fontSize: 15, fontWeight: 700, color: P, marginBottom: 6 }}>Turn new truck onboarding into a repeatable system — not a stressful guessing game.</p>
-          <p style={{ fontSize: 14, color: S, lineHeight: 1.65 }}>The result is a more professional experience for truck owners, less pressure on dispatchers, faster team handoff, and stronger long-term business value.</p>
-        </div>
-      </FadeUp>
+      <SectionHead eyebrow="New Truck Onboarding" title="A Professional System. Not a Stressful Guessing Game." desc="For many dispatch companies, keeping new trucks long enough to prove value is the hardest part. Autonomatex makes the onboarding timeline repeatable." />
+      <div style={{ maxWidth: 640, margin: '0 auto', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 24, bottom: 24, left: 19, width: 2, background: `rgba(13,148,136,0.18)` }} />
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}>
+          {timeline.map((step, i) => (
+            <motion.div key={step.label} variants={staggerItem} style={{ position: 'relative', paddingLeft: 56, marginBottom: i < timeline.length - 1 ? 36 : 0 }}>
+              <div style={{
+                position: 'absolute', left: 8, top: 4, width: 24, height: 24, borderRadius: '50%',
+                background: i === 0 ? A : i === timeline.length - 1 ? A : SF,
+                border: `2px solid ${A}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 10, fontWeight: 700, color: (i === 0 || i === timeline.length - 1) ? '#fff' : A, zIndex: 1,
+              }}>
+                {i + 1}
+              </div>
+              <p style={{ fontSize: 13.5, fontWeight: 700, color: A, marginBottom: 3, letterSpacing: '0.02em' }}>{step.label}</p>
+              <p style={{ fontSize: 14, color: S, lineHeight: 1.65 }}>{step.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </SectionWrap>
   );
 }
 
-// ── S9: Existing Client Retention ─────────────────────────────────────────────
+// ── S11: Existing Client Retention ────────────────────────────────────────────
 function ClientRetentionSection() {
-  const cards = [
-    { title: 'Remember what worked', body: 'Lane performance, broker behavior, accepted rates, and repeatable patterns become part of the company memory that improves every future decision.' },
-    { title: 'Remember what failed', body: 'Rejected loads, weak lanes, bad timing, poor broker behavior, and wrong-fit choices are not forgotten. Weak decisions become permanent lessons.' },
-    { title: 'Improve client confidence', body: 'Existing clients do not feel handled randomly. They feel the dispatch company is learning their business and improving over time.' },
-    { title: 'Support long-term retention', body: 'Autonomatex helps improve trust, reduce repeated mistakes, make communication smoother, and create a more professional client experience.' },
-  ];
-
   return (
     <section id="client-retention" style={{ background: D }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '96px 24px' }}>
         <div className="atx-g2-wide">
           <FadeUp>
-            <Eyebrow>Existing client retention</Eyebrow>
+            <Eyebrow>Client Retention</Eyebrow>
             <h2 style={{ fontSize: 'clamp(26px,3vw,36px)', fontWeight: 700, color: '#fff', letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 18 }}>
-              Old clients should feel remembered, understood, and professionally managed.
+              Old Trucks Become More Valuable. Every Week. Every Month. Every Year.
             </h2>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', lineHeight: 1.7, marginBottom: 24 }}>
-              Every week your dispatch company works with a truck, valuable knowledge is created. The longer the relationship continues, the stronger the intelligence becomes.
+            <p style={{ fontSize: 15.5, color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: 24 }}>
+              Every week your dispatch company works with a truck, Autonomatex remembers more. The dispatch company becomes stronger. Existing clients feel remembered, understood, and professionally managed — not handled randomly.
             </p>
+            <div style={{ background: 'rgba(13,148,136,0.12)', border: '1px solid rgba(13,148,136,0.3)', borderRadius: 10, padding: '18px 22px', marginBottom: 24 }}>
+              <p style={{ fontSize: 14.5, fontWeight: 600, color: '#fff', lineHeight: 1.55 }}>
+                The longer the relationship continues, the stronger the intelligence becomes — and the harder it is for a competitor to replicate.
+              </p>
+            </div>
             <NavHref href="/#paid-pilot">
               <span style={{ display: 'inline-block', fontSize: 14, fontWeight: 600, color: A, cursor: 'pointer' }}>
                 Start paid pilot access →
               </span>
             </NavHref>
           </FadeUp>
-          <div className="atx-g2" style={{ gap: 16 }}>
-            {cards.map((c, i) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            {[
+              { title: 'Remember what worked', body: 'Lane performance, broker behavior, accepted rates, and repeatable patterns compound into company memory that improves every future decision.' },
+              { title: 'Remember what failed', body: 'Rejected loads, weak lanes, bad timing, and wrong-fit choices are not forgotten. Every weak decision becomes a permanent lesson.' },
+              { title: 'Improve client confidence', body: 'Existing clients feel the dispatch company is learning their operation and improving over time — not handling them randomly.' },
+              { title: 'Build long-term retention', body: 'Autonomatex reduces repeated mistakes, makes communication smoother, and creates a more professional client experience every month.' },
+            ].map((c, i) => (
               <FadeUp key={c.title} delay={i * 0.07}>
                 <DarkCard title={c.title} body={c.body} />
               </FadeUp>
@@ -619,49 +862,84 @@ function ClientLifecycleSection() {
   );
 }
 
-// ── S11: What Happens If Your Best Dispatcher Leaves? (NEW) ──────────────────
+// ── S14: Dispatcher Transition ────────────────────────────────────────────────
 function DispatcherLeavesSection() {
+  const scenarios = [
+    { label: 'A dispatcher leaves', body: 'Broker relationships, lane judgment, truck history, and years of market knowledge stay inside the company — not leave with the person. The next dispatcher starts informed.' },
+    { label: 'A dispatcher joins', body: 'New dispatchers learn from accumulated company intelligence. Ramp-up time shortens. Decision quality stays consistent. The company does not restart its knowledge base.' },
+    { label: 'Shifts change', body: 'The next shift starts informed. Truck context, open decisions, and recent outcomes are organized and accessible — not lost between handoffs.' },
+    { label: 'Departments grow', body: 'As the team expands, every dispatcher works from the same shared intelligence layer. More dispatchers means more capacity — not more fragmentation.' },
+  ];
+
   return (
-    <SectionWrap id="dispatcher-leaves" bg="#F0F4F8" style={{ borderTop: `1px solid ${B}` }}>
+    <SectionWrap id="dispatcher-leaves" bg={BG} style={{ borderTop: `1px solid ${B}` }}>
+      <SectionHead center eyebrow="Dispatcher Transition" title="Operational Intelligence Remains. Every Time." desc="When dispatchers change, shift, or grow — the company keeps its intelligence. Dispatchers come and go. The business gets smarter." />
+      <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, maxWidth: 1000, margin: '0 auto 48px' }}>
+        {scenarios.map(s => (
+          <motion.div key={s.label} variants={staggerItem}>
+            <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 10, padding: '24px 26px', height: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: A, flexShrink: 0 }} />
+                <p style={{ fontSize: 14.5, fontWeight: 700, color: P }}>{s.label}</p>
+              </div>
+              <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{s.body}</p>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
       <FadeUp>
-        <div style={{ maxWidth: 840, margin: '0 auto' }}>
-          <Eyebrow>Operational continuity</Eyebrow>
-          <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 14 }}>
-            What Happens If Your Best Dispatcher Leaves?
-          </h2>
-          <p style={{ fontSize: 16, color: S, lineHeight: 1.7, marginBottom: 40 }}>
-            This is not a fear question. It is a business continuity question. Most dispatch companies have no answer for it. Autonomatex provides one.
+        <div style={{ background: D, borderRadius: 12, padding: '22px 32px', textAlign: 'center', maxWidth: 600, margin: '0 auto' }}>
+          <p style={{ fontSize: 16.5, fontWeight: 700, color: '#fff' }}>
+            The company keeps improving. Always.
           </p>
-          <div className="atx-g2" style={{ gap: 20 }}>
-            <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 12, padding: 28 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: `1px solid ${B}` }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#F04438' }} />
-                <p style={{ fontSize: 13, fontWeight: 700, color: P }}>Without Autonomatex</p>
-              </div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {['Broker relationships reset. New dispatcher starts building from scratch.','Lane judgment disappears. Years of market knowledge are gone.','Truck preferences must be re-learned through costly trial and error.','Client trust weakens during the transition. Some clients leave.','The business loses value with the person, not with the work.'].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 10, fontSize: 13.5, color: S, lineHeight: 1.6 }}>
-                    <span style={{ color: '#F04438', flexShrink: 0 }}>—</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div style={{ background: '#F0F9F8', border: '1px solid rgba(13,148,136,0.2)', borderRadius: 12, padding: 28 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20, paddingBottom: 16, borderBottom: '1px solid rgba(13,148,136,0.15)' }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: A }} />
-                <p style={{ fontSize: 13, fontWeight: 700, color: P }}>With Autonomatex</p>
-              </div>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {['Broker relationships stay in the company. History is organized and accessible.','Lane intelligence stays inside the business — not inside one person.','Truck preferences are documented and ready for the next dispatcher.','Client continuity is supported by organized company knowledge.','The business retains its intelligence. Dispatchers come and go. The company gets smarter.'].map((item, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 10, fontSize: 13.5, color: S, lineHeight: 1.6 }}>
-                    <span style={{ color: A, flexShrink: 0 }}>✓</span>{item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </FadeUp>
+    </SectionWrap>
+  );
+}
+
+// ── S15: Operations Manager Transition ────────────────────────────────────────
+function OperationsManagerSection() {
+  return (
+    <SectionWrap id="ops-manager-transition" bg={SF} style={{ borderTop: `1px solid ${B}` }}>
+      <div style={{ maxWidth: 840, margin: '0 auto' }}>
+        <FadeUp>
+          <Eyebrow>Operations Manager Transition</Eyebrow>
+          <h2 style={{ fontSize: 'clamp(26px,3vw,38px)', fontWeight: 700, color: P, letterSpacing: '-0.025em', lineHeight: 1.22, marginBottom: 14 }}>
+            If an Operations Manager Changes, the Company Does Not Restart.
+          </h2>
+          <p style={{ fontSize: 15.5, color: S, lineHeight: 1.7, marginBottom: 36 }}>
+            This is not a personnel question. It is a business continuity question. When an operations manager transitions, everything they knew should remain inside the company — not leave with them.
+          </p>
+        </FadeUp>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 40 }}>
+          {[
+            { label: 'Procedures', body: 'Operational workflows, decision logic, and team processes stay documented inside the platform.' },
+            { label: 'Truck history', body: 'Every truck\'s profile, preferences, lane history, and operational patterns remain intact and accessible.' },
+            { label: 'Broker relationships', body: 'Communication history, rate patterns, cancellation behavior, and reliability data stay inside the business.' },
+            { label: 'Lane knowledge', body: 'What lanes work. What lanes to avoid. What markets perform. This intelligence does not leave with the manager.' },
+            { label: 'Business rules', body: 'Minimum RPM floors, no-go areas, preferred brokers, and team decision guidelines remain organized and available.' },
+            { label: 'Operational intelligence', body: 'Everything the company has earned — every decision, every outcome, every lesson — remains inside the platform.' },
+          ].map(item => (
+            <motion.div key={item.label} variants={staggerItem}>
+              <div style={{ background: BG, border: `1px solid ${B}`, borderRadius: 10, padding: '20px 22px' }}>
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: A, marginBottom: 10 }} />
+                <p style={{ fontSize: 14, fontWeight: 700, color: P, marginBottom: 6 }}>{item.label}</p>
+                <p style={{ fontSize: 13, color: S, lineHeight: 1.6 }}>{item.body}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+        <FadeUp>
+          <div style={{ background: D, borderRadius: 12, padding: '22px 28px', borderLeft: `3px solid ${A}` }}>
+            <p style={{ fontSize: 15.5, fontWeight: 600, color: '#fff', lineHeight: 1.55 }}>
+              Operational intelligence remains inside the company. The next operations manager inherits a business that is already smarter than the day they arrived.
+            </p>
+          </div>
+        </FadeUp>
+      </div>
     </SectionWrap>
   );
 }
@@ -713,14 +991,15 @@ function FutureOfDispatchSection() {
   );
 }
 
-// ── S13: Technical Foundation ─────────────────────────────────────────────────
+// ── S17: Technical Foundation ─────────────────────────────────────────────────
 function TechnicalFoundationSection() {
   const steps = [
-    { n: 1, title: 'Authorized load data', desc: 'Approved DAT API, approved data partner, or customer-authorized load data. No scraping or unauthorized automation.' },
-    { n: 2, title: 'Truck intelligence profile', desc: 'Stores each truck\'s preferences, no-go areas, minimum RPM, driver notes, broker history, and lane patterns.' },
-    { n: 3, title: 'Rejection intelligence', desc: 'Weak loads are rejected with documented reasons before the dispatcher wastes time calling them.' },
-    { n: 4, title: 'AI load decision layer', desc: 'Ranks the top options and explains why each load is worth calling or avoiding — in plain language, not technical jargon.' },
-    { n: 5, title: 'Human dispatcher control', desc: 'The dispatcher calls, negotiates, books manually, and logs the outcome. Autonomatex updates the truck\'s intelligence with the result.' },
+    { n: 1, title: 'Business Experience', desc: 'Every load, every broker call, every dispatch decision — captured and organized as structured operational data.' },
+    { n: 2, title: 'Operational Memory', desc: 'Each truck\'s preferences, no-go areas, minimum RPM, driver notes, broker history, and lane patterns — stored as durable intelligence.' },
+    { n: 3, title: 'AI Intelligence', desc: 'The platform analyzes patterns across your operational history, surfaces signals, and builds ranked recommendations from your own data.' },
+    { n: 4, title: 'Recommendations', desc: 'A ranked shortlist of loads worth calling — explained in plain language, not technical jargon.' },
+    { n: 5, title: 'Human Dispatcher', desc: 'The dispatcher calls, negotiates, books manually, and logs the outcome. Humans decide. Always. No automatic booking.' },
+    { n: 6, title: 'Continuous Learning', desc: 'Every accepted and declined outcome feeds back into the system. The intelligence improves with every cycle — compounding over time.' },
   ];
   const compliance = [
     { title: 'Authorized data only', desc: 'Built for approved DAT API, approved data partner access, or customer-authorized load data. No scraping.' },
@@ -1031,7 +1310,7 @@ function FAQSection() {
   const faqs = [
     { q: 'Do I need to book a live call?',        a: 'No. The website includes a self-guided workflow preview. Paid users can submit questions by email and form. No live call is required to start.' },
     { q: 'How do I contact Autonomatex?',          a: 'Use the paid pilot form or onboarding form. Autonomatex is designed for email-first support, so serious paid users can get focused answers without long live calls.' },
-    { q: 'What equipment types does Autonomatex support?', a: 'Autonomatex supports Dry Van, Reefer, Flatbed, Hotshot, and Box Truck dispatch operations. During onboarding you select the equipment types your company dispatches and the intelligence layer adapts automatically.' },
+    { q: 'What equipment types does Autonomatex support?', a: 'Autonomatex supports Dry Van, Reefer, Flatbed, Hotshot, Box Truck, and Power Only dispatch operations. During onboarding you select the equipment types your company dispatches and the intelligence layer adapts automatically.' },
     { q: 'When does the paid pilot start?',        a: 'The 7-day paid pilot starts after account activation — not immediately after submitting the form.' },
     { q: 'Does Autonomatex book loads?',           a: 'No. Autonomatex ranks and explains. The dispatcher calls, negotiates, books manually, and logs outcomes. The dispatcher stays in full control.' },
     { q: 'Is DAT connected?',                      a: 'The platform is designed for approved DAT API or customer-authorized data sources. The workflow preview uses sample data until an approved connection is active.' },
@@ -1119,15 +1398,20 @@ export function HomePage() {
     <main>
       <HeroSection />
       <QuickSummarySection />
+      <WhyExistsSection />
       <WhyStopGrowingSection />
+      <ComparisonSection />
       <CostOfNothingSection />
-      <DispatcherSideSection />
-      <OwnerSideSection />
+      <OperationsSideSection />
+      <BusinessSideSection />
+      <BusinessContinuitySection />
+      <CompoundingTimelineSection />
       <SmarterEveryDaySection />
       <NewTruckOnboardingSection />
       <ClientRetentionSection />
       <ClientLifecycleSection />
       <DispatcherLeavesSection />
+      <OperationsManagerSection />
       <FutureOfDispatchSection />
       <TechnicalFoundationSection />
       <WorkflowSection />

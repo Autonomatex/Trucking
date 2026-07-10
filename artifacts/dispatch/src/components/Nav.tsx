@@ -26,25 +26,25 @@ function AtxMark({ size = 20 }: { size?: number }) {
 }
 
 const NAV_LINKS = [
-  { label: 'Quick Summary',  href: '/#quick-summary'   },
-  { label: 'Workflow',       href: '/workflow'          },
-  { label: 'Dispatch Side',  href: '/#dispatcher-side'  },
-  { label: 'Pricing',        href: '/#pricing'          },
-  { label: 'Paid Pilot',     href: '/#paid-pilot'       },
-  { label: 'Contact',        href: '/#contact'          },
+  { label: 'Quick Summary',   href: '/#quick-summary'    },
+  { label: 'Workflow',        href: '/workflow'           },
+  { label: 'Operations Side', href: '/#operations-side'  },
+  { label: 'Business Side',   href: '/#business-side'    },
+  { label: 'Technical Side',  href: '/#technical-side'   },
+  { label: 'Pricing',         href: '/#pricing'          },
+  { label: 'FAQ',             href: '/#faq'              },
+  { label: 'Contact',         href: '/#contact'          },
 ];
 
 const MOBILE_LINKS = [
-  { label: 'Quick Summary',      href: '/#quick-summary',      sub: 'Start here for the short version' },
-  { label: 'Self-Guided Workflow', href: '/workflow',           sub: 'See the workflow without a live call' },
-  { label: 'Dispatch Side',      href: '/#dispatcher-side',    sub: 'Less pressure, better decisions' },
-  { label: 'Owner Side',         href: '/#owner-side',         sub: 'Company-owned dispatch intelligence' },
-  { label: 'New Truck Onboarding', href: '/#new-truck-onboarding', sub: 'Start new trucks professionally' },
-  { label: 'Client Lifecycle',   href: '/#client-lifecycle',   sub: 'From first call to long-term retention' },
-  { label: 'Technical Side',     href: '/#technical-side',     sub: 'How it works behind the scenes' },
-  { label: 'Pricing',            href: '/#pricing',            sub: 'Start small, scale the dispatch brain' },
-  { label: 'Paid Pilot',         href: '/#paid-pilot',         sub: 'Start testing without a sales call' },
-  { label: 'Contact',            href: '/#contact',            sub: 'Email-first, no calls required' },
+  { label: 'Quick Summary',    href: '/#quick-summary',    sub: 'What Autonomatex does and why'          },
+  { label: 'Workflow',         href: '/workflow',          sub: 'See the workflow without a live call'    },
+  { label: 'Operations Side',  href: '/#operations-side',  sub: 'Less pressure, better decisions'        },
+  { label: 'Business Side',    href: '/#business-side',    sub: 'Company-owned dispatch intelligence'    },
+  { label: 'Technical Side',   href: '/#technical-side',   sub: 'How the intelligence works'             },
+  { label: 'Pricing',          href: '/#pricing',          sub: 'Start small, scale the dispatch brain'  },
+  { label: 'FAQ',              href: '/#faq',              sub: 'Common questions answered'              },
+  { label: 'Contact',          href: '/#contact',          sub: 'Email-first, no calls required'         },
 ];
 
 function scrollTo(hash: string) {
@@ -122,12 +122,12 @@ export function Nav() {
           </NavHref>
 
           {/* Desktop nav — display controlled by Tailwind class only */}
-          <nav style={{ alignItems: 'center', gap: 4, marginLeft: 'auto' }}
-               className="hidden md:flex" aria-label="Primary navigation">
+          <nav style={{ alignItems: 'center', gap: 0, marginLeft: 'auto', marginRight: 12 }}
+               className="hidden lg:flex" aria-label="Primary navigation">
             {NAV_LINKS.map(link => (
               <NavHref key={link.label} href={link.href}>
                 <span style={{
-                  fontSize: 13.5, fontWeight: 500, color: '#667085', padding: '6px 12px',
+                  fontSize: 13, fontWeight: 500, color: '#667085', padding: '6px 10px',
                   borderRadius: 6, cursor: 'pointer', transition: 'color 0.15s, background 0.15s',
                   display: 'block',
                 }}
@@ -148,7 +148,7 @@ export function Nav() {
               cursor: 'pointer', whiteSpace: 'nowrap',
               transition: 'background 0.15s',
             }}
-              className="hidden md:inline-block"
+              className="hidden lg:inline-block"
               onMouseEnter={e => { (e.target as HTMLElement).style.background = '#0f766e'; }}
               onMouseLeave={e => { (e.target as HTMLElement).style.background = ACCENT; }}
             >
@@ -158,7 +158,7 @@ export function Nav() {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden"
+            className="lg:hidden"
             onClick={() => setOpen(v => !v)}
             aria-label={open ? 'Close navigation' : 'Open navigation'}
             aria-expanded={open}
