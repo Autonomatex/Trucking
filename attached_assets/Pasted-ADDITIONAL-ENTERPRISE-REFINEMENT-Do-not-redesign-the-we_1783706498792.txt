@@ -1,0 +1,201 @@
+ADDITIONAL ENTERPRISE REFINEMENT
+
+Do not redesign the website.
+
+Only strengthen the enterprise messaging.
+
+====================================================
+
+1.
+
+Replace every reference to:
+
+Driver Side
+
+with
+
+Carrier Side
+
+Replace every reference to:
+
+Owner Side
+
+with
+
+Business Side
+
+The website should feel enterprise-first.
+
+====================================================
+
+2.
+
+Supported equipment should include:
+
+Dry Van
+
+Reefer
+
+Flatbed
+
+Hotshot
+
+Box Truck
+
+Power Only
+
+Mention this only in onboarding and hero support text.
+
+Do not create separate pages.
+
+====================================================
+
+3.
+
+Strengthen operational continuity.
+
+Instead of only discussing dispatcher changes, explain that operational intelligence remains with the carrier business when:
+
+• Dispatcher changes
+
+• Dispatch company changes
+
+• Driver changes
+
+• Fleet manager changes
+
+• Operations manager changes
+
+• Internal team restructuring
+
+Business continuity should become one of the strongest selling points.
+
+====================================================
+
+4.
+
+Add a premium comparison section.
+
+Traditional Operations
+
+Knowledge lives inside people.
+
+Starts over after personnel changes.
+
+Repeated mistakes.
+
+Manual remembering.
+
+Slow onboarding.
+
+Autonomatex
+
+Knowledge belongs to the business.
+
+Operational intelligence compounds.
+
+Faster transitions.
+
+Calmer operations.
+
+Better decisions.
+
+====================================================
+
+5.
+
+Add a premium timeline.
+
+Operational Intelligence Compounds
+
+Year 1
+
+↓
+
+Year 2
+
+↓
+
+Year 3
+
+↓
+
+Year 5
+
+↓
+
+Smarter Carrier Business
+
+Explain that every decision increases long-term business intelligence.
+
+====================================================
+
+6.
+
+Improve the Technical Side.
+
+Keep the business architecture.
+
+Business Experience
+
+↓
+
+Operational Memory
+
+↓
+
+AI Intelligence
+
+↓
+
+Recommendations
+
+↓
+
+Human Decision
+
+↓
+
+Continuous Learning
+
+Use premium enterprise graphics.
+
+====================================================
+
+7.
+
+Create visual consistency.
+
+The following sections should share a common visual style:
+
+Quick Summary
+
+Workflow
+
+Carrier Side
+
+Business Side
+
+Technical Side
+
+Pricing
+
+FAQ
+
+Contact
+
+Use the same card system, spacing, iconography and section headers so visitors immediately recognize the Autonomatex design language.
+
+====================================================
+
+FINAL DESIGN RULE
+
+Every page should feel like part of one enterprise ecosystem.
+
+autonomatex.com
+
+dispatch.autonomatex.com
+
+carrier.autonomatex.com
+
+The visitor should immediately recognize that all three belong to the same company while clearly addressing different audiences.

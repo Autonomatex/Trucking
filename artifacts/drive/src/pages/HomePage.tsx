@@ -188,7 +188,7 @@ function HeroSection() {
             transition={{ delay: 0.18, duration: 0.6, ease: EASE }}
             style={{ fontSize: 13, color: A, fontWeight: 600, letterSpacing: '0.04em', marginBottom: 22 }}
           >
-            Dry Van · Reefer · Flatbed · Hotshot · Box Truck
+            Dry Van · Reefer · Flatbed · Hotshot · Box Truck · Power Only
           </motion.p>
 
           <motion.div
@@ -461,59 +461,135 @@ function CostOfStartingOverSection() {
   );
 }
 
-// ── S6: Dispatcher + Driver Transitions ───────────────────────────────────────
+// ── S6: Comparison ────────────────────────────────────────────────────────────
 
-function TransitionsSection() {
+function ComparisonSection() {
+  const traditional = [
+    'Knowledge lives inside people.',
+    'Starts over after personnel changes.',
+    'Repeated mistakes.',
+    'Manual remembering.',
+    'Slow onboarding.',
+  ];
+  const autonomatex = [
+    'Knowledge belongs to the business.',
+    'Operational intelligence compounds.',
+    'Faster transitions.',
+    'Calmer operations.',
+    'Better decisions.',
+  ];
+
   return (
-    <SectionWrap id="big-differentiator" bg={BG}>
-      <SectionHead center eyebrow="Intelligence That Stays With Your Business" title="Transitions Become Smooth. Knowledge Never Leaves." />
+    <SectionWrap id="comparison" bg={BG}>
+      <SectionHead center eyebrow="Why It Matters" title="Traditional Operations vs. Autonomatex." />
       <FadeUp delay={0.05}>
-        <div className="atx-g2" style={{ gap: 24, maxWidth: 1000, margin: '0 auto 48px' }}>
-
-          {/* Dispatcher card */}
+        <div className="atx-g2" style={{ gap: 20, maxWidth: 920, margin: '0 auto 48px' }}>
+          {/* Traditional */}
           <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 12, padding: 36 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(13,148,136,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={A} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-              </svg>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: '#FEF3F2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F04438" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: P }}>Traditional Operations</p>
             </div>
-            <p style={{ fontSize: 16, fontWeight: 700, color: P, marginBottom: 12 }}>When Dispatchers Change</p>
-            <p style={{ fontSize: 14, color: S, lineHeight: 1.7, marginBottom: 20 }}>
-              Operational intelligence belongs to your truck and your business — not to any individual dispatcher. When dispatchers change, accumulated knowledge stays with your operation.
-            </p>
-            <div style={{ background: BG, borderRadius: 8, padding: '14px 18px' }}>
-              <p style={{ fontSize: 13.5, color: P, lineHeight: 1.6 }}>
-                Your next dispatcher starts with your truck's accumulated business knowledge instead of starting from zero — becoming productive faster while your business keeps compounding.
-              </p>
-            </div>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
+              {traditional.map(item => (
+                <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: '#FEF3F2', border: '1.5px solid #FECDCA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke="#F04438" strokeWidth="2.2" strokeLinecap="round">
+                      <line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 14.5, color: S, lineHeight: 1.6 }}>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* Driver card */}
-          <div style={{ background: SF, border: `1px solid ${B}`, borderRadius: 12, padding: 36 }}>
-            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(13,148,136,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={A} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="1" y="3" width="15" height="13" rx="1"/>
-                <path d="M16 8h4l3 4v4h-7V8z"/>
-                <circle cx="5.5" cy="18.5" r="2.5"/>
-                <circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
+          {/* Autonomatex */}
+          <div style={{ background: D, borderRadius: 12, padding: 36, border: `1px solid rgba(13,148,136,0.3)` }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(13,148,136,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={A} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              </div>
+              <p style={{ fontSize: 15, fontWeight: 700, color: '#fff' }}>Autonomatex</p>
             </div>
-            <p style={{ fontSize: 16, fontWeight: 700, color: P, marginBottom: 12 }}>When Drivers Change</p>
-            <p style={{ fontSize: 14, color: S, lineHeight: 1.7, marginBottom: 20 }}>
-              If a driver changes, the truck does not lose its operational history. Business knowledge, equipment preferences, operational patterns and customer communication history remain with the business.
-            </p>
-            <div style={{ background: BG, borderRadius: 8, padding: '14px 18px' }}>
-              <p style={{ fontSize: 13.5, color: P, lineHeight: 1.6 }}>
-                This helps new drivers understand the operation faster — under full human management, not automated systems.
-              </p>
-            </div>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
+              {autonomatex.map(item => (
+                <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                  <div style={{ width: 18, height: 18, borderRadius: '50%', background: 'rgba(13,148,136,0.2)', border: `1.5px solid ${A}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                    <svg width="8" height="8" viewBox="0 0 12 12" fill="none" stroke={A} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="1.5 6 4.5 9 10.5 3"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6 }}>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+      </FadeUp>
+    </SectionWrap>
+  );
+}
 
+// ── S7: Transitions ───────────────────────────────────────────────────────────
+
+function TransitionsSection() {
+  const transitions = [
+    {
+      label: 'Dispatcher changes',
+      body: 'Accumulated load history, broker relationships and operational patterns stay with your business — not with any individual dispatcher. Your next dispatcher starts informed.',
+    },
+    {
+      label: 'Dispatch company changes',
+      body: 'Moving to a new dispatch arrangement does not mean starting over. Your operational intelligence moves with you, not with the company you leave behind.',
+    },
+    {
+      label: 'Driver changes',
+      body: 'Truck knowledge, equipment preferences, customer communication history and operational patterns remain with the business. The next driver inherits the foundation — under full human management.',
+    },
+    {
+      label: 'Fleet manager changes',
+      body: 'Fleet-wide operational context, performance history and decision patterns belong to your business — not to the individual managing it at any given time.',
+    },
+    {
+      label: 'Operations manager changes',
+      body: 'Strategic operational knowledge — lane decisions, broker strategies, rate floors — stays inside the platform and transfers cleanly to whoever steps into the role.',
+    },
+    {
+      label: 'Internal team restructuring',
+      body: 'When your team changes shape, your operational intelligence does not scatter. The platform holds the institutional knowledge your business has earned.',
+    },
+  ];
+
+  return (
+    <SectionWrap id="big-differentiator" bg={SF}>
+      <SectionHead center eyebrow="Operational Continuity" title="Intelligence That Stays With Your Business — Through Every Change." desc="Operational intelligence remains with the carrier business when any person, role or arrangement changes." />
+      <FadeUp delay={0.05}>
+        <motion.div
+          variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20, maxWidth: 1000, margin: '0 auto 48px' }}
+        >
+          {transitions.map(t => (
+            <motion.div key={t.label} variants={staggerItem}>
+              <div style={{ background: BG, border: `1px solid ${B}`, borderRadius: 10, padding: '24px 28px', height: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+                  <div style={{ width: 8, height: 8, borderRadius: '50%', background: A, flexShrink: 0 }} />
+                  <p style={{ fontSize: 14.5, fontWeight: 700, color: P }}>{t.label}</p>
+                </div>
+                <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{t.body}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
         <div style={{
           background: D, borderRadius: 12, padding: '24px 36px', textAlign: 'center',
-          border: `1px solid ${A}`, maxWidth: 640, margin: '0 auto',
+          border: `1px solid rgba(13,148,136,0.35)`, maxWidth: 640, margin: '0 auto',
         }}>
           <p style={{ fontSize: 19, fontWeight: 700, color: '#fff', letterSpacing: '-0.01em' }}>
             Knowledge compounds. The business never starts over.
@@ -541,7 +617,7 @@ function TruckMemorySection() {
       <div className="atx-g2" style={{ gap: 32, maxWidth: 960, margin: '0 auto 48px' }}>
         <FadeUp>
           <div style={{ background: BG, border: `1px solid ${B}`, borderRadius: 12, padding: 36, height: '100%' }}>
-            <p style={{ fontSize: 13, fontWeight: 700, color: S, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 20 }}>The Truck Remembers</p>
+            <p style={{ fontSize: 13, fontWeight: 700, color: S, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 20 }}>Carrier Side</p>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
               {['Lane history', 'Load history', 'Equipment preferences', 'Operating patterns'].map(item => (
                 <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
@@ -555,7 +631,7 @@ function TruckMemorySection() {
 
         <FadeUp delay={0.1}>
           <div style={{ background: D, borderRadius: 12, padding: 36, height: '100%' }}>
-            <p style={{ fontSize: 13, fontWeight: 700, color: A, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 20 }}>The Business Remembers</p>
+            <p style={{ fontSize: 13, fontWeight: 700, color: A, textTransform: 'uppercase', letterSpacing: '0.07em', marginBottom: 20 }}>Business Side</p>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: 14, listStyle: 'none' }}>
               {['Broker relationships', 'Dispatcher experience', 'Customer preferences', 'Operational knowledge'].map(item => (
                 <li key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
@@ -617,7 +693,67 @@ function CarrierTimelineSection() {
   );
 }
 
-// ── S9: Customer Lifecycle ────────────────────────────────────────────────────
+// ── S9: Compounding Timeline ──────────────────────────────────────────────────
+
+function CompoundingTimelineSection() {
+  const years = [
+    { label: 'Year 1', desc: 'Foundation built. Lane patterns emerge. Broker relationships take shape. Every load decision adds to the intelligence layer.' },
+    { label: 'Year 2', desc: 'Recommendations sharpen. Rate floors clarify. Transitions become smooth. The operation stops repeating early mistakes.' },
+    { label: 'Year 3', desc: 'Operational consistency compounds. New dispatchers onboard faster. Fleet decisions become more informed. Business value grows.' },
+    { label: 'Year 5', desc: 'Institutional knowledge is deep. The business is more resilient, more efficient, and more valuable than any single-person operation could achieve.' },
+    { label: 'Smarter Carrier Business', desc: 'Every decision — every load, every broker call, every outcome — has contributed to a business that is more intelligent than when it started.', accent: true },
+  ];
+
+  return (
+    <SectionWrap id="compounding-timeline" bg={D}>
+      <SectionHead center light eyebrow="Operational Intelligence Compounds"
+        title={<span style={{ color: '#fff' }}>Every Decision Increases Long-Term Business Intelligence.</span>}
+        desc="The longer you operate with Autonomatex, the more intelligent your business becomes. Intelligence is not reset — it compounds."
+        descColor="rgba(255,255,255,0.55)"
+      />
+      <div style={{ maxWidth: 540, margin: '0 auto', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: 28, bottom: 28, left: 19, width: 2, background: 'rgba(13,148,136,0.3)' }} />
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}>
+          {years.map((y, i) => (
+            <motion.div key={y.label} variants={staggerItem} style={{ position: 'relative', paddingLeft: 58, marginBottom: i < years.length - 1 ? 48 : 0 }}>
+              {/* Connector arrow between items */}
+              {i < years.length - 1 && (
+                <div style={{ position: 'absolute', left: 16, top: 44, zIndex: 1 }}>
+                  <svg width="8" height="16" viewBox="0 0 8 16" fill="none">
+                    <path d="M4 0 L4 10 M1 7 L4 11 L7 7" stroke={A} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6"/>
+                  </svg>
+                </div>
+              )}
+              <div style={{
+                position: 'absolute', left: 8, top: 4, width: 24, height: 24, borderRadius: '50%',
+                background: y.accent ? A : 'rgba(13,148,136,0.15)',
+                border: `2px solid ${A}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2,
+              }}>
+                {y.accent
+                  ? <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#fff' }} />
+                  : <div style={{ width: 6, height: 6, borderRadius: '50%', background: A, opacity: 0.8 }} />
+                }
+              </div>
+              <div style={{
+                background: y.accent ? 'rgba(13,148,136,0.12)' : 'rgba(255,255,255,0.04)',
+                border: `1px solid ${y.accent ? 'rgba(13,148,136,0.4)' : 'rgba(255,255,255,0.07)'}`,
+                borderRadius: 10, padding: '18px 22px',
+              }}>
+                <p style={{ fontSize: 14, fontWeight: 700, color: y.accent ? A : 'rgba(255,255,255,0.9)', marginBottom: 6, letterSpacing: y.accent ? '-0.01em' : 0 }}>
+                  {y.label}
+                </p>
+                <p style={{ fontSize: 13.5, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65 }}>{y.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </SectionWrap>
+  );
+}
+
+// ── S10: Customer Lifecycle ───────────────────────────────────────────────────
 
 function CustomerLifecycleSection() {
   const stages = [
@@ -816,42 +952,113 @@ function IntelligenceSection() {
 
 // ── S14: Technical Side ───────────────────────────────────────────────────────
 
+const TECH_ICONS: Record<string, React.ReactElement> = {
+  'Business Experience': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+    </svg>
+  ),
+  'Operational Memory': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/>
+    </svg>
+  ),
+  'AI Intelligence': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+    </svg>
+  ),
+  'Recommendations': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+    </svg>
+  ),
+  'Human Decision': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    </svg>
+  ),
+  'Continuous Learning': (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+    </svg>
+  ),
+};
+
 function TechnicalSideSection() {
   const flow = [
-    { label: 'Business Experience', desc: 'Every load, every broker call, every decision — captured and organized.' },
-    { label: 'Operational Memory', desc: 'Your truck\'s history, preferences, patterns and outcomes — stored as intelligence.' },
-    { label: 'AI Intelligence', desc: 'The platform analyzes patterns, surfaces signals and builds recommendations from your own history.' },
-    { label: 'Recommendations', desc: '3 loads worth calling, ranked specifically for your truck and your operation.' },
-    { label: 'Human Decision', desc: 'Your dispatcher or you make every call. The platform informs. Humans decide.' },
-    { label: 'Continuous Learning', desc: 'Every outcome feeds back into the system. The intelligence improves with every cycle.' },
+    { label: 'Business Experience', desc: 'Every load, every broker call, every decision — captured and organized as structured operational data.' },
+    { label: 'Operational Memory', desc: 'Your truck\'s history, preferences, patterns and outcomes — stored as a durable intelligence layer that belongs to your business.' },
+    { label: 'AI Intelligence', desc: 'The platform analyzes patterns across your operational history, surfaces signals and builds ranked recommendations from your own data.' },
+    { label: 'Recommendations', desc: 'A ranked shortlist of loads worth calling — specific to your truck, your lanes and your operational preferences.' },
+    { label: 'Human Decision', desc: 'Your dispatcher or you make every call. The platform informs. Humans decide. Always.' },
+    { label: 'Continuous Learning', desc: 'Every accepted and declined outcome feeds back into the system. The intelligence improves with every cycle — compounding over time.' },
   ];
 
   return (
-    <SectionWrap id="technical-side" bg={SF}>
-      <SectionHead center eyebrow="Technical Side" title="How the Intelligence Works." desc="Business-focused. No technical jargon. The platform stays invisible." />
-      <div style={{ maxWidth: 680, margin: '0 auto', position: 'relative' }}>
-        {/* Vertical line */}
-        <div style={{ position: 'absolute', top: 24, bottom: 24, left: 19, width: 2, background: `rgba(13,148,136,0.18)` }} />
-        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}>
+    <SectionWrap id="technical-side" bg={BG}>
+      <SectionHead center eyebrow="Technical Side" title="How the Intelligence Works." desc="Business-focused architecture. No technical jargon. The platform stays invisible." />
+      <div style={{ maxWidth: 760, margin: '0 auto' }}>
+        <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-60px' }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 0 }}
+        >
           {flow.map((step, i) => (
-            <motion.div key={step.label} variants={staggerItem} style={{ position: 'relative', paddingLeft: 56, marginBottom: i < flow.length - 1 ? 40 : 0, display: 'flex', gap: 0 }}>
-              {/* Step number circle */}
+            <motion.div key={step.label} variants={staggerItem}>
+              {/* Step card */}
               <div style={{
-                position: 'absolute', left: 8, top: 6, width: 24, height: 24, borderRadius: '50%',
-                background: i === flow.length - 1 ? A : BG,
-                border: `2px solid ${A}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 10, fontWeight: 700, color: i === flow.length - 1 ? '#fff' : A,
+                display: 'flex', gap: 20, alignItems: 'flex-start',
+                background: SF, border: `1px solid ${B}`, borderRadius: 10,
+                padding: '20px 24px', boxShadow: '0 1px 3px rgba(16,24,40,0.04)',
               }}>
-                {i + 1}
+                {/* Icon badge */}
+                <div style={{
+                  width: 38, height: 38, borderRadius: 9, flexShrink: 0,
+                  background: i === flow.length - 1 ? A : 'rgba(13,148,136,0.1)',
+                  color: i === flow.length - 1 ? '#fff' : A,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  {TECH_ICONS[step.label]}
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 5 }}>
+                    <span style={{
+                      fontSize: 10, fontWeight: 700, color: i === flow.length - 1 ? A : S,
+                      letterSpacing: '0.07em', textTransform: 'uppercase',
+                    }}>Step {i + 1}</span>
+                  </div>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: P, marginBottom: 5 }}>{step.label}</p>
+                  <p style={{ fontSize: 13.5, color: S, lineHeight: 1.65 }}>{step.desc}</p>
+                </div>
               </div>
-              <div>
-                <p style={{ fontSize: 15.5, fontWeight: 700, color: P, marginBottom: 6 }}>{step.label}</p>
-                <p style={{ fontSize: 14, color: S, lineHeight: 1.65 }}>{step.desc}</p>
-              </div>
+              {/* Connector arrow */}
+              {i < flow.length - 1 && (
+                <div style={{ display: 'flex', justifyContent: 'center', padding: '6px 0' }}>
+                  <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
+                    <line x1="7" y1="0" x2="7" y2="14" stroke={A} strokeWidth="1.5" strokeDasharray="3 2" opacity="0.5"/>
+                    <path d="M3 11 L7 16 L11 11" stroke={A} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.7"/>
+                  </svg>
+                </div>
+              )}
             </motion.div>
           ))}
         </motion.div>
+
+        <FadeUp delay={0.15}>
+          <div style={{
+            background: D, borderRadius: 10, padding: '20px 28px', marginTop: 32,
+            display: 'flex', alignItems: 'center', gap: 16,
+            border: '1px solid rgba(13,148,136,0.25)',
+          }}>
+            <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(13,148,136,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={A} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <p style={{ fontSize: 14.5, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
+              This cycle repeats with every load, every day — building a compounding intelligence layer that makes your operation more valuable over time.
+            </p>
+          </div>
+        </FadeUp>
       </div>
     </SectionWrap>
   );
@@ -957,7 +1164,7 @@ function FAQSection() {
     { q: 'What happens when a driver changes?', a: 'The truck does not lose its operational history. Business knowledge, equipment preferences, operational patterns and communication history remain available to help the next driver understand the operation faster — under full human management.' },
     { q: 'What if I\'m a brand-new MC with no history?', a: 'Autonomatex begins building your operational intelligence from your very first load. Recommendations improve continuously as your own history grows.' },
     { q: 'Does my truck continue learning after any change?', a: 'Yes. Every new decision, load outcome, and broker interaction continues building on existing intelligence. The learning never resets.' },
-    { q: 'What equipment types are supported?', a: 'Dry Van, Reefer, Flatbed, Hotshot, and Box Truck. You select your equipment type during onboarding.' },
+    { q: 'What equipment types are supported?', a: 'Dry Van, Reefer, Flatbed, Hotshot, Box Truck, and Power Only. You select your equipment type during onboarding.' },
     { q: 'Is this another TMS or dispatch software?', a: 'No. Autonomatex Carrier is an operational intelligence layer. It works alongside your dispatch arrangement — not instead of it. Your dispatcher stays in control of every decision.' },
   ];
 
@@ -1031,7 +1238,7 @@ function PilotFormSection() {
               <div>
                 <label style={{ display: 'block', fontSize: 13, fontWeight: 500, color: P, marginBottom: 10 }}>Equipment Types</label>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-                  {['Dry Van', 'Reefer', 'Flatbed', 'Hotshot', 'Box Truck'].map(t => (
+                  {['Dry Van', 'Reefer', 'Flatbed', 'Hotshot', 'Box Truck', 'Power Only'].map(t => (
                     <label key={t} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 14, color: S, cursor: 'pointer' }}>
                       <input type="checkbox" name="equipment_types" value={t.toLowerCase().replace(' ', '_')} style={{ accentColor: A }} />
                       {t}
@@ -1152,9 +1359,11 @@ export function HomePage() {
       <WhyExistsSection />
       <WhyCarriersChooseSection />
       <CostOfStartingOverSection />
+      <ComparisonSection />
       <TransitionsSection />
       <TruckMemorySection />
       <CarrierTimelineSection />
+      <CompoundingTimelineSection />
       <CustomerLifecycleSection />
       <SegmentsSection />
       <HowItWorksSection />
