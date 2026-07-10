@@ -23,7 +23,7 @@ title = "autonomatex-dispatch-v2.zip"
 id = "hBXy4fHPY1K1p7GKvqb4O"
 uri = "file://autonomatex-dispatch-dist.zip"
 type = "unspecified"
-title = "autonomatex-dispatch-dist.zip (drag-and-drop ready)"
+title = "Dispatch Site — Pre-built dist (drag & drop)"
 
 [[outputs]]
 id = "Eam_LVl51E9hlHSgBq-md"
@@ -48,3 +48,9 @@ id = "HjTVVEnsglzRaJrAwJb7r"
 uri = "file://autonomatex-carrier-dist.zip"
 type = "unspecified"
 title = "Autonomatex Carrier — Pre-built Dist (drag-and-drop)"
+
+[[outputs]]
+id = "k7Ye2ayFOf0KV5PUu0zG1"
+uri = "file://autonomatex-dispatch-v1.zip"
+type = "unspecified"
+title = "Dispatch Site — Source + netlify.toml"
