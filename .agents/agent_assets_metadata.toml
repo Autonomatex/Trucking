@@ -36,3 +36,15 @@ id = "03OHpVlr0p2Cu8Jvga5ht"
 uri = "file://autonomatex-drive-dist.zip"
 type = "unspecified"
 title = "Autonomatex Drive — Pre-built dist ZIP (drag-and-drop)"
+
+[[outputs]]
+id = "argJ8pob0VjRnTUbQy8op"
+uri = "file://autonomatex-carrier-v2.zip"
+type = "unspecified"
+title = "Autonomatex Carrier — Source (Netlify CI)"
+
+[[outputs]]
+id = "HjTVVEnsglzRaJrAwJb7r"
+uri = "file://autonomatex-carrier-dist.zip"
+type = "unspecified"
+title = "Autonomatex Carrier — Pre-built Dist (drag-and-drop)"
