@@ -137,13 +137,13 @@ function Navbar() {
   const didOpenRef    = useRef(false); // tracks whether menu was ever opened
 
   const navLinks = [
-    { id: 'why',          label: 'Why' },
-    { id: 'intelligence', label: 'Intelligence' },
-    { id: 'thinking',     label: 'Thinking' },
-    { id: 'architecture', label: 'Architecture' },
-    { id: 'principles',   label: 'Principles' },
-    { id: 'security',     label: 'Security' },
-    { id: 'vision',       label: 'Vision' },
+    { id: 'why',           label: 'Why' },
+    { id: 'quick-summary', label: 'Quick Summary' },
+    { id: 'intelligence',  label: 'Intelligence' },
+    { id: 'architecture',  label: 'Architecture' },
+    { id: 'principles',    label: 'Principles' },
+    { id: 'security',      label: 'Security' },
+    { id: 'vision',        label: 'Vision' },
   ];
 
   // Active section via IntersectionObserver — no scroll-time layout reads
@@ -538,6 +538,71 @@ function HeroSection() {
 }
 
 // ==========================================
+// QUICK SUMMARY — exact brief text
+// ==========================================
+
+function QuickSummarySection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-10%' });
+
+  const lines = [
+    'Every operation creates knowledge.',
+    'Every decision teaches something.',
+    'Every success and every mistake becomes part of the organization\'s growing operational intelligence.',
+    'Autonomatex quietly captures, structures and strengthens that intelligence while keeping humans completely in control.',
+    'The result is a business that becomes smarter, more consistent and more valuable over time.',
+  ];
+
+  return (
+    <section id="quick-summary" className="py-28 md:py-40" style={{ background: SURFACE }}>
+      <div className="mx-auto px-6 md:px-8 max-w-3xl" ref={ref}>
+        <Eyebrow>Quick Summary</Eyebrow>
+        <motion.p
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          className="text-xl md:text-2xl font-medium leading-[1.5] mb-16 tracking-tight"
+          style={{ color: PRIMARY }}
+        >
+          Autonomatex helps organizations preserve operational intelligence so experience continues
+          creating value long after individual people, processes or teams change.
+        </motion.p>
+
+        <motion.div
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="space-y-7 mb-16"
+        >
+          {lines.map((line, i) => (
+            <motion.p key={i} variants={staggerItem}
+              className="text-[17px] leading-[1.85]" style={{ color: SECONDARY }}>
+              {line}
+            </motion.p>
+          ))}
+        </motion.div>
+
+        <motion.div
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant} custom={lines.length + 2}
+          className="border-l-[3px] pl-8 py-2 space-y-3"
+          style={{ borderColor: ACCENT }}
+        >
+          {['Technology changes.', 'People change.', 'Operational Intelligence should remain.'].map((s, i) => (
+            <p key={i}
+              className="font-semibold tracking-tight leading-[1.2]"
+              style={{ fontSize: 'clamp(1.1rem, 2vw, 1.35rem)', color: i < 2 ? SECONDARY : PRIMARY }}>
+              {s}
+            </p>
+          ))}
+        </motion.div>
+      </div>
+      <div className="mx-auto px-6 md:px-8 max-w-3xl mt-16">
+        <NodeDivider />
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
 // MANIFESTO — emotional heart, almost empty
 // ==========================================
 
@@ -592,13 +657,14 @@ function WhySection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-15%' });
 
-  // Solid accessible colors — cascading build-up effect without opacity hack
-  // All pass WCAG AA large text (3:1) on BG (#FAFBFC)
-  const statements = [
-    { text: 'Knowledge disappears.', color: '#808892' },  // 3.4:1 ✓
-    { text: 'Experience leaves.',    color: '#667085' },  // 4.7:1 ✓
-    { text: 'Operations restart.',   color: '#4A5568' },  // 7.2:1 ✓
-    { text: 'Teams begin again.',    color: PRIMARY   },  // 17:1  ✓
+  const disappear = [
+    { text: 'Employees leave.',      color: '#808892' },
+    { text: 'Teams change.',         color: '#727985' },
+    { text: 'Managers change.',      color: '#667085' },
+    { text: 'Processes evolve.',     color: '#5A6478' },
+    { text: 'Departments expand.',   color: '#4E586B' },
+    { text: 'Leadership changes.',   color: '#424C5E' },
+    { text: 'Technology changes.',   color: PRIMARY   },
   ];
 
   return (
@@ -606,16 +672,24 @@ function WhySection() {
       <div className="mx-auto px-6 md:px-8 max-w-5xl" ref={ref}>
         <Eyebrow>Why We Exist</Eyebrow>
 
-        <div className="space-y-7 mb-20">
-          {statements.map((s, i) => (
+        <motion.p
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant}
+          className="text-[17px] leading-[1.85] mb-14 max-w-xl"
+          style={{ color: SECONDARY }}
+        >
+          Organizations constantly create valuable operational knowledge.
+          Unfortunately, much of it disappears when:
+        </motion.p>
+
+        <div className="space-y-5 mb-16">
+          {disappear.map((s, i) => (
             <motion.p
-              key={i}
-              custom={i}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
+              key={i} custom={i + 1}
+              initial="hidden" animate={isInView ? 'visible' : 'hidden'}
               variants={fadeUpVariant}
               className="font-medium tracking-tight leading-[1.1]"
-              style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)', color: s.color }}
+              style={{ fontSize: 'clamp(1.5rem, 2.8vw, 2.6rem)', color: s.color }}
             >
               {s.text}
             </motion.p>
@@ -623,25 +697,236 @@ function WhySection() {
         </div>
 
         <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUpVariant}
-          custom={statements.length + 1}
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant} custom={disappear.length + 2}
           className="border-l-[3px] pl-8 py-2"
           style={{ borderColor: ACCENT }}
         >
           <p className="text-2xl md:text-[1.7rem] font-semibold leading-[1.3] mb-4"
             style={{ color: PRIMARY }}>
-            Autonomatex exists so that operational intelligence compounds instead of disappearing.
+            Knowledge should not disappear.
           </p>
           <p className="text-base leading-[1.8] max-w-lg" style={{ color: SECONDARY }}>
-            Every organization carries knowledge in its people — patterns recognized,
-            decisions made, lessons earned over years. When those people move on, that
-            intelligence must not go with them.
+            Autonomatex exists so that operational intelligence compounds instead of disappearing.
+            Every organization carries knowledge in its people — patterns recognized, decisions made,
+            lessons earned over years. When those people move on, that intelligence must not go with them.
           </p>
         </motion.div>
       </div>
       <NodeDivider />
+    </section>
+  );
+}
+
+// ==========================================
+// BUSINESS CONTINUITY (NEW)
+// ==========================================
+
+function BusinessContinuitySection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-10%' });
+
+  const changes = [
+    { label: 'People change.',       detail: 'Employees, managers and leadership transition. Operational intelligence should not leave with them.' },
+    { label: 'Teams change.',        detail: 'Teams restructure. Departments grow. New members join. The intelligence layer remains consistent.' },
+    { label: 'Processes evolve.',    detail: 'Methods improve. Approaches adapt. The organization\'s accumulated knowledge continues compounding.' },
+    { label: 'Technology changes.',  detail: 'Platforms shift. Systems upgrade. Intelligence built on experience endures beyond any single tool.' },
+  ];
+
+  return (
+    <section id="business-continuity" className="py-28 md:py-40" style={{ background: BG }}>
+      <div className="mx-auto px-6 md:px-8 max-w-6xl" ref={ref}>
+        <Eyebrow>Business Continuity</Eyebrow>
+        <div className="grid md:grid-cols-2 gap-16 items-start mb-16">
+          <motion.div
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+          >
+            <motion.h2 variants={staggerItem}
+              className="text-3xl md:text-[2.1rem] font-semibold leading-[1.2] tracking-tight mb-6"
+              style={{ color: PRIMARY }}>
+              Organizations change.<br />Operational intelligence should remain.
+            </motion.h2>
+            <motion.p variants={staggerItem}
+              className="text-[16px] leading-[1.85]" style={{ color: SECONDARY }}>
+              Autonomatex protects operational continuity without replacing human decision-making.
+              Every transition becomes an opportunity for the intelligence layer to grow stronger —
+              not a moment when organizational knowledge disappears.
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+            className="space-y-4"
+          >
+            {changes.map((item, i) => (
+              <motion.div key={i} variants={staggerItem}
+                className="flex gap-4 p-6 rounded-xl border"
+                style={{ background: SURFACE, borderColor: BORDER }}>
+                <div className="w-2 h-2 rounded-full mt-2 flex-shrink-0" style={{ background: ACCENT }} />
+                <div>
+                  <p className="text-[15px] font-semibold mb-1.5" style={{ color: PRIMARY }}>{item.label}</p>
+                  <p className="text-[14px] leading-[1.75]" style={{ color: SECONDARY }}>{item.detail}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeUpVariant} custom={5}
+          className="rounded-2xl p-10 md:p-14 text-center"
+          style={{ background: DARK }}
+        >
+          <p className="text-xl md:text-2xl font-semibold tracking-tight leading-[1.4]"
+            style={{ color: '#FAFBFC' }}>
+            Intelligence that belongs to the organization.{' '}
+            <span style={{ color: ACCENT_DIM }}>Not to any individual within it.</span>
+          </p>
+        </motion.div>
+      </div>
+      <div className="mx-auto px-6 md:px-8 max-w-6xl mt-14">
+        <NodeDivider />
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// INTELLIGENCE COMPOUNDS — visual timeline
+// ==========================================
+
+function IntelligenceCompoundsSection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-10%' });
+
+  const stages = [
+    { label: 'Experience',           sub: 'Operations produce raw knowledge through daily decisions and outcomes.' },
+    { label: 'Knowledge',            sub: 'Patterns emerge. What worked. What failed. Why decisions produced their results.' },
+    { label: 'Operational Memory',   sub: 'Knowledge is captured, structured and made accessible across the organization.' },
+    { label: 'Business Intelligence',sub: 'Structured memory becomes a living asset — informing every future decision.' },
+    { label: 'Better Decisions',     sub: 'Decision quality improves as the intelligence layer deepens and matures.' },
+    { label: 'Smarter Organization', sub: 'The organization as a whole becomes more consistent, more capable, more resilient.' },
+    { label: 'Long-Term Value',      sub: 'Operational intelligence is one of the most durable competitive advantages an organization can build.' },
+  ];
+
+  return (
+    <section className="py-28 md:py-40" style={{ background: DARK }}>
+      <div className="mx-auto px-6 md:px-8 max-w-5xl" ref={ref}>
+        <motion.div
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+          className="text-center mb-20"
+        >
+          <motion.div variants={staggerItem}>
+            <Eyebrow>Operational Intelligence Compounds</Eyebrow>
+          </motion.div>
+          <motion.h2 variants={staggerItem}
+            className="text-3xl md:text-[2.2rem] font-semibold tracking-tight leading-[1.2]"
+            style={{ color: '#FAFBFC' }}>
+            Every cycle makes the next one stronger.
+          </motion.h2>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="relative max-w-xl mx-auto">
+          {/* Vertical connector */}
+          <div className="absolute left-[19px] top-6 bottom-6 w-[2px]"
+            style={{ background: 'rgba(13,148,136,0.2)' }} aria-hidden="true" />
+
+          <motion.div
+            initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+            className="relative space-y-0"
+          >
+            {stages.map((stage, i) => {
+              const isLast = i === stages.length - 1;
+              return (
+                <motion.div key={stage.label} variants={staggerItem}
+                  className="relative flex gap-6"
+                  style={{ paddingBottom: isLast ? 0 : 36 }}>
+                  {/* Node */}
+                  <div className="flex-shrink-0 relative z-10 flex flex-col items-center" style={{ width: 40 }}>
+                    <div
+                      className="w-10 h-10 rounded-full border-2 flex items-center justify-center"
+                      style={{
+                        background: isLast ? ACCENT : DARK,
+                        borderColor: isLast ? ACCENT : 'rgba(13,148,136,0.45)',
+                      }}
+                    >
+                      {isLast ? (
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#fff' }} />
+                      ) : (
+                        <span className="text-[11px] font-semibold" style={{ color: ACCENT }}>{i + 1}</span>
+                      )}
+                    </div>
+                    {!isLast && (
+                      <motion.div
+                        initial={{ scaleY: 0 }}
+                        animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+                        transition={{ delay: i * 0.12 + 0.5, duration: 0.4, ease: EASE }}
+                        className="w-[2px] flex-1 origin-top"
+                        style={{ background: `${ACCENT}50`, minHeight: 20 }}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </div>
+                  {/* Content */}
+                  <div className="pb-1" style={{ paddingTop: 6 }}>
+                    <h3
+                      className="font-semibold mb-1.5"
+                      style={{
+                        fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
+                        color: isLast ? ACCENT : '#FAFBFC',
+                        letterSpacing: '-0.01em'
+                      }}>
+                      {stage.label}
+                    </h3>
+                    <p className="text-[14px] leading-[1.75]" style={{ color: '#8899A8' }}>
+                      {stage.sub}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// DESIGN PHILOSOPHY — one-sentence interstitial
+// ==========================================
+
+function DesignPhilosophySection() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-15%' });
+
+  return (
+    <section className="py-24 md:py-32 px-6 md:px-8 text-center"
+      style={{ background: DEEP_ALT, borderTop: `1px solid ${BORDER}`, borderBottom: `1px solid ${BORDER}` }}>
+      <div className="mx-auto max-w-3xl" ref={ref}>
+        <motion.div
+          initial="hidden" animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          <motion.div variants={staggerItem}>
+            <Eyebrow muted>Our Design Philosophy</Eyebrow>
+          </motion.div>
+          <motion.p variants={staggerItem}
+            className="font-medium tracking-tight leading-[1.3]"
+            style={{ fontSize: 'clamp(1.5rem, 3.2vw, 2.6rem)', color: PRIMARY }}>
+            Complexity belongs inside the platform.{' '}
+            <span style={{ color: SECONDARY, fontWeight: 300 }}>
+              Simplicity belongs to the people using it.
+            </span>
+          </motion.p>
+        </motion.div>
+      </div>
     </section>
   );
 }
@@ -767,14 +1052,14 @@ function ArchitectureDiagram() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const layers = [
-    { id: 'human',       label: 'Human Intelligence',      sub: 'Every insight begins with the people who do the work.',        icon: BrainCircuit },
-    { id: 'memory',      label: 'Memory Intelligence',      sub: 'Operational patterns are captured so knowledge compounds.',    icon: Database },
-    { id: 'decision',    label: 'Decision Intelligence',    sub: 'Context-aware frameworks guide consistent decisions.',         icon: GitMerge },
-    { id: 'operational', label: 'Operational Intelligence', sub: 'Human experience and data create a living intelligence layer.', icon: Cpu },
-    { id: 'continuous',  label: 'Continuous Intelligence',  sub: 'Each decision feeds forward. The organization grows wiser.',   icon: RefreshCcw },
+    { id: 'human',       label: 'Human Intelligence',      sub: 'Every insight begins with the people who do the work.',                       icon: BrainCircuit },
+    { id: 'memory',      label: 'Memory Intelligence',      sub: 'Operational patterns are captured and structured so knowledge compounds.',   icon: Database },
+    { id: 'decision',    label: 'Decision Intelligence',    sub: 'Accumulated context guides consistent, high-quality decisions.',             icon: GitMerge },
+    { id: 'operational', label: 'Operational Intelligence', sub: 'Human experience and structured data create a living intelligence layer.',   icon: Cpu },
+    { id: 'continuous',  label: 'Continuous Intelligence',  sub: 'Each outcome feeds forward. The organization grows wiser indefinitely.',     icon: RefreshCcw },
   ];
 
-  const BOX_W = 520, BOX_H = 58, GAP = 26, STEP = BOX_H + GAP;
+  const BOX_W = 520, BOX_H = 76, GAP = 22, STEP = BOX_H + GAP;
   const SVG_W = BOX_W + 40, SVG_H = layers.length * STEP - GAP;
   const X0 = 20;
 
@@ -841,8 +1126,8 @@ function ArchitectureDiagram() {
                 />
 
                 <motion.text
-                  x={X0 + 46} y={y + BOX_H / 2 + 5}
-                  fontSize="14.5" fontWeight={isCore ? '600' : '500'}
+                  x={X0 + 50} y={y + BOX_H / 2 - 5}
+                  fontSize="14" fontWeight={isCore ? '600' : '500'}
                   fill={isCore ? '#FAFBFC' : PRIMARY}
                   fontFamily="Inter, system-ui, sans-serif"
                   letterSpacing="-0.01em"
@@ -851,6 +1136,17 @@ function ArchitectureDiagram() {
                   transition={{ delay: delay + 0.15, duration: 0.4 }}
                 >
                   {layer.label}
+                </motion.text>
+                <motion.text
+                  x={X0 + 50} y={y + BOX_H / 2 + 14}
+                  fontSize="11.5" fontWeight="400"
+                  fill={isCore ? `${ACCENT_DIM}cc` : SECONDARY}
+                  fontFamily="Inter, system-ui, sans-serif"
+                  initial={{ opacity: 0 }}
+                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ delay: delay + 0.22, duration: 0.4 }}
+                >
+                  {layer.sub}
                 </motion.text>
 
                 <motion.circle cx={X0 + 22} cy={y + BOX_H / 2} r="7"
@@ -952,12 +1248,14 @@ function PrinciplesSection() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const principles = [
-    { title: 'Experience compounds.',      text: 'Every operational cycle adds to the intelligence of the system. Value grows with time, not against it.' },
-    { title: 'Humans remain accountable.', text: 'Intelligence advises. People decide. Responsibility is never delegated to a machine.' },
-    { title: 'Knowledge should survive.',  text: 'When experience exits the organization, the intelligence stays. Continuity is built in.' },
-    { title: 'Trust is earned.',           text: 'We build incrementally, transparently, and only claim what we can demonstrate.' },
-    { title: 'Design for decades.',        text: 'Every architectural decision considers what must hold for the next twenty years.' },
-    { title: 'Reduce complexity.',         text: 'If a system makes operations harder to understand, it is the wrong system.' },
+    { title: 'Knowledge belongs to the organization.', text: 'Operational intelligence is a company asset. It must never belong to an individual, a vendor, or a platform.' },
+    { title: 'Humans remain accountable.',             text: 'Intelligence advises. People decide. Responsibility is never delegated to a machine.' },
+    { title: 'Technology reduces complexity.',         text: 'If a system makes operations harder to understand, it is the wrong system. Clarity is a design requirement.' },
+    { title: 'Operational intelligence compounds.',    text: 'Every decision adds to the intelligence of the system. The longer it operates, the more accurate and valuable it becomes.' },
+    { title: 'Trust is earned.',                      text: 'We build incrementally and transparently. We only claim what we can demonstrate.' },
+    { title: 'Design for decades.',                   text: 'Every architectural decision considers what must hold for the next twenty years — not just the next quarter.' },
+    { title: 'Business continuity matters.',          text: 'When people, processes or teams change, operational intelligence must remain. Continuity is designed in from the start.' },
+    { title: 'Experience should survive organizational change.', text: 'The value of accumulated experience belongs to the organization permanently. Transitions strengthen it — they do not erase it.' },
   ];
 
   return (
@@ -1008,13 +1306,14 @@ function SecuritySection() {
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
   const items = [
-    { label: 'Privacy',                  desc: 'Data sovereignty and privacy-by-design at every layer. Your operational data belongs to you.',           icon: <Lock       className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Security by Design',       desc: 'Security is a foundation, not a feature. Every system is built on zero-trust principles from day one.',  icon: <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Responsible AI',           desc: 'All AI systems undergo rigorous evaluation for reliability, consistency, and alignment with human values.', icon: <Scale      className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Human Oversight',          desc: 'No automated action occurs without defined human review checkpoints. Autonomy is always bounded.',        icon: <Eye        className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Transparency',             desc: 'Organizations have full visibility into how their intelligence systems operate and inform decisions.',     icon: <Activity   className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Compliance-Ready',         desc: 'Built to accommodate regulatory requirements across jurisdictions without architectural rework.',          icon: <FileCheck  className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
-    { label: 'Enterprise Infrastructure', desc: 'Infrastructure that scales with operational demand without compromising availability or reliability.',   icon: <Server     className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Enterprise Ownership',     desc: 'Operational intelligence belongs permanently to the organization. No vendor lock-in. No knowledge dependency. Complete data sovereignty.',                    icon: <ShieldCheck className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Responsible AI',           desc: 'All AI systems undergo rigorous evaluation for reliability, consistency and alignment with human values before any organizational deployment.',               icon: <Scale      className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Human Approval',           desc: 'No automated action occurs without defined human review checkpoints. Every significant recommendation requires explicit human authorization.',                icon: <Eye        className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Privacy by Design',        desc: 'Privacy is built into architecture from the ground up — not added as a compliance layer. Data sovereignty and privacy principles at every layer.',           icon: <Lock       className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Secure Architecture',      desc: 'Security is a foundation, not a feature. Every system is built on zero-trust principles. Infrastructure scales without compromising availability.',          icon: <Server     className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Transparency',             desc: 'Organizations have full visibility into how their intelligence systems operate, inform decisions, and evolve over time.',                                     icon: <Activity   className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Regulatory Readiness',      desc: 'Built to accommodate evolving regulatory requirements across jurisdictions without architectural rework. Adaptability is a design requirement, not an afterthought.', icon: <FileCheck  className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
+    { label: 'Human Oversight',          desc: 'Autonomy is always bounded. Every intelligence system operates within clearly defined human governance boundaries that cannot be bypassed.',                  icon: <BrainCircuit className="w-4 h-4 flex-shrink-0" style={{ color: '#2F3A4D' }} /> },
   ];
 
   return (
@@ -1184,7 +1483,7 @@ function ContactSection() {
               </label>
               <textarea
                 required id="message" name="message" autoComplete="off" rows={5}
-                placeholder="Tell us about your organization."
+                placeholder="Tell us about your organization and the operational challenges you are trying to solve."
                 className={inputClass + ' resize-none'}
                 style={inputStyle}
               />
@@ -1256,10 +1555,13 @@ function SinglePageSite() {
       <Navbar />
       <main id="main-content">
         <HeroSection />
+        <QuickSummarySection />
         <ManifestoSection />
         <WhySection />
+        <BusinessContinuitySection />
+        <IntelligenceCompoundsSection />
         <OperationalIntelligenceSection />
-        <OurThinkingSection />
+        <DesignPhilosophySection />
         <ArchitectureSection />
         <PrinciplesSection />
         <SecuritySection />

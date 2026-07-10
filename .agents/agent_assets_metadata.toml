@@ -54,3 +54,15 @@ id = "k7Ye2ayFOf0KV5PUu0zG1"
 uri = "file://autonomatex-dispatch-v1.zip"
 type = "unspecified"
 title = "Dispatch Site — Source + netlify.toml"
+
+[[outputs]]
+id = "qOX2abXdbRlzaa5zOaN7c"
+uri = "file://autonomatex-www-v1.zip"
+type = "unspecified"
+title = "autonomatex.com — Source + netlify.toml"
+
+[[outputs]]
+id = "bICc6Ij1dVf7cx1W1TWv2"
+uri = "file://autonomatex-www-dist.zip"
+type = "unspecified"
+title = "autonomatex.com — Pre-built dist (drag & drop)"
