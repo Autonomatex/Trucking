@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Force dark mode for NOC aesthetic */
+  --background: 220 30% 4%;
+  --foreground: 220 15% 85%;
+
+  --card: 220 25% 6%;
+  --card-foreground: 220 15% 90%;
+  --card-border: 220 25% 12%;
+
+  --popover: 220 30% 5%;
+  --popover-foreground: 220 15% 85%;
+  --popover-border: 220 25% 12%;
+
+  --primary: 180 100% 40%;
+  --primary-foreground: 180 100% 10%;
+  
+  --secondary: 220 25% 12%;
+  --secondary-foreground: 220 15% 80%;
+
+  --muted: 220 25% 10%;
+  --muted-foreground: 220 15% 60%;
+
+  --accent: 180 100% 35%;
+  --accent-foreground: 180 100% 10%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 25% 15%;
+  --input: 220 25% 12%;
+  --ring: 180 100% 40%;
+
+  --app-font-sans: 'Inter', sans-serif;
+  --app-font-serif: Georgia, serif;
+  --app-font-mono: 'JetBrains Mono', monospace;
+  
+  --radius: 0.25rem; /* 4px, sharp corners */
+
+  /* Health Status Colors */
+  --status-healthy: 150 100% 40%;
+  --status-degraded: 45 100% 50%;
+  --status-offline: 0 84% 60%;
+}
+
+.dark {
+  /* Same variables to ensure it stays dark */
+  --background: 220 30% 4%;
+  --foreground: 220 15% 85%;
+  --card: 220 25% 6%;
+  --card-foreground: 220 15% 90%;
+  --card-border: 220 25% 12%;
+  --popover: 220 30% 5%;
+  --popover-foreground: 220 15% 85%;
+  --popover-border: 220 25% 12%;
+  --primary: 180 100% 40%;
+  --primary-foreground: 180 100% 10%;
+  --secondary: 220 25% 12%;
+  --secondary-foreground: 220 15% 80%;
+  --muted: 220 25% 10%;
+  --muted-foreground: 220 15% 60%;
+  --accent: 180 100% 35%;
+  --accent-foreground: 180 100% 10%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 25% 15%;
+  --input: 220 25% 12%;
+  --ring: 180 100% 40%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary;
+    background-image: 
+      linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center top;
+  }
+}
+
+@layer utilities {
+  .glow-healthy {
+    box-shadow: 0 0 15px hsl(var(--status-healthy) / 0.4), inset 0 0 10px hsl(var(--status-healthy) / 0.2);
+  }
+  .glow-degraded {
+    box-shadow: 0 0 15px hsl(var(--status-degraded) / 0.4), inset 0 0 10px hsl(var(--status-degraded) / 0.2);
+  }
+  .glow-offline {
+    box-shadow: 0 0 15px hsl(var(--status-offline) / 0.4), inset 0 0 10px hsl(var(--status-offline) / 0.2);
+  }
+  
+  .text-healthy {
+    color: hsl(var(--status-healthy));
+  }
+  .text-degraded {
+    color: hsl(var(--status-degraded));
+  }
+  .text-offline {
+    color: hsl(var(--status-offline));
+  }
+
+  .bg-healthy {
+    background-color: hsl(var(--status-healthy));
+  }
+  .bg-degraded {
+    background-color: hsl(var(--status-degraded));
+  }
+  .bg-offline {
+    background-color: hsl(var(--status-offline));
+  }
+
+  /* Scanline effect */
+  .scanline {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanline::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+    opacity: 0.5;
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+
+  /* Pulse animation for live indicators */
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    80% { transform: scale(2.5); opacity: 0; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+  .animate-pulse-ring {
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  }
+}
