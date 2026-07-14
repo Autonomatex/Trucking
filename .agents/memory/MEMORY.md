@@ -1,2 +1,3 @@
 - [Dispatch site build](dispatch-site.md) — React rebuild of dispatch.autonomatex.com; 19-section funnel, Netlify Forms, Stripe placeholder config, wouter routing with base path.
 - [Vite scaffold PORT/BASE_PATH](vite-scaffold-env.md) — artifact scaffold throws on missing PORT/BASE_PATH; safe to add fallbacks (port 3000, basePath '/') for Netlify CI builds.
+- [Autonomatex API backend quirks](autonomatex-api-quirks.md) — passlib+bcrypt version pin needed; never pass `extra={"message": ...}` to stdlib logger (crashes AppError handling).

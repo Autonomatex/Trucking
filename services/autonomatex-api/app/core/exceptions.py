@@ -69,7 +69,13 @@ def register_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(AppError)
     async def handle_app_error(_: Request, exc: AppError) -> JSONResponse:
-        logger.warning("app_error", extra={"error_code": exc.error_code, "message": exc.message})
+        # NOTE: the extra key must not be named "message" — that collides
+        # with the reserved `LogRecord.message` attribute the stdlib sets
+        # from `record.getMessage()` and raises `KeyError` inside
+        # `Logger.makeRecord`, which would crash every error response.
+        logger.warning(
+            "app_error", extra={"error_code": exc.error_code, "error_message": exc.message}
+        )
         return JSONResponse(
             status_code=exc.status_code,
             content=_error_envelope(exc.error_code, exc.message, exc.details),
