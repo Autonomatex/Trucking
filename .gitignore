@@ -54,3 +54,4 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 services/autonomatex-api/.env
+dump.rdb
