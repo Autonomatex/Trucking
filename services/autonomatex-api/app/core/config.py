@@ -58,6 +58,20 @@ class Settings(BaseSettings):
     # --- CORS ---------------------------------------------------------------
     cors_allow_origins: list[str] = Field(default_factory=lambda: ["*"])
 
+    # --- Rate limiting ------------------------------------------------------
+    # POST /tenants (public signup): limit per remote IP, using a fixed window.
+    signup_rate_limit_requests: int = 5    # max signups per window
+    signup_rate_limit_window_seconds: int = 3600  # 1 hour
+
+    # How many reverse-proxy hops sit in front of this app.
+    # 0 (default) = use the raw TCP peer address; X-Forwarded-For is ignored.
+    # N > 0 = trust the rightmost N entries in X-Forwarded-For as added by
+    # controlled proxies and use the entry just before them as the client IP.
+    # Set this to 1 when behind a single load-balancer/reverse-proxy.
+    rate_limit_trusted_proxy_count: int = Field(
+        default=0, validation_alias="RATE_LIMIT_TRUSTED_PROXY_COUNT"
+    )
+
     @field_validator("database_url")
     @classmethod
     def _normalize_database_url(cls, value: str) -> str:

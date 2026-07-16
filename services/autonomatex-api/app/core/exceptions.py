@@ -60,6 +60,13 @@ class TenantMismatchError(AuthorizationError):
     error_code = "tenant_mismatch"
 
 
+class RateLimitError(AppError):
+    """Raised when a caller exceeds the allowed request rate for an endpoint."""
+
+    status_code = status.HTTP_429_TOO_MANY_REQUESTS
+    error_code = "rate_limit_exceeded"
+
+
 def _error_envelope(error_code: str, message: str, details: dict | None = None) -> dict:
     return {"error": {"code": error_code, "message": message, "details": details or {}}}
 
