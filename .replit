@@ -32,6 +32,14 @@ args = "Autonomatex Celery Worker"
 task = "workflow.run"
 args = "api-tenant-isolation-tests"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "migration-check"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "tenant-isolation"
+
 [[workflows.workflow]]
 name = "Autonomatex Redis"
 author = "agent"
@@ -68,6 +76,28 @@ outputType = "console"
 
 [[workflows.workflow]]
 name = "api-tenant-isolation-tests"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd services/autonomatex-api && /home/runner/workspace/.pythonlibs/bin/python -m pytest tests/test_tenant_isolation.py -v"
+
+[workflows.workflow.metadata]
+isValidation = true
+
+[[workflows.workflow]]
+name = "migration-check"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd services/autonomatex-api && /home/runner/workspace/.pythonlibs/bin/python -m pytest tests/test_migration_check.py -v"
+
+[workflows.workflow.metadata]
+isValidation = true
+
+[[workflows.workflow]]
+name = "tenant-isolation"
 author = "agent"
 
 [[workflows.workflow.tasks]]
