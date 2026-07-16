@@ -5,8 +5,10 @@ from __future__ import annotations
 from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.infrastructure.db.repositories.role_repository import RoleRepository
 from app.infrastructure.db.repositories.tenant_repository import TenantRepository
 from app.infrastructure.db.repositories.user_repository import UserRepository
+from app.infrastructure.db.repositories.user_role_repository import UserRoleRepository
 from app.infrastructure.db.session import get_db_session
 from app.infrastructure.security.principal import CurrentPrincipal, get_current_principal
 
@@ -16,6 +18,20 @@ def get_user_repository(
     principal: CurrentPrincipal = Depends(get_current_principal),
 ) -> UserRepository:
     return UserRepository(session, tenant_id=principal.tenant_id)
+
+
+def get_role_repository(
+    session: AsyncSession = Depends(get_db_session),
+    principal: CurrentPrincipal = Depends(get_current_principal),
+) -> RoleRepository:
+    return RoleRepository(session, tenant_id=principal.tenant_id)
+
+
+def get_user_role_repository(
+    session: AsyncSession = Depends(get_db_session),
+    principal: CurrentPrincipal = Depends(get_current_principal),
+) -> UserRoleRepository:
+    return UserRoleRepository(session, tenant_id=principal.tenant_id)
 
 
 def get_user_repository_for_tenant(tenant_id: str, session: AsyncSession) -> UserRepository:

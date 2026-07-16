@@ -11,12 +11,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from app.application.services.role_service import RoleService
 from app.core.exceptions import ConflictError
 from app.infrastructure.db.models.tenant import Tenant
 from app.infrastructure.db.models.user import User
+from app.infrastructure.db.repositories.role_repository import RoleRepository
 from app.infrastructure.db.repositories.tenant_repository import TenantRepository
 from app.infrastructure.db.repositories.user_repository import UserRepository
+from app.infrastructure.db.repositories.user_role_repository import UserRoleRepository
 from app.infrastructure.security.jwt import hash_password
+from app.infrastructure.security.rbac import Role
 
 
 @dataclass(frozen=True, slots=True)
@@ -47,10 +51,13 @@ class TenantService:
 
         tenant = await self._tenants.add(Tenant(name=name, slug=slug, is_active=True))
 
-        # The owner user is scoped to the tenant we just created, so a
-        # tenant-scoped `UserRepository` can be built directly from its id —
-        # this is the same repository every other feature uses, there is no
-        # special-cased "unscoped" write path for user creation.
+        # The role catalog and owner user are both scoped to the tenant we
+        # just created, so tenant-scoped repositories can be built directly
+        # from its id — the same repositories every other feature uses,
+        # there is no special-cased "unscoped" write path here.
+        role_service = RoleService(role_repository=RoleRepository(self._session, tenant_id=tenant.id))
+        seeded_roles = await role_service.seed_default_roles(tenant_id=tenant.id)
+
         user_repository = UserRepository(self._session, tenant_id=tenant.id)
         owner = await user_repository.add(
             User(
@@ -60,6 +67,11 @@ class TenantService:
                 password_hash=hash_password(owner_password),
                 is_active=True,
             )
+        )
+
+        user_role_repository = UserRoleRepository(self._session, tenant_id=tenant.id)
+        await user_role_repository.replace_role_for_user(
+            user_id=owner.id, role_id=seeded_roles[Role.OWNER.value].id
         )
 
         return ProvisionedTenant(tenant=tenant, owner=owner)

@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from app.core.config import Settings
 from app.core.exceptions import AuthenticationError
 from app.infrastructure.db.repositories.user_repository import UserRepository
+from app.infrastructure.db.repositories.user_role_repository import UserRoleRepository
 from app.infrastructure.security.jwt import create_token, verify_password
 from app.infrastructure.security.rbac import Role
 
@@ -26,8 +27,15 @@ class TokenPair:
 
 
 class AuthService:
-    def __init__(self, *, user_repository: UserRepository, settings: Settings) -> None:
+    def __init__(
+        self,
+        *,
+        user_repository: UserRepository,
+        user_role_repository: UserRoleRepository,
+        settings: Settings,
+    ) -> None:
         self._users = user_repository
+        self._user_roles = user_role_repository
         self._settings = settings
 
     async def authenticate(self, *, email: str, password: str) -> TokenPair:
@@ -35,10 +43,11 @@ class AuthService:
         if user is None or not user.is_active or not verify_password(password, user.password_hash):
             raise AuthenticationError("Invalid email or password.")
 
-        # Role resolution is expanded in a later phase (per-user role
-        # assignments via `UserRole`); Phase 1 grants the baseline VIEWER
-        # role so authenticated requests can already exercise RBAC.
-        roles = [Role.VIEWER.value]
+        roles = await self._user_roles.list_role_names_for_user(user.id)
+        if not roles:
+            # Safety net: a user somehow left without a role assignment
+            # still gets read-only access rather than being locked out.
+            roles = [Role.VIEWER.value]
 
         access_token = create_token(
             settings=self._settings,
