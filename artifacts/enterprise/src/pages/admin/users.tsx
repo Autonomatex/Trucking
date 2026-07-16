@@ -30,7 +30,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog';
 import { useToast } from '@/components/ui/use-toast';
-import { Loader2, ShieldCheck, UserPlus } from 'lucide-react';
+import { Loader2, ShieldCheck, UserPlus, UserCheck, UserX } from 'lucide-react';
 
 export default function AdminUsers() {
   const { user: currentUser, hasPermission } = useAuth();
@@ -49,6 +49,25 @@ export default function AdminUsers() {
   });
 
   const roleOptions = rolesQuery.data?.roles.map((r) => r.name) ?? [];
+
+  const setActiveMutation = useMutation({
+    mutationFn: ({ userId, is_active }: { userId: string; is_active: boolean }) =>
+      apiFetch<UserResponse>(`/users/${userId}/active`, {
+        method: 'PATCH',
+        body: JSON.stringify({ is_active }),
+      }),
+    onSuccess: (_data, { is_active }) => {
+      queryClient.invalidateQueries({ queryKey: ['enterprise', 'users'] });
+      toast({ title: is_active ? 'Account enabled' : 'Account disabled' });
+    },
+    onError: (err) => {
+      toast({
+        title: 'Could not update account status',
+        description: err instanceof ApiError ? err.message : 'Unexpected error.',
+        variant: 'destructive',
+      });
+    },
+  });
 
   const updateRoleMutation = useMutation({
     mutationFn: ({ userId, role }: { userId: string; role: string }) =>
@@ -179,15 +198,35 @@ export default function AdminUsers() {
                       )}
                     </TableCell>
                     <TableCell>
-                      <span
-                        className={
-                          u.is_active
-                            ? 'text-healthy font-mono text-xs uppercase'
-                            : 'text-muted-foreground font-mono text-xs uppercase'
-                        }
-                      >
-                        {u.is_active ? 'Active' : 'Disabled'}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span
+                          className={
+                            u.is_active
+                              ? 'text-healthy font-mono text-xs uppercase'
+                              : 'text-muted-foreground font-mono text-xs uppercase'
+                          }
+                        >
+                          {u.is_active ? 'Active' : 'Disabled'}
+                        </span>
+                        {canManageUsers && u.id !== currentUser?.id && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 px-2 font-mono text-xs"
+                            disabled={setActiveMutation.isPending}
+                            onClick={() =>
+                              setActiveMutation.mutate({ userId: u.id, is_active: !u.is_active })
+                            }
+                            data-testid={`button-toggle-active-${u.id}`}
+                          >
+                            {u.is_active ? (
+                              <><UserX size={12} className="mr-1" />Disable</>
+                            ) : (
+                              <><UserCheck size={12} className="mr-1" />Enable</>
+                            )}
+                          </Button>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}

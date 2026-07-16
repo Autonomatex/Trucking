@@ -28,6 +28,10 @@ class UserRoleUpdateRequest(BaseModel):
     role: str = Field(min_length=1, max_length=100)
 
 
+class UserActiveUpdateRequest(BaseModel):
+    is_active: bool
+
+
 class RoleResponse(BaseModel):
     name: str
     permissions: list[str]

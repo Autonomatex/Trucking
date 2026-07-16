@@ -63,3 +63,10 @@ class UserService:
         role = await self._roles.get_by_name_or_raise(role_name)
         await self._user_roles.replace_role_for_user(user_id=user.id, role_id=role.id)
         return UserWithRoles(user=user, roles=[role.name])
+
+    async def set_active(self, *, user_id: str, is_active: bool) -> UserWithRoles:
+        user = await self._users.get_by_id_or_raise(user_id)
+        user.is_active = is_active
+        await self._users.session.flush()
+        role_names = await self._user_roles.list_role_names_for_users([user.id])
+        return UserWithRoles(user=user, roles=role_names.get(user.id, []))

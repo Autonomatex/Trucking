@@ -23,6 +23,7 @@ from app.interface.api.deps import (
     get_user_role_repository,
 )
 from app.interface.schemas.user import (
+    UserActiveUpdateRequest,
     UserCreateRequest,
     UserListResponse,
     UserResponse,
@@ -95,4 +96,18 @@ async def update_user_role(
 ) -> UserResponse:
     service = _build_service(user_repository, role_repository, user_role_repository)
     entry = await service.update_user_role(user_id=user_id, role_name=payload.role)
+    return _to_response(entry)
+
+
+@router.patch("/{user_id}/active", response_model=UserResponse)
+async def set_user_active(
+    user_id: str,
+    payload: UserActiveUpdateRequest,
+    _: CurrentPrincipal = Depends(require_permission(Permission.USER_MANAGE)),
+    user_repository: UserRepository = Depends(get_user_repository),
+    role_repository: RoleRepository = Depends(get_role_repository),
+    user_role_repository: UserRoleRepository = Depends(get_user_role_repository),
+) -> UserResponse:
+    service = _build_service(user_repository, role_repository, user_role_repository)
+    entry = await service.set_active(user_id=user_id, is_active=payload.is_active)
     return _to_response(entry)
