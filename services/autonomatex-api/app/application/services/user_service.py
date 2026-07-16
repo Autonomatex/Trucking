@@ -84,7 +84,7 @@ class UserService:
                 "If you have any questions, reach out to your team owner.\n\n"
                 "— The Autonomatex team"
             ),
-            metadata={"roles": entry.roles},
+            metadata={"roles": entry.roles, "to_email": user.email},
         )
         try:
             await self._notifications.send(notification)

@@ -55,6 +55,15 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
     refresh_token_expire_minutes: int = 60 * 24 * 7
 
+    # --- Email / Notifications -----------------------------------------------
+    # When RESEND_API_KEY is set the application sends real transactional email
+    # through Resend.  When it is absent (local dev, tests) the logging sender
+    # is used instead so no emails escape the development environment.
+    resend_api_key: str | None = Field(default=None, validation_alias="RESEND_API_KEY")
+    resend_from_email: str = Field(
+        default="noreply@autonomatex.com", validation_alias="RESEND_FROM_EMAIL"
+    )
+
     # --- CORS ---------------------------------------------------------------
     cors_allow_origins: list[str] = Field(default_factory=lambda: ["*"])
 

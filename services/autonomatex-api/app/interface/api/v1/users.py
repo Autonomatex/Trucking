@@ -12,6 +12,9 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends
 
 from app.application.services.user_service import UserService, UserWithRoles
+from app.core.config import get_settings
+from app.domain.notifications.interfaces import NotificationSender
+from app.domain.notifications.resend_sender import ResendNotificationSender
 from app.domain.notifications.sender import LoggingNotificationSender
 from app.infrastructure.db.repositories.role_repository import RoleRepository
 from app.infrastructure.db.repositories.user_repository import UserRepository
@@ -44,6 +47,23 @@ def _to_response(entry: UserWithRoles) -> UserResponse:
     )
 
 
+def _get_notification_sender() -> NotificationSender:
+    """Return the appropriate NotificationSender based on environment config.
+
+    When RESEND_API_KEY is set the real Resend adapter is used so that invite
+    emails are delivered to the new user's inbox.  In all other environments
+    (local development, CI, tests) the logging sender is used instead so that
+    no emails escape the development environment.
+    """
+    settings = get_settings()
+    if settings.resend_api_key:
+        return ResendNotificationSender(
+            api_key=settings.resend_api_key,
+            from_email=settings.resend_from_email,
+        )
+    return LoggingNotificationSender()
+
+
 def _build_service(
     user_repository: UserRepository,
     role_repository: RoleRepository,
@@ -53,7 +73,7 @@ def _build_service(
         user_repository=user_repository,
         role_repository=role_repository,
         user_role_repository=user_role_repository,
-        notification_sender=LoggingNotificationSender(),
+        notification_sender=_get_notification_sender(),
     )
 
 
