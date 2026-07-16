@@ -276,3 +276,102 @@ async def test_cross_tenant_role_change_blocked(client: AsyncClient):
     assert "operator" in users_a[tenant_a_user_id]["roles"], (
         "Tenant A user's role must be unchanged after the rejected cross-tenant attempt"
     )
+
+
+@pytest.mark.asyncio
+async def test_operator_cannot_change_role(client: AsyncClient):
+    """An operator within the same tenant must get 403 on PATCH /users/{id}/role.
+
+    ROLE_MANAGE is restricted to owner/admin; a future RBAC refactor must not
+    silently grant it to operator.
+    """
+    provision = await _provision_tenant(client)
+    owner_token = await _login(client, provision["owner_email"], provision["owner_password"])
+    owner_headers = _auth(owner_token)
+
+    # Invite an operator into the tenant
+    op_email = _uniq_email("op")
+    resp = await client.post(
+        f"{API}/users",
+        json={"email": op_email, "password": "Operator!99", "full_name": "Op User", "role": "operator"},
+        headers=owner_headers,
+    )
+    assert resp.status_code == 201, resp.text
+
+    # Fetch the owner's user ID so the operator can target it
+    list_resp = await client.get(f"{API}/users", headers=owner_headers)
+    assert list_resp.status_code == 200, list_resp.text
+    owner_user = next(u for u in list_resp.json()["users"] if u["email"] == provision["owner_email"])
+    owner_id = owner_user["id"]
+
+    # Operator tries to change the owner's role — must be refused
+    op_token = await _login(client, op_email, "Operator!99")
+    patch_resp = await client.patch(
+        f"{API}/users/{owner_id}/role",
+        json={"role": "viewer"},
+        headers=_auth(op_token),
+    )
+    assert patch_resp.status_code == 403, (
+        f"Expected 403 for operator role change, got {patch_resp.status_code}: {patch_resp.text}"
+    )
+
+    # Confirm the owner's role is unchanged
+    list_resp2 = await client.get(f"{API}/users", headers=owner_headers)
+    assert list_resp2.status_code == 200, list_resp2.text
+    owner_after = next(u for u in list_resp2.json()["users"] if u["id"] == owner_id)
+    assert "owner" in owner_after["roles"], "Owner role must be unchanged after rejected attempt"
+
+
+@pytest.mark.asyncio
+async def test_viewer_cannot_change_role(client: AsyncClient):
+    """A viewer within the same tenant must get 403 on PATCH /users/{id}/role.
+
+    ROLE_MANAGE is restricted to owner/admin; a future RBAC refactor must not
+    silently grant it to viewer.
+    """
+    provision = await _provision_tenant(client)
+    owner_token = await _login(client, provision["owner_email"], provision["owner_password"])
+    owner_headers = _auth(owner_token)
+
+    # Invite a viewer into the tenant
+    viewer_email = _uniq_email("viewer")
+    resp = await client.post(
+        f"{API}/users",
+        json={"email": viewer_email, "password": "Viewer!99", "full_name": "View User", "role": "viewer"},
+        headers=owner_headers,
+    )
+    assert resp.status_code == 201, resp.text
+    viewer_id = resp.json()["id"]
+
+    # Fetch the owner's user ID so the viewer can target it
+    list_resp = await client.get(f"{API}/users", headers=owner_headers)
+    assert list_resp.status_code == 200, list_resp.text
+    owner_user = next(u for u in list_resp.json()["users"] if u["email"] == provision["owner_email"])
+    owner_id = owner_user["id"]
+
+    # Viewer tries to change the owner's role — must be refused
+    viewer_token = await _login(client, viewer_email, "Viewer!99")
+    patch_resp = await client.patch(
+        f"{API}/users/{owner_id}/role",
+        json={"role": "operator"},
+        headers=_auth(viewer_token),
+    )
+    assert patch_resp.status_code == 403, (
+        f"Expected 403 for viewer role change, got {patch_resp.status_code}: {patch_resp.text}"
+    )
+
+    # Also confirm viewer cannot change another non-owner user's role
+    patch_self_resp = await client.patch(
+        f"{API}/users/{viewer_id}/role",
+        json={"role": "admin"},
+        headers=_auth(viewer_token),
+    )
+    assert patch_self_resp.status_code == 403, (
+        f"Expected 403 for viewer self-promotion, got {patch_self_resp.status_code}: {patch_self_resp.text}"
+    )
+
+    # Confirm the owner's role is unchanged
+    list_resp2 = await client.get(f"{API}/users", headers=owner_headers)
+    assert list_resp2.status_code == 200, list_resp2.text
+    owner_after = next(u for u in list_resp2.json()["users"] if u["id"] == owner_id)
+    assert "owner" in owner_after["roles"], "Owner role must be unchanged after rejected attempt"
