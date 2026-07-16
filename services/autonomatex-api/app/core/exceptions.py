@@ -90,12 +90,28 @@ def register_exception_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(RequestValidationError)
     async def handle_validation_error(_: Request, exc: RequestValidationError) -> JSONResponse:
+        # Pydantic v2 may embed non-JSON-serializable objects (e.g. ValueError
+        # instances) inside the `ctx` field of each error.  Strip them out so
+        # the response body is always valid JSON.
+        def _safe_errors(errors: list) -> list:
+            safe = []
+            for err in errors:
+                err_copy = dict(err)
+                if "ctx" in err_copy:
+                    ctx = err_copy["ctx"]
+                    err_copy["ctx"] = {
+                        k: str(v) if not isinstance(v, (str, int, float, bool, type(None))) else v
+                        for k, v in ctx.items()
+                    }
+                safe.append(err_copy)
+            return safe
+
         return JSONResponse(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             content=_error_envelope(
                 "validation_error",
                 "Request validation failed.",
-                {"errors": exc.errors()},
+                {"errors": _safe_errors(exc.errors())},
             ),
         )
 

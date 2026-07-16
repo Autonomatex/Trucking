@@ -133,6 +133,11 @@ async def _check_rate_limit(
         )
 
 
+def resolve_client_ip(request: Request, *, trusted_proxy_count: int) -> str:
+    """Public wrapper around ``_client_ip`` for non-rate-limit callers."""
+    return _client_ip(request, trusted_proxy_count)
+
+
 def make_rate_limiter(key_prefix: str) -> Callable:
     """Return a FastAPI dependency that enforces per-IP rate limiting.
 
