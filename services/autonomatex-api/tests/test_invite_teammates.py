@@ -224,3 +224,55 @@ async def test_duplicate_email_within_tenant_rejected(client: AsyncClient):
 
     second = await client.post(f"{API}/users", json=payload, headers=headers)
     assert second.status_code == 409, second.text
+
+
+@pytest.mark.asyncio
+async def test_cross_tenant_role_change_blocked(client: AsyncClient):
+    """Tenant B's owner cannot change the role of a user that belongs to tenant A.
+
+    The PATCH /users/{user_id}/role handler is tenant-scoped via the injected
+    repository, so a cross-tenant user_id lookup must return 404 rather than
+    silently succeeding or leaking data.
+    """
+    # --- Tenant A: create owner and one teammate ---
+    prov_a = await _provision_tenant(client)
+    token_a = await _login(client, prov_a["owner_email"], prov_a["owner_password"])
+
+    teammate_email = _uniq_email("role-target")
+    invite_resp = await client.post(
+        f"{API}/users",
+        json={
+            "email": teammate_email,
+            "password": "Teammate!99",
+            "full_name": "Tenant A Teammate",
+            "role": "operator",
+        },
+        headers=_auth(token_a),
+    )
+    assert invite_resp.status_code == 201, invite_resp.text
+    tenant_a_user_id = invite_resp.json()["id"]
+
+    # --- Tenant B: completely separate owner ---
+    prov_b = await _provision_tenant(client)
+    token_b = await _login(client, prov_b["owner_email"], prov_b["owner_password"])
+
+    # Tenant B's owner attempts to change the role of tenant A's user.
+    # The repository is scoped to tenant B, so the user_id will not be found
+    # and the endpoint must respond with 404.
+    patch_resp = await client.patch(
+        f"{API}/users/{tenant_a_user_id}/role",
+        json={"role": "viewer"},
+        headers=_auth(token_b),
+    )
+    assert patch_resp.status_code == 404, (
+        f"Expected 404 for cross-tenant role change, got {patch_resp.status_code}: {patch_resp.text}"
+    )
+
+    # Verify that the original tenant A user still has their original role.
+    list_resp = await client.get(f"{API}/users", headers=_auth(token_a))
+    assert list_resp.status_code == 200, list_resp.text
+    users_a = {u["id"]: u for u in list_resp.json()["users"]}
+    assert tenant_a_user_id in users_a, "Tenant A user should still exist"
+    assert "operator" in users_a[tenant_a_user_id]["roles"], (
+        "Tenant A user's role must be unchanged after the rejected cross-tenant attempt"
+    )
