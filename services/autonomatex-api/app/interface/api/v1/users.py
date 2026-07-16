@@ -12,6 +12,7 @@ from __future__ import annotations
 from fastapi import APIRouter, Depends
 
 from app.application.services.user_service import UserService, UserWithRoles
+from app.domain.notifications.sender import LoggingNotificationSender
 from app.infrastructure.db.repositories.role_repository import RoleRepository
 from app.infrastructure.db.repositories.user_repository import UserRepository
 from app.infrastructure.db.repositories.user_role_repository import UserRoleRepository
@@ -52,6 +53,7 @@ def _build_service(
         user_repository=user_repository,
         role_repository=role_repository,
         user_role_repository=user_role_repository,
+        notification_sender=LoggingNotificationSender(),
     )
 
 

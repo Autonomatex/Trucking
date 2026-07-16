@@ -24,6 +24,7 @@ class LoggingNotificationSender:
                 "recipient_user_id": notification.recipient_user_id,
                 "channel": notification.channel,
                 "subject": notification.subject,
+                "body": notification.body,
             },
         )
         return True
