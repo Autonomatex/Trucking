@@ -301,3 +301,97 @@ class TestIsActiveFilterSurvivesMutationPath:
         assert body["is_active"] is False, (
             f"PATCH response should show is_active=False, got: {body.get('is_active')}"
         )
+
+
+class TestAdminCannotDisableOwnAccount:
+    """An admin cannot disable their own account via the API."""
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_owner_cannot_disable_self(self, client: AsyncClient) -> None:
+        """
+        Given a tenant owner who is authenticated,
+        when they PATCH /users/{own_id}/active with is_active=False,
+        then the API must return 409 and their account must remain active.
+        """
+        prov = await _provision_tenant(client)
+        owner_token = await _login(
+            client, prov["owner_email"], prov["owner_password"]
+        )
+
+        # Retrieve the owner's own user ID.
+        list_resp = await client.get(f"{API}/users", headers=_auth(owner_token))
+        assert list_resp.status_code == 200, list_resp.text
+        owner_id = next(
+            u["id"]
+            for u in list_resp.json()["users"]
+            if u["email"] == prov["owner_email"]
+        )
+
+        # Attempt to disable self — must be rejected.
+        resp = await client.patch(
+            f"{API}/users/{owner_id}/active",
+            headers=_auth(owner_token),
+            json={"is_active": False},
+        )
+        assert resp.status_code == 409, (
+            f"Expected 409 when an admin disables their own account, "
+            f"got {resp.status_code}: {resp.text}"
+        )
+        body = resp.json()
+        message = body.get("error", {}).get("message", "")
+        assert "cannot disable your own account" in message.lower(), (
+            f"Expected a clear error message, got: {resp.text}"
+        )
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_admin_cannot_disable_self(self, client: AsyncClient) -> None:
+        """
+        An invited admin (not the owner) also cannot disable their own account.
+        """
+        prov = await _provision_tenant(client)
+        owner_token = await _login(
+            client, prov["owner_email"], prov["owner_password"]
+        )
+
+        admin = await _invite_user(client, token=owner_token, role="admin")
+        admin_token = await _login(client, admin["_email"], admin["_password"])
+        admin_id = admin["id"]
+
+        resp = await client.patch(
+            f"{API}/users/{admin_id}/active",
+            headers=_auth(admin_token),
+            json={"is_active": False},
+        )
+        assert resp.status_code == 409, (
+            f"Expected 409 when an admin disables their own account, "
+            f"got {resp.status_code}: {resp.text}"
+        )
+
+    @pytest.mark.asyncio(loop_scope="session")
+    async def test_re_enable_self_is_allowed(self, client: AsyncClient) -> None:
+        """
+        The guard only blocks self-deactivation; enabling one's own account
+        (is_active=True) must be allowed, even though it is a no-op in practice.
+        """
+        prov = await _provision_tenant(client)
+        owner_token = await _login(
+            client, prov["owner_email"], prov["owner_password"]
+        )
+
+        list_resp = await client.get(f"{API}/users", headers=_auth(owner_token))
+        assert list_resp.status_code == 200, list_resp.text
+        owner_id = next(
+            u["id"]
+            for u in list_resp.json()["users"]
+            if u["email"] == prov["owner_email"]
+        )
+
+        # Setting is_active=True on yourself is harmless and must succeed.
+        resp = await client.patch(
+            f"{API}/users/{owner_id}/active",
+            headers=_auth(owner_token),
+            json={"is_active": True},
+        )
+        assert resp.status_code == 200, (
+            f"Enabling own account should be allowed; got {resp.status_code}: {resp.text}"
+        )

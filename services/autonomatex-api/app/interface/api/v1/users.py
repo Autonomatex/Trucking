@@ -105,11 +105,15 @@ async def update_user_role(
 async def set_user_active(
     user_id: str,
     payload: UserActiveUpdateRequest,
-    _: CurrentPrincipal = Depends(require_permission(Permission.USER_MANAGE)),
+    principal: CurrentPrincipal = Depends(require_permission(Permission.USER_MANAGE)),
     user_repository: UserRepository = Depends(get_user_repository),
     role_repository: RoleRepository = Depends(get_role_repository),
     user_role_repository: UserRoleRepository = Depends(get_user_role_repository),
 ) -> UserResponse:
     service = _build_service(user_repository, role_repository, user_role_repository)
-    entry = await service.set_active(user_id=user_id, is_active=payload.is_active)
+    entry = await service.set_active(
+        user_id=user_id,
+        is_active=payload.is_active,
+        requesting_user_id=principal.user_id,
+    )
     return _to_response(entry)

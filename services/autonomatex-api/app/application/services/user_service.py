@@ -105,7 +105,14 @@ class UserService:
         await self._user_roles.replace_role_for_user(user_id=user.id, role_id=role.id)
         return UserWithRoles(user=user, roles=[role.name])
 
-    async def set_active(self, *, user_id: str, is_active: bool) -> UserWithRoles:
+    async def set_active(
+        self, *, user_id: str, is_active: bool, requesting_user_id: str
+    ) -> UserWithRoles:
+        if not is_active and user_id == requesting_user_id:
+            raise ConflictError(
+                "You cannot disable your own account.",
+                details={"user_id": user_id},
+            )
         user = await self._users.get_by_id_or_raise(user_id)
         user.is_active = is_active
         await self._users.session.flush()
